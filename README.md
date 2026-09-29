@@ -1,16 +1,25 @@
-# XENESIS: hold-to-ignite teaser
-Department of CSE, Government College of Engineering, Keonjhar
+# XENESIS 4.0
 
-## Run
-    npm install
-    npm run dev      # http://localhost:3000
+Website for XENESIS 4.0, the three-day departmental tech fest of the Department of Computer Science and Engineering, Government College of Engineering, Keonjhar.
 
-## Test on a phone
-Motion sensors need HTTPS. Easiest: deploy to Vercel, or run a tunnel
-(e.g. `npx localtunnel --port 3000`) and open the https link on your phone.
+Static site: no build step, no dependencies. Everything is in `index.html`.
 
-## Edit
-- `lib/config.js`: name, 4.0 edition, Date/Venue/Events (change "Coming soon" when final), WhatsApp link, footer text
-- `components/XenesisTeaser.jsx`: the whole experience (hold, physics, chrome)
-  - `HOLD_MS`: how long the hold takes
-  - `CHROME`: the reflection colours
+## Run locally
+
+```bash
+python3 -m http.server 4173
+```
+
+Open http://127.0.0.1:4173/
+
+## Deploy on Vercel
+
+Push this folder to a GitHub repo, then in Vercel: Add New Project, import the repo, set Framework Preset to "Other", leave Build Command and Output Directory empty, and Deploy.
+
+## Editing content
+
+All text lives in `index.html`. Search for the section ids: `#hero`, `#gate` (about), `#pathways` (three days), `#lessons` (itinerary), `#eternity` (closing) and the `<footer>`.
+
+## Credit
+
+Design base: "Kage" by MengTo (https://github.com/MengTo/kage). Three.js is MIT licensed.
