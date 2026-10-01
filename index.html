@@ -108,6 +108,8 @@ h1,h2,h3{ font-weight:400; margin:0; letter-spacing:-.005em; }
 }
 .pre-enter small{ font-size:9px; letter-spacing:.24em; color:var(--muted); font-weight:400; }
 #pre.ready .pre-enter{ opacity:1; visibility:visible; transform:none; pointer-events:auto; }
+/* once the loader is dismissed, its Enter button must stop catching taps */
+#pre.done .pre-enter{ visibility:hidden; pointer-events:none; }
 #pre.ready .pre-meta{ opacity:.35; }
 .pre-enter:hover,.pre-enter:focus-visible{ background:rgba(223,231,224,.09); border-color:rgba(223,231,224,.6); outline:0; }
 .pre-in{ width:min(420px,74vw); text-align:center; }
