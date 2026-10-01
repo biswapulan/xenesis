@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Register · XENESIS 4.0</title><meta name="theme-color" content="#0b0f12">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Shippori+Mincho:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="theme.css">
+<style>
+main{display:flex;flex-direction:column;justify-content:center;align-items:center}
+#stage{width:100%;display:flex;justify-content:center}
+.card{position:relative;width:min(640px,100%);padding:clamp(26px,5vw,48px) clamp(22px,5vw,52px);color:var(--ink);isolation:isolate;margin:auto}
+.card::before{content:"";position:absolute;inset:0;z-index:-1;filter:url(#rough);background:radial-gradient(ellipse at 0 0,rgba(11,15,18,.55),transparent 22%),radial-gradient(ellipse at 100% 100%,rgba(11,15,18,.5),transparent 24%),repeating-linear-gradient(97deg,rgba(120,105,80,.05) 0 1px,transparent 1px 7px),repeating-linear-gradient(8deg,rgba(255,255,255,.18) 0 1px,transparent 1px 11px),var(--bone);box-shadow:0 30px 80px rgba(0,0,0,.6)}
+.card .kj{color:var(--crim)}.card .blade{color:var(--ink)}
+.qn{font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--moon);font-weight:600}
+h2{font-size:clamp(18px,3.6vw,26px);margin:10px 0 22px}
+input[type=text],input[type=tel],input[type=email]{width:100%;background:transparent;border:0;border-bottom:1.5px solid rgba(18,23,27,.55);padding:10px 2px;font:500 18px var(--sans);letter-spacing:.04em;color:var(--ink);border-radius:0}
+input:focus{outline:0;border-color:var(--crim);box-shadow:0 2px 0 var(--crim)}::placeholder{color:rgba(18,23,27,.4)}
+.fl{display:block;font-size:10.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--moon);font-weight:600;margin:16px 0 0}.fl:first-child{margin-top:0}
+.err{min-height:22px;margin-top:10px;font-size:12.5px;letter-spacing:.06em;color:var(--crim);font-weight:600}
+.opts{display:flex;flex-wrap:wrap;gap:10px}.opts input{position:absolute;opacity:0;pointer-events:none}
+.opts label{cursor:pointer;border:1.5px solid rgba(18,23,27,.6);padding:11px 16px;font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;transition:.25s;user-select:none}
+.opts label:hover{border-color:var(--crim)}.opts input:checked+label{background:var(--crim);border-color:var(--crim);color:var(--bone)}
+.opts input:focus-visible+label{outline:2px solid var(--amber);outline-offset:3px}.opts input:disabled+label{opacity:.4;cursor:not-allowed}
+.big label{padding:16px 28px;font-size:14px}.opts.col{flex-direction:column}.opts.col label small{display:block;opacity:.75;letter-spacing:.08em;margin-top:2px;font-size:11px}
+.row{display:flex;gap:12px;align-items:center;margin-top:24px;flex-wrap:wrap;position:sticky;bottom:0;z-index:2;padding:14px 0 calc(10px + env(safe-area-inset-bottom));background:linear-gradient(180deg,rgba(232,228,218,0),var(--bone) 35%)}
+.card .btn.ghost{color:var(--ink)}
+.mini{background:none;border:0;border-bottom:1px solid var(--crim);color:var(--crim);font:700 11px var(--sans);letter-spacing:.2em;text-transform:uppercase;cursor:pointer;padding:3px 0;margin:14px 16px 0 0}
+.nr{display:flex;gap:10px;align-items:flex-end}.nr input{flex:1}.nr .mini{margin:0 0 10px}
+.pay{text-align:center}.amt{border:1.5px solid var(--ink);padding:14px;margin-bottom:18px}.amt span,.amt small{display:block;font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--moon);font-weight:600}
+.amt b{font-size:38px;letter-spacing:.04em}.qr{width:min(260px,70vw);aspect-ratio:1;object-fit:contain;display:block;margin:0 auto;border:6px solid #fff;background:#fff;box-shadow:0 8px 24px rgba(0,0,0,.3)}
+.dl{display:inline-block;margin:10px 0 4px;font-size:11px;letter-spacing:.2em;text-transform:uppercase;font-weight:700;color:var(--crim);border-bottom:1px solid var(--crim)}
+.note{font-size:13px;opacity:.8;margin:10px auto 18px;max-width:46ch}
+.drop{display:block;text-align:left}.drop input{width:100%;font:500 13px var(--sans);padding:12px;border:1.5px dashed rgba(18,23,27,.6);background:rgba(255,255,255,.3)}
+.pv{max-height:220px;max-width:100%;margin:14px auto 0;display:block;border:1px solid rgba(18,23,27,.3)}
+.rv{list-style:none;padding:0}.rv li{display:grid;grid-template-columns:1fr auto;gap:2px 12px;padding:11px 0;border-bottom:1px solid rgba(18,23,27,.18)}
+.rv b{font-size:10.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--moon);font-weight:600}.rv span{grid-column:1;word-break:break-word;font-size:15px}
+.rv button{grid-row:1/3;grid-column:2;background:none;border:0;border-bottom:1px solid var(--crim);color:var(--crim);font:700 11px var(--sans);letter-spacing:.24em;text-transform:uppercase;cursor:pointer;align-self:center;padding:3px 0}
+.warn{font-size:12.5px;line-height:1.6;margin-top:16px;padding:12px 14px;border-left:3px solid var(--crim);background:rgba(176,32,42,.08)}
+.hp{position:absolute;left:-9999px;height:0;overflow:hidden}
+.clogo{height:56px;width:auto;display:block;margin:0 auto 14px;background:#0b0f12;padding:8px 14px;border-radius:4px}
+.hanko{width:100px;height:100px;margin:0 auto 12px;display:block;transform:rotate(-6deg);animation:stamp .7s cubic-bezier(.2,1.4,.4,1) .3s both}
+@keyframes stamp{0%{transform:scale(2.4) rotate(-14deg);opacity:0}55%{opacity:1}100%{transform:scale(1) rotate(-6deg);opacity:1}}
+.rid{font-size:22px;font-weight:700;letter-spacing:.18em;margin:10px 0 4px}.ok{text-align:center}.ok .row{justify-content:center;position:static;background:none}
+@media (max-width:520px){.opts label{padding:9px 12px;font-size:11px}.big label{padding:13px 20px}}
+</style></head>
+<body data-page="register.html">
+<div class="app"><main><div id="stage" aria-live="polite"></div></main></div>
+<script src="events-data.js"></script><script src="shared.js"></script>
+<script>
+const ENDPOINT="https://script.google.com/macros/s/AKfycbzEqyS9Bg0pQQNxLHTcq5Buyie9Gtgl0GlFYDFgZp-STic_mpy2t4s_MQqtoWN8nAhDJA/exec";  /* Google Apps Script web-app URL */
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const $=s=>document.querySelector(s),stage=$("#stage");
+const A={type:"",event:"",names:[],mobile:"",email:"",shot:"",shotName:""};
+let step=0,fromReview=false,busy=false,tmp=[];
+const ev=()=>XEN_EVENTS.find(e=>e.id===A.event);
+const NAME=/^[A-Za-z][A-Za-z .'-]{1,59}$/;
+
+function compress(file){return new Promise((res,rej)=>{const img=new Image(),u=URL.createObjectURL(file);
+ img.onload=()=>{const k=Math.min(1,1400/Math.max(img.width,img.height)),c=document.createElement("canvas");c.width=img.width*k|0;c.height=img.height*k|0;
+  const x=c.getContext("2d");x.fillStyle="#fff";x.fillRect(0,0,c.width,c.height);x.drawImage(img,0,0,c.width,c.height);URL.revokeObjectURL(u);res(c.toDataURL("image/jpeg",.78))};
+ img.onerror=()=>rej(new Error("That file couldn't be read as an image. Try a PNG or JPG screenshot."));img.src=u})}
+
+const STEPS=[
+{t:"Event type",jp:"種別",
+ html:()=>`<div class="opts big" role="radiogroup" aria-labelledby="qt">${[["tech","Tech"],["non-tech","Non-Tech"]].map(([v,l],j)=>`<input type="radio" name="r" id="o${j}" value="${v}" ${A.type===v?"checked":""}><label for="o${j}">${l}</label>`).join("")}</div>`,
+ take(){const c=stage.querySelector("input:checked");if(!c)return"Choose Tech or Non-Tech.";if(c.value!==A.type){A.type=c.value;A.event="";A.names=[];fromReview=false}return""}},
+{t:"Choose your event",jp:"競技",
+ html:()=>`<div class="opts col" role="radiogroup" aria-labelledby="qt">${XEN_EVENTS.filter(e=>e.type===A.type).map((e,j)=>`<input type="radio" name="r" id="o${j}" value="${e.id}" ${A.event===e.id?"checked":""} ${e.fee==null?"disabled":""}><label for="o${j}">${esc(e.name)}<small>${xenTeam(e)} · ${xenFee(e)}</small></label>`).join("")}</div>`,
+ take(){const c=stage.querySelector("input:checked");if(!c)return"Choose an event.";if(c.value!==A.event){A.event=c.value;A.names=[];fromReview=false}return""}},
+{t:"Participants",jp:"参加者",
+ html(){const e=ev();tmp=A.names.length?[...A.names]:[];while(tmp.length<e.min)tmp.push("");
+  return `<p class="note" style="margin:-8px 0 8px;max-width:none">${esc(e.name)} · ${e.min===e.max?(e.max===1?"Solo event":`Exactly ${e.max} players`):`${e.min} to ${e.max} players`}</p><div id="nl"></div>${e.max>e.min?'<button class="mini" id="add" type="button">+ Add member</button>':""}`},
+ bind(){const e=ev(),nl=$("#nl");
+  const draw=()=>{nl.innerHTML=tmp.map((v,j)=>`<label class="fl" for="n${j}">${e.max===1?"Your name":j===0?"Player 1 (team leader)":"Player "+(j+1)}</label><div class="nr"><input type="text" class="nm" id="n${j}" autocomplete="off" placeholder="Full name" value="${esc(v)}">${j>=e.min?`<button class="mini" type="button" data-r="${j}">Remove</button>`:""}</div>`).join("");
+   nl.querySelectorAll(".nm").forEach((x,j)=>x.oninput=()=>{tmp[j]=x.value;$("#e").textContent=""});
+   nl.querySelectorAll("[data-r]").forEach(b=>b.onclick=()=>{tmp.splice(+b.dataset.r,1);draw()});
+   if($("#add"))$("#add").style.display=tmp.length>=e.max?"none":""};
+  draw();if($("#add"))$("#add").onclick=()=>{tmp.push("");draw();nl.querySelectorAll(".nm")[tmp.length-1].focus()}},
+ take(){const v=tmp.map(x=>x.trim().replace(/\s+/g," "));const b=v.findIndex(x=>!NAME.test(x));
+  if(b>=0)return `Player ${b+1}: enter a full name (letters only, 2–60 characters).`;
+  if(new Set(v.map(x=>x.toLowerCase())).size<v.length)return"Each member needs a different name.";A.names=v;return""}},
+{t:"Contact details",jp:"連絡先",
+ html:()=>`<label class="fl" for="mo">Mobile / WhatsApp number (one person)</label><input id="mo" type="tel" inputmode="numeric" maxlength="13" autocomplete="tel-national" placeholder="10-digit WhatsApp number" value="${esc(A.mobile)}"><label class="fl" for="em">Email ID (one person)</label><input id="em" type="email" inputmode="email" maxlength="254" autocomplete="email" placeholder="you@example.com" spellcheck="false" value="${esc(A.email)}"><p class="note" style="margin-top:14px;max-width:none">Your confirmation email will be sent to this address. Event date, time and venue will be notified on your WhatsApp number and by email, so use an active number and email.</p>`,
+ take(){const m=$("#mo").value.trim().replace(/[\s-]/g,"").replace(/^(\+91|91|0)(?=\d{10}$)/,""),em=$("#em").value.trim().toLowerCase();
+  if(!/^[6-9]\d{9}$/.test(m))return"Enter 10 digits starting with 6, 7, 8 or 9.";
+  if(em.length>254||!/^[^\s@]+@[^\s@]+\.[A-Za-z]{2,}$/.test(em))return"Enter a valid email address, like name@example.com.";A.mobile=m;A.email=em;return""}},
+{t:"Payment",jp:"支払い",
+ html:()=>{const e=ev();return `<div class="pay"><div class="amt"><span>Amount to pay</span><b>₹${e.fee}</b><small>${e.unit==="person"?"per person":"per "+e.unit} · ${esc(e.name)}</small></div>
+  <img class="qr" src="${XEN_UPI.qr}" alt="Payment QR code"><a class="dl" href="${XEN_UPI.qr}" download="xenesis-payment-qr.jpeg">Save QR image</a>
+  <p class="note">Scan with any UPI app and pay the exact amount. On a phone, save the QR and choose it from your UPI app's gallery. Then upload the screenshot of the successful payment.</p>
+  <label class="drop"><span class="fl" style="margin:0 0 8px">Payment screenshot</span><input type="file" id="sh" accept="image/*"></label>
+  <img class="pv" id="pv" alt="Screenshot preview" ${A.shot?`src="${A.shot}"`:"hidden"}></div>`},
+ bind(){$("#sh").onchange=async ev=>{const f=ev.target.files[0],e=$("#e");if(!f)return;e.textContent="";
+  if(!/^image\//.test(f.type)){e.textContent="Please upload an image file.";ev.target.value="";return}
+  if(f.size>12e6){e.textContent="Image is too large (max 12 MB).";ev.target.value="";return}
+  try{A.shot=await compress(f);A.shotName=f.name;$("#pv").src=A.shot;$("#pv").hidden=false}catch(x){A.shot="";e.textContent=x.message}}},
+ take(){return A.shot?"":"Upload your payment screenshot to continue."}}
+];
+const total=STEPS.length+1;
+
+function view(){
+ window.scrollTo(0,0);
+ if(step===STEPS.length)return review();
+ const st=STEPS[step];
+ stage.innerHTML=`<section class="card in"><p class="qn">Step ${step+1} of ${total}</p><h2 id="qt">${st.t}<span class="kj" lang="ja">${st.jp}</span></h2>${st.html()}<p class="err" id="e" role="alert"></p>
+ <div class="row"><button class="btn ghost" id="bk" type="button">${fromReview?"Cancel":"Back"}</button><button class="btn" id="nx" type="button">${fromReview?"Save":"Continue"}</button></div></section>`;
+ st.bind&&st.bind();
+ $("#nx").onclick=next;$("#bk").onclick=()=>{if(fromReview){fromReview=false;step=STEPS.length}else if(step>0)step--;view()};
+ stage.querySelectorAll("input:not([type=file])").forEach(x=>x.addEventListener("keydown",e=>{if(e.key==="Enter"&&x.type!=="radio"||e.key==="Enter"){e.preventDefault();next()}}));
+ stage.querySelectorAll(".opts input").forEach(x=>x.addEventListener("change",()=>$("#e").textContent=""));
+ const f=stage.querySelector("input:checked,input[type=text],input[type=tel]");if(f)f.focus({preventScroll:true});
+}
+function next(){const m=STEPS[step].take();if(m){$("#e").textContent=m;return}
+ if(fromReview){fromReview=false;step=STEPS.length}else step++;view()}
+function edit(i){fromReview=true;step=i;view()}
+
+function review(){
+ const e=ev(),rows=[["Event type",A.type==="tech"?"Tech":"Non-Tech",0],["Event",e.name,1],["Participants",A.names.map((n,i)=>(i+1)+". "+n).join("  ·  "),2],["Mobile",A.mobile,3],["Email",A.email,3],["Amount",`₹${e.fee}`,4],["Screenshot",A.shotName||"Uploaded",4]];
+ stage.innerHTML=`<section class="card in"><p class="qn">Step ${total} of ${total}</p><h2 id="qt">Review &amp; submit<span class="kj" lang="ja">確認</span></h2>
+ <ul class="rv">${rows.map(([l,v,i])=>`<li><b>${l}</b><span>${esc(v)}</span><button type="button" data-i="${i}" aria-label="Edit ${l}">Edit</button></li>`).join("")}</ul>
+ <p class="warn">Your registration is confirmed only after we verify your payment. Fake or incorrect payment screenshots will lead to cancellation of the registration.</p>
+ <input class="hp" id="hp" type="text" tabindex="-1" autocomplete="off" aria-hidden="true"><p class="err" id="e" role="alert"></p>
+ <div class="row"><button class="btn ghost" id="bk" type="button">Back</button><button class="btn" id="sub" type="button">Submit</button></div></section>`;
+ stage.querySelectorAll(".rv button").forEach(b=>b.onclick=()=>edit(+b.dataset.i));
+ $("#bk").onclick=()=>{step=STEPS.length-1;view()};$("#sub").onclick=submit;
+}
+
+async function submit(){
+ if(busy)return;const e=ev(),b=$("#sub"),er=$("#e");
+ busy=true;b.disabled=true;b.textContent="Sending…";er.textContent="";
+ try{
+  if(!/^https:\/\//.test(ENDPOINT))throw new Error("The form isn't connected to the sheet yet.");
+  const ctl=new AbortController(),t=setTimeout(()=>ctl.abort(),45000);
+  const r=await fetch(ENDPOINT,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},signal:ctl.signal,
+   body:JSON.stringify({type:A.type,eventId:e.id,eventName:e.name,members:A.names,mobile:A.mobile,email:A.email,amount:e.fee,screenshot:{name:A.shotName,mime:"image/jpeg",data:A.shot.split(",")[1]},website:$("#hp").value})});
+  clearTimeout(t);const d=await r.json();
+  if(d&&d.status==="success")done(d.regId);else throw new Error((d&&d.message)||"The server rejected the registration.");
+ }catch(x){b.disabled=false;b.textContent="Submit";er.textContent=(x.name==="AbortError"?"The request timed out. Check your connection and try again.":x.message)+" Your answers are still saved here."}
+ finally{busy=false}
+}
+function done(id){
+ const e=ev();window.scrollTo(0,0);
+ stage.innerHTML=`<section class="card ok in"><img class="clogo" src="assets/xenesis-logo.png" alt="XENESIS 4.0" width="750" height="603"><svg class="hanko" viewBox="0 0 100 100" role="img" aria-label="Red hanko seal"><rect x="6" y="6" width="88" height="88" rx="4" fill="#b0202a"/><rect x="13" y="13" width="74" height="74" fill="none" stroke="#e8e4da" stroke-width="2" opacity=".8"/><text x="50" y="66" text-anchor="middle" font-family="Shippori Mincho,serif" font-weight="700" font-size="52" fill="#e8e4da">承</text></svg>
+ <h2 style="margin:0" id="qt">Registration received<span class="kj" lang="ja">受付完了</span></h2><hr class="blade">
+ ${id?`<p class="qn">Registration ID</p><p class="rid">${esc(id)}</p>`:""}<p><b>${esc(e.name)}</b></p>
+ <p class="note" style="margin:14px auto 0">A confirmation email is on its way to ${esc(A.email)}. You'll be notified once your payment is verified.</p><p class="note" style="margin:8px auto 0">The date, time and venue will be notified via WhatsApp and email.</p>
+ <div class="row"><a class="btn" href="events.html">More Events</a><a class="btn ghost" href="index.html">Home</a></div><p class="note" style="margin:6px auto 0">Need help? <a href="help.html" style="color:var(--crim);border-bottom:1px solid var(--crim)">Chat with us</a></p></section>`;
+}
+
+const pre=new URLSearchParams(location.search).get("event"),pe=XEN_EVENTS.find(e=>e.id===pre&&e.fee!=null);
+if(pe){A.type=pe.type;A.event=pe.id;step=2}
+view();
+</script></body></html>

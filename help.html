@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Help Desk · XENESIS 4.0</title><meta name="theme-color" content="#0b0f12">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Shippori+Mincho:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="theme.css">
+<style>
+.wrap{max-width:860px;margin:0 auto;width:100%;padding:8px clamp(18px,4vw,44px) 40px}
+.hero{position:relative;padding:8px 0 4px}.hero::after{content:"助";position:absolute;right:0;top:-10px;font:700 clamp(60px,14vw,130px) var(--min);color:rgba(176,32,42,.22);pointer-events:none;line-height:1}
+.grp{font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--amber);font-weight:600}
+.hero h1{font-size:clamp(24px,5.4vw,44px);margin:10px 0 8px}
+.panel{background:linear-gradient(180deg,rgba(11,15,18,.62),rgba(11,15,18,.88));border:1px solid rgba(232,228,218,.14);backdrop-filter:blur(3px);padding:26px 28px;margin-top:22px}
+.panel h2{font-size:13px;letter-spacing:.3em;color:var(--amber);margin-bottom:12px;text-transform:uppercase}
+.panel p{font-size:14.5px;line-height:1.75;opacity:.9}
+.st{display:flex;align-items:center;gap:10px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;margin-bottom:12px}
+.st i{width:9px;height:9px;border-radius:50%;background:var(--amber);box-shadow:0 0 12px var(--amber)}
+.panel .btn{margin-top:18px}
+#fb{display:none;margin-top:14px;font-size:13px;color:var(--amber)}
+details{border-bottom:1px solid rgba(232,228,218,.12);padding:14px 0}details:last-child{border-bottom:0}
+summary{cursor:pointer;font-weight:600;font-size:14.5px;list-style:none;display:flex;justify-content:space-between;gap:14px}
+summary::-webkit-details-marker{display:none}summary::after{content:"+";color:var(--crim);font-size:20px;line-height:1}details[open] summary::after{content:"–"}
+details p{margin-top:10px}
+@media (max-width:640px){.panel{padding:22px 20px}}
+</style></head>
+<body data-page="help.html">
+<div class="app"><main class="wrap">
+<section class="hero"><p class="grp">Help Desk</p><h1>We're here to help</h1><hr class="blade"></section>
+<section class="panel"><h2>Live chat</h2>
+<p class="st"><i></i>Chat with the XENESIS team</p>
+<p>The chat opens automatically. If an agent is online you'll get a reply right away; if not, leave a message and we'll get back to you.</p>
+<button class="btn" id="open" type="button">Open live chat</button>
+<p id="fb">Live chat couldn't load. Please turn off your ad blocker for this page and refresh, or check the FAQ below.</p></section>
+<section class="panel"><h2>Frequently asked</h2>
+<details><summary>How do I register?</summary><p>Open the Register page, pick Tech or Non-Tech, choose your event, add participant names and contact details, pay via the UPI QR and upload the payment screenshot.</p></details>
+<details><summary>What is the fee?</summary><p>The fee is shown on every event card and event page, for example ₹29 for Photography, Memography, Tech Painting and Story Writing. Team events are charged per team or squad.</p></details>
+<details><summary>How does payment work?</summary><p>Scan the QR on the payment step with any UPI app, pay the exact amount and upload a screenshot of the successful payment. On a phone, save the QR image and choose it from your UPI app's gallery.</p></details>
+<details><summary>Why does my registration say "pending"?</summary><p>Your registration is confirmed only after we verify your payment. You'll get an email once it is verified.</p></details>
+<details><summary>Fake or wrong payment screenshots?</summary><p>Fake or incorrect payment screenshots lead to cancellation of the registration.</p></details>
+<details><summary>I didn't get my email</summary><p>Check your spam or promotions folder. If it isn't there, start a live chat with your event name and registered email.</p></details>
+<details><summary>When will I get the date, time and venue?</summary><p>They will be notified via WhatsApp and email.</p></details>
+<details><summary>How many members can a team have?</summary><p>It depends on the event. The format (solo or team size) is shown on each event page and on the registration step.</p></details>
+</section></main></div>
+<script src="shared.js"></script>
+<script>
+var Tawk_API=Tawk_API||{},Tawk_LoadStart=new Date(),ok=false;
+Tawk_API.onLoad=function(){ok=true;Tawk_API.maximize()};
+Tawk_API.onChatMinimized=function(){Tawk_API.hideWidget()};
+document.getElementById("open").onclick=function(){if(ok){Tawk_API.showWidget();Tawk_API.maximize()}else document.getElementById("fb").style.display="block"};
+setTimeout(function(){if(!ok)document.getElementById("fb").style.display="block"},9000);
+(function(){var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;s1.src="https://embed.tawk.to/6abec161e8a3f43445b5fe6b/1k3si6pvq";s1.charset="UTF-8";s1.setAttribute("crossorigin","*");s0.parentNode.insertBefore(s1,s0)})();
+</script></body></html>

@@ -164,6 +164,7 @@ h1,h2,h3{ font-weight:400; margin:0; letter-spacing:-.005em; }
 .nav-link:hover span{ transform:translate3d(0,-100%,0); }
 .nav-link:hover .alt{ transform:none; }
 .nav-link.on{ color:var(--bone); }
+.nav-link.reg{ color:var(--vermilion); }
 .nav-link.on::after{ content:''; position:absolute; left:0; bottom:0; width:100%; height:1px; background:var(--vermilion); }
 .nav-burger{ margin-left:clamp(18px,2.6vw,42px); width:26px; height:16px; position:relative; flex:0 0 auto; }
 .nav-burger i{ position:absolute; right:0; height:1.5px; background:var(--bone); transition:width .45s var(--ease-out), transform .45s var(--ease-out); }
@@ -919,6 +920,14 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
   body[data-layout-hero="b"] .hero-side{ display:none; }
 }
 </style>
+<style>
+.helpfab{position:fixed;right:max(16px,env(safe-area-inset-right));bottom:calc(18px + env(safe-area-inset-bottom));z-index:20;width:52px;height:52px;border-radius:50%;background:#b0202a;border:2px solid #d9a15b;color:#e8e4da;display:grid;place-items:center;box-shadow:0 6px 22px rgba(0,0,0,.5),0 0 22px rgba(176,32,42,.45);transition:transform .25s,box-shadow .25s,background .25s}
+.helpfab:hover{transform:scale(1.08);background:#7a1f24;box-shadow:0 6px 26px rgba(0,0,0,.55),0 0 34px rgba(176,32,42,.7)}
+.helpfab svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.helpfab::before{content:attr(data-tip);position:absolute;right:62px;top:50%;translate:0 -50%;background:rgba(11,15,18,.92);border:1px solid rgba(232,228,218,.2);color:#e8e4da;font:600 11px/1 Montserrat,Arial,sans-serif;letter-spacing:.2em;text-transform:uppercase;padding:8px 12px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .2s}
+.helpfab:hover::before,.helpfab:focus-visible::before{opacity:1}
+@media (max-width:700px){.helpfab{width:46px;height:46px;right:14px}}
+</style>
 </head>
 <body data-layout-hero="b" data-layout-story="b" data-layout-gallery="b"
       data-layout-curriculum="b" data-layout-closing="b" data-layout-footer="b">
@@ -954,6 +963,9 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
     <a class="nav-link" href="#pathways" data-cursor><span>Days</span><span class="alt">02</span></a>
     <a class="nav-link" href="#lessons" data-cursor><span>Itinerary</span><span class="alt">03</span></a>
     <a class="nav-link" href="#eternity" data-cursor><span>Join us</span><span class="alt">04</span></a>
+    <a class="nav-link" href="events.html" data-cursor><span>Events</span><span class="alt">05</span></a>
+    <a class="nav-link reg" href="register.html" data-cursor><span>Register</span><span class="alt">06</span></a>
+    <a class="nav-link" href="help.html" data-cursor><span>Help</span><span class="alt">07</span></a>
   </nav>
   <button class="nav-burger" aria-label="Menu" data-cursor><i></i><i></i></button>
 </header>
@@ -1106,7 +1118,7 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
   </div>
   <div class="cur-head">
     <h2 class="display h-sec" data-rv="up">Three days. One fest. Endless events.</h2>
-    <p class="body-lg" data-rv="up">Here is the plan so far. The full events list and detailed schedule are on their way.</p>
+    <p class="body-lg" data-rv="up">Here is the plan so far. Exact dates, timings and venue will be notified via WhatsApp and email to registered participants.</p>
   </div>
   <div class="cur" id="cur">
     <div class="les" data-les="0" data-cursor>
@@ -1119,7 +1131,7 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
       <span class="k">02</span>
       <h3>Inauguration<em class="jp">Day 2</em></h3>
       <p>The formal opening ceremony of XENESIS 4.0.</p>
-      <span class="t">Time TBA</span><i class="bar"></i>
+      <span class="t">Time via WhatsApp &amp; Email</span><i class="bar"></i>
     </div>
     <div class="les" data-les="2" data-cursor>
       <span class="k">03</span>
@@ -1131,7 +1143,7 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
       <span class="k">04</span>
       <h3>Final Events &amp; Lunch<em class="jp">Day 3</em></h3>
       <p>A few more events, then lunch together.</p>
-      <span class="t">Time TBA</span><i class="bar"></i>
+      <span class="t">Time via WhatsApp &amp; Email</span><i class="bar"></i>
     </div>
     <div class="les" data-les="4" data-cursor>
       <span class="k">05</span>
@@ -1161,9 +1173,9 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
   </div>
   <div class="eyebrow" data-rv="fade">04 — Join us</div>
   <h2 class="display" data-rv="up">See you there.</h2>
-  <p class="body-lg" data-rv="up">Three days, one department, a lot of energy. Registrations and the full events list are opening soon.</p>
-  <a class="cta" href="#top" data-rv="fade" data-cursor>
-    <i></i><span>Registrations opening soon</span>
+  <p class="body-lg" data-rv="up">Three days, one department, a lot of energy. Registrations are open. Browse every event and sign up for the ones you want to play.</p>
+  <a class="cta" href="events.html" data-rv="fade" data-cursor>
+    <i></i><span>Explore events &amp; register</span>
     <svg viewBox="0 0 14 14" fill="none" width="13" height="13"><path d="M3 11 11 3M5 3h6v6" stroke="#dfe7e0" stroke-width="1.3"/></svg>
   </a>
 </section>
@@ -1192,6 +1204,9 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
       <li><a href="#pathways" data-cursor>Three Days</a></li>
       <li><a href="#lessons" data-cursor>Itinerary</a></li>
       <li><a href="#eternity" data-cursor>Join us</a></li>
+      <li><a href="events.html" data-cursor>Events</a></li>
+      <li><a href="register.html" data-cursor>Register</a></li>
+      <li><a href="help.html" data-cursor>Help Desk</a></li>
     </ul></div>
     <div><h4>Days</h4><ul>
       <li><a href="#lessons" data-cursor>Day 1 — Flash mob</a></li>
@@ -1199,10 +1214,10 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
       <li><a href="#lessons" data-cursor>Day 2 — Events</a></li>
       <li><a href="#lessons" data-cursor>Day 3 — Finale &amp; DJ night</a></li>
     </ul></div>
-    <div><h4>Coming soon</h4><ul>
-      <li><a href="#top" data-cursor>Events</a></li>
-      <li><a href="#top" data-cursor>Schedule</a></li>
-      <li><a href="#top" data-cursor>Registration</a></li>
+    <div><h4>Events</h4><ul>
+      <li><a href="events.html#tech" data-cursor>Tech Events</a></li>
+      <li><a href="events.html#non-tech" data-cursor>Non-Tech Events</a></li>
+      <li><a href="register.html" data-cursor>Register Now</a></li>
     </ul></div>
   </div>
   <div class="foot-base">
@@ -4388,7 +4403,7 @@ function wireNav() {
      one link per section in matching order. With five links over four chapters
      every entry past the third lit for its neighbour: standing in Afterlight
      highlighted Stories. Reading the destination cannot drift. */
-  const linkSec = links.map(l => SECS.indexOf(document.querySelector(l.getAttribute('href'))));
+  const linkSec = links.map(l => { const h = l.getAttribute('href'); return h.startsWith('#') ? SECS.indexOf(document.querySelector(h)) : -1; });
   window.addEventListener('scroll', () => {
     const y = scrollY;
     nav.classList.toggle('stuck', y > 40);
@@ -4886,5 +4901,6 @@ else addEventListener('DOMContentLoaded', boot);
   });
 })();
 </script>
+<a class="helpfab" href="help.html" data-tip="Help" aria-label="Help desk and live chat" data-cursor><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.5-4.6A8 8 0 1 1 21 12z"/><path d="M9.5 10.5h5M9.5 13.5h3"/></svg></a>
 </body>
 </html>
