@@ -41,14 +41,20 @@ input:focus{outline:0;border-color:var(--crim);box-shadow:0 2px 0 var(--crim)}::
 .clogo{height:56px;width:auto;display:block;margin:0 auto 14px;background:#0b0f12;padding:8px 14px;border-radius:4px}
 .hanko{width:100px;height:100px;margin:0 auto 12px;display:block;transform:rotate(-6deg);animation:stamp .7s cubic-bezier(.2,1.4,.4,1) .3s both}
 @keyframes stamp{0%{transform:scale(2.4) rotate(-14deg);opacity:0}55%{opacity:1}100%{transform:scale(1) rotate(-6deg);opacity:1}}
+.mailbox{display:flex;gap:14px;align-items:flex-start;text-align:left;margin:18px 0 0;padding:16px 18px;background:var(--crim);color:var(--bone);border-left:6px solid var(--amber);box-shadow:0 8px 24px rgba(176,32,42,.35);animation:mbpulse 2.4s ease-in-out 1s 3}
+.mailbox svg{flex:none;width:34px;height:34px;margin-top:2px;stroke:var(--bone);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.mailbox b{display:block;font-size:12px;letter-spacing:.24em;text-transform:uppercase;margin-bottom:6px}
+.mailbox p{margin:0;font-size:14px;line-height:1.55}.mailbox u{text-decoration-color:var(--amber);text-underline-offset:3px;text-decoration-thickness:2px}
+.mailbox.no{background:rgba(176,32,42,.1);color:var(--ink);box-shadow:none;animation:none}.mailbox.no svg{stroke:var(--crim)}
+@keyframes mbpulse{0%,100%{box-shadow:0 8px 24px rgba(176,32,42,.35)}50%{box-shadow:0 8px 34px rgba(176,32,42,.75)}}
 .rid{font-size:22px;font-weight:700;letter-spacing:.18em;margin:10px 0 4px}.ok{text-align:center}.ok .row{justify-content:center;position:static;background:none}
 @media (max-width:520px){.opts label{padding:9px 12px;font-size:11px}.big label{padding:13px 20px}.card{padding:24px 16px}input[type=text],input[type=tel],input[type=email]{font-size:16px}.nr{flex-wrap:wrap}.row .btn{flex:1}.amt b{font-size:32px}}
 </style></head>
 <body data-page="register.html">
 <div class="app"><main><div id="stage" aria-live="polite"></div></main></div>
-<script src="events-data.js?v=4"></script><script src="shared.js?v=3"></script>
+<script src="events-data.js?v=5"></script><script src="shared.js?v=4"></script>
 <script>
-const ENDPOINT="https://script.google.com/macros/s/AKfycbzEqyS9Bg0pQQNxLHTcq5Buyie9Gtgl0GlFYDFgZp-STic_mpy2t4s_MQqtoWN8nAhDJA/exec";  /* Google Apps Script web-app URL */
+const ENDPOINT="https://script.google.com/macros/s/AKfycbya7-J8tG72_JJAPKPdm2VcSadTzYvmKMazzDK3kG4sCw_6TbiG9PWBOhtg9W-cbTS0zg/exec";  /* Google Apps Script web-app URL */
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const $=s=>document.querySelector(s),stage=$("#stage");
 const A={type:"",event:"",names:[],mobile:"",email:"",shot:"",shotName:""};
@@ -120,7 +126,7 @@ function review(){
  stage.innerHTML=`<section class="card in"><p class="qn">Step ${total} of ${total}</p><h2 id="qt">Review &amp; submit<span class="kj" lang="ja">確認</span></h2>
  <ul class="rv">${rows.map(([l,v,i])=>`<li><b>${l}</b><span>${esc(v)}</span><button type="button" data-i="${i}" aria-label="Edit ${l}">Edit</button></li>`).join("")}</ul>
  <p class="warn">Your registration is confirmed only after we verify your payment. Fake or incorrect payment screenshots will lead to cancellation of the registration.</p>
- <input class="hp" id="hp" type="text" tabindex="-1" autocomplete="off" aria-hidden="true"><p class="err" id="e" role="alert"></p>
+ <input class="hp" id="hp" name="xen_hp_field" type="text" tabindex="-1" autocomplete="new-password" data-lpignore="true" aria-hidden="true"><p class="err" id="e" role="alert"></p>
  <div class="row"><button class="btn ghost" id="bk" type="button">Back</button><button class="btn" id="sub" type="button">Submit</button></div></section>`;
  stage.querySelectorAll(".rv button").forEach(b=>b.onclick=()=>edit(+b.dataset.i));
  $("#bk").onclick=()=>{step=STEPS.length-1;view()};$("#sub").onclick=submit;
@@ -131,20 +137,23 @@ async function submit(){
  busy=true;b.disabled=true;b.textContent="Sending…";er.textContent="";
  try{
   if(!/^https:\/\//.test(ENDPOINT))throw new Error("The form isn't connected to the sheet yet.");
-  const ctl=new AbortController(),t=setTimeout(()=>ctl.abort(),45000);
+  const ctl=new AbortController(),t=setTimeout(()=>ctl.abort(),90000);
   const r=await fetch(ENDPOINT,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},signal:ctl.signal,
    body:JSON.stringify({type:A.type,eventId:e.id,eventName:e.name,members:A.names,mobile:A.mobile,email:A.email,amount:e.fee,screenshot:{name:A.shotName,mime:"image/jpeg",data:A.shot.split(",")[1]},website:$("#hp").value})});
-  clearTimeout(t);const d=await r.json();
-  if(d&&d.status==="success")done(d.regId);else throw new Error((d&&d.message)||"The server rejected the registration.");
- }catch(x){b.disabled=false;b.textContent="Submit";er.textContent=(x.name==="AbortError"?"The request timed out. Check your connection and try again.":x.message)+" Your answers are still saved here."}
+  clearTimeout(t);const raw=await r.text();let d;try{d=JSON.parse(raw)}catch(_){throw new Error("The registration server sent an unexpected reply (the Apps Script may not be deployed for public access, or has an error).")}
+  if(d&&d.status==="success")done(d.regId,d.mail);else throw new Error((d&&d.message)||"The server rejected the registration.");
+ }catch(x){b.disabled=false;b.textContent="Submit";er.textContent=(x.name==="AbortError"?"The request timed out. It may still have gone through: if you retry and see \"already registered\", your registration is saved; message us on Help with your mobile number.":(x.message==="Failed to fetch"?"Could not reach the server. Check your internet connection and try again.":x.message))+" Your answers are still saved here."}
  finally{busy=false}
 }
-function done(id){
+function done(id,mail){
  const e=ev();window.scrollTo(0,0);
  stage.innerHTML=`<section class="card ok in"><img class="clogo" src="assets/xenesis-logo.png" alt="XENESIS 4.0" width="750" height="603"><svg class="hanko" viewBox="0 0 100 100" role="img" aria-label="Red hanko seal"><rect x="6" y="6" width="88" height="88" rx="4" fill="#b0202a"/><rect x="13" y="13" width="74" height="74" fill="none" stroke="#e8e4da" stroke-width="2" opacity=".8"/><text x="50" y="66" text-anchor="middle" font-family="Shippori Mincho,serif" font-weight="700" font-size="52" fill="#e8e4da">承</text></svg>
  <h2 style="margin:0" id="qt">Registration received<span class="kj" lang="ja">受付完了</span></h2><hr class="blade">
  ${id?`<p class="qn">Registration ID</p><p class="rid">${esc(id)}</p>`:""}<p><b>${esc(e.name)}</b></p>
- <p class="warn" style="text-align:left;margin:16px 0 0"><b>Remember your Registration ID.</b> Take a screenshot of this screen. A receipt has also been emailed to ${esc(A.email)}; it is your proof of registration.</p>
+ ${mail&&mail!=="Sent"
+ ?`<div class="mailbox no" role="status"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg><div><b>Save this screen</b><p>We couldn't email your receipt right now. <u>Take a screenshot of this page</u> and keep your Registration ID: it is your proof of registration.</p></div></div>`
+ :`<div class="mailbox" role="status"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg><div><b>Check your mailbox</b><p>Your registration receipt has been sent to <u>${esc(A.email)}</u>. If you don't see it, <u>check your Spam / Junk folder too</u>.</p></div></div>`}
+ <p class="warn" style="text-align:left;margin:14px 0 0"><b>Remember your Registration ID.</b> Take a screenshot of this screen. The receipt email is your proof of registration.</p>
  <p class="note" style="margin:12px auto 0">Our team will verify your payment and send your confirmation on <b>WhatsApp</b>. Date, time and venue will be notified via WhatsApp and email.</p>
  <div class="row"><a class="btn" href="events.html">More Events</a><a class="btn ghost" href="index.html">Home</a></div><p class="note" style="margin:6px auto 0">Need help? <a href="help.html" style="color:var(--crim);border-bottom:1px solid var(--crim)">Chat with us</a></p></section>`;
 }
