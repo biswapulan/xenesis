@@ -10,3 +10,5 @@ Department of CSE, Government College of Engineering, Keonjhar
 - When final details are ready, edit `XEN_INFO` in `events-details.js`.
 
 - Help Desk: `help.html` loads Tawk.to (Property `6abec161e8a3f43445b5fe6b`, Widget `1k3si6pvq`) only on that page. A circular Help button (`.helpfab`, in `shared.js` and `index.html`) links to it. Registration `ENDPOINT` is set in `register.html`.
+
+- Payments are verified manually and confirmed on WhatsApp. `Code.gs` now only emails a registration receipt (with the Registration ID); the sheet menu just marks Verified/Rejected and sends no email.

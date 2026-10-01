@@ -46,7 +46,7 @@ input:focus{outline:0;border-color:var(--crim);box-shadow:0 2px 0 var(--crim)}::
 </style></head>
 <body data-page="register.html">
 <div class="app"><main><div id="stage" aria-live="polite"></div></main></div>
-<script src="events-data.js?v=3"></script><script src="shared.js?v=3"></script>
+<script src="events-data.js?v=4"></script><script src="shared.js?v=3"></script>
 <script>
 const ENDPOINT="https://script.google.com/macros/s/AKfycbzEqyS9Bg0pQQNxLHTcq5Buyie9Gtgl0GlFYDFgZp-STic_mpy2t4s_MQqtoWN8nAhDJA/exec";  /* Google Apps Script web-app URL */
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
@@ -144,7 +144,8 @@ function done(id){
  stage.innerHTML=`<section class="card ok in"><img class="clogo" src="assets/xenesis-logo.png" alt="XENESIS 4.0" width="750" height="603"><svg class="hanko" viewBox="0 0 100 100" role="img" aria-label="Red hanko seal"><rect x="6" y="6" width="88" height="88" rx="4" fill="#b0202a"/><rect x="13" y="13" width="74" height="74" fill="none" stroke="#e8e4da" stroke-width="2" opacity=".8"/><text x="50" y="66" text-anchor="middle" font-family="Shippori Mincho,serif" font-weight="700" font-size="52" fill="#e8e4da">承</text></svg>
  <h2 style="margin:0" id="qt">Registration received<span class="kj" lang="ja">受付完了</span></h2><hr class="blade">
  ${id?`<p class="qn">Registration ID</p><p class="rid">${esc(id)}</p>`:""}<p><b>${esc(e.name)}</b></p>
- <p class="note" style="margin:14px auto 0">A confirmation email is on its way to ${esc(A.email)}. You'll be notified once your payment is verified.</p><p class="note" style="margin:8px auto 0">The date, time and venue will be notified via WhatsApp and email.</p>
+ <p class="warn" style="text-align:left;margin:16px 0 0"><b>Remember your Registration ID.</b> Take a screenshot of this screen. A receipt has also been emailed to ${esc(A.email)}; it is your proof of registration.</p>
+ <p class="note" style="margin:12px auto 0">Our team will verify your payment and send your confirmation on <b>WhatsApp</b>. Date, time and venue will be notified via WhatsApp and email.</p>
  <div class="row"><a class="btn" href="events.html">More Events</a><a class="btn ghost" href="index.html">Home</a></div><p class="note" style="margin:6px auto 0">Need help? <a href="help.html" style="color:var(--crim);border-bottom:1px solid var(--crim)">Chat with us</a></p></section>`;
 }
 

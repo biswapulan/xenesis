@@ -53,10 +53,13 @@ const XEN_DETAILS={
  {h:"Capture",items:["People","Emotions","Events","Decorations","Action","Campus","Behind-the-scenes moments","Creative perspectives"]},
  {h:"Judging criteria",items:["Creativity","Composition","Lighting","Timing","Subject selection","Originality","Overall visual impact"]},
  {h:"Note",p:"The registration fee will be announced soon."}]},
-"robo":{tag:"Control. Strategy. Speed. Precision.",sections:[
- {h:"Robo Drift",p:"Put your robot car to the test! Control your robot through a designated track while completing the challenge with speed, precision and control."},
- {h:"Robo Soccer",p:"Take your robot onto the arena and compete against another robot."},
- {h:"Basic concept",items:["Robots compete inside a designated arena.","Participants control their robots remotely.","The format may involve racing, pushing, manoeuvring or scoring, depending on the announcement.","Technical specifications, arena dimensions and match rules will be announced before the event."]},
+"robo-drift":{tag:"Control. Speed. Precision.",sections:[
+ {h:"About",p:"Put your robot car to the test! Control your robot through a designated track while completing the challenge with speed, precision and control."},
+ {h:"Basic concept",items:["Robots compete on a designated track.","Participants control their robots remotely.","Technical specifications, track details and match rules will be announced before the event."]},
+ {h:"Important",p:"Make sure your robot complies with the technical requirements announced by the organizers."}]},
+"robo-soccer":{tag:"Control. Strategy. Precision.",sections:[
+ {h:"About",p:"Take your robot onto the arena and compete against another robot."},
+ {h:"Basic concept",items:["Robots compete inside a designated arena.","Participants control their robots remotely.","The format may involve pushing, manoeuvring or scoring, depending on the announcement.","Technical specifications, arena dimensions and match rules will be announced before the event."]},
  {h:"Important",p:"Make sure your robot complies with the technical requirements announced by the organizers."}]},
 "wordlord":{tag:"The Typing Battle",sections:[
  {h:"About",p:"How fast can you type? WordLord is a pure typing-speed challenge. You get a typing test with a limited time of about 15–30 seconds, depending on the final format. Type as fast and accurately as possible."},

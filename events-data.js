@@ -26,8 +26,10 @@ const XEN_EVENTS=[
 {id:"photography",type:"non-tech",jp:"写真",name:"XENESIS Photography Challenge",min:1,max:1,fee:29,unit:"person",prize:NT_PRIZE,
  summary:"See what others don't. Capture a moment worth remembering throughout XENESIS 4.0."},
 /* ---------- TECH ---------- */
-{id:"robo",type:"tech",jp:"機械",name:"Robo Drift / Robo Soccer",min:1,max:4,fee:50,unit:"team",prize:"₹1,000 · ₹500",
- summary:"Control your robot through a track or face another robot in the arena. Speed, precision and strategy."},
+{id:"robo-drift",type:"tech",jp:"走行",name:"Robo Drift",min:1,max:4,fee:50,unit:"team",prize:"₹1,000 · ₹500",
+ summary:"Control your robot car through a designated track. Speed, precision and control decide the winner."},
+{id:"robo-soccer",type:"tech",jp:"蹴球",name:"Robo Soccer",min:1,max:4,fee:50,unit:"team",prize:"₹1,000 · ₹500",
+ summary:"Take your robot onto the arena and face another robot. Strategy, speed and precision win the match."},
 {id:"wordlord",type:"tech",jp:"速打",name:"WordLord — The Typing Battle",min:1,max:1,fee:49,unit:"person",prize:"₹1,000 · ₹500 · Memento",
  summary:"A pure typing-speed challenge. No AI, no shortcuts, just you and your keyboard."},
 {id:"codemon",type:"tech",jp:"開発",name:"CodeMon — Build Under Pressure",min:2,max:4,fee:199,unit:"team",prize:"To be announced",duration:"3 hours",

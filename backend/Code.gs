@@ -1,8 +1,8 @@
 /**
  * XENESIS 4.0 – Registration backend (Google Apps Script, bound to the Google Sheet)
- * Handles: validation, duplicate check, screenshot -> Drive, row -> Sheet, confirmation email,
- * and a Sheet menu to mark payments Verified / Rejected (sends an email to the student).
- * Emails go ONLY to the student's email. WhatsApp (date/time/venue) is sent manually by the team.
+ * Handles: validation, duplicate check, screenshot -> Drive, row -> Sheet, and a registration RECEIPT email.
+ * The team verifies payments manually and sends confirmation on WhatsApp (no verification emails are sent).
+ * The Sheet menu only marks a row Verified / Rejected.
  */
 const SHEET_NAME  = "Registrations";
 const FOLDER_NAME = "Xenesis 4.0 Payment Screenshots";
@@ -25,7 +25,8 @@ const EVENTS = {
  "short-film":{n:"XENESIS Short Film Challenge",min:1,max:1,fee:99},
  "story-writing":{n:"Story Writing — Words to Worlds",min:1,max:1,fee:29},
  "photography":{n:"XENESIS Photography Challenge",min:1,max:1,fee:29},
- "robo":{n:"Robo Drift / Robo Soccer",min:1,max:4,fee:50,tech:1},
+ "robo-drift":{n:"Robo Drift",min:1,max:4,fee:50,tech:1},
+ "robo-soccer":{n:"Robo Soccer",min:1,max:4,fee:50,tech:1},
  "wordlord":{n:"WordLord — The Typing Battle",min:1,max:1,fee:49,tech:1},
  "codemon":{n:"CodeMon — Build Under Pressure",min:2,max:4,fee:199,tech:1},
  "kbc":{n:"KBC — Kon Banega Coder",min:1,max:1,fee:49,tech:1}
@@ -86,10 +87,10 @@ function doPost(e){
     s.appendRow([new Date(),regId,tt==="TECH"?"Tech":"Non-Tech",ev.n,members.join(", "),members.length,"'"+mobile,"'"+email,ev.fee,file.getUrl(),"Pending","",""]);
     const row = s.getLastRow();
 
-    s.getRange(row,C.MAIL).setValue(sendMail_(email,"Registration received · "+regId,
-      body_("Registration received",regId,ev.n,members,ev.fee,
-      "Thank you for registering! Your payment is <b>pending verification</b>. Once it is verified, you will be notified by email.",
-      "Date, time and venue will be shared via WhatsApp and email. If the payment is found to be fake or incorrect, the registration will be cancelled.")));
+    s.getRange(row,C.MAIL).setValue(sendMail_(email,"Registration receipt · "+regId,
+      body_("Registration receipt",regId,ev.n,members,ev.fee,
+      "Thank you for registering! This email is your <b>registration receipt</b> and your proof of registration. Please keep your <b>Registration ID</b> safe: you will need it for any query and at the event.",
+      "Our team will verify your payment and send your confirmation on <b>WhatsApp</b> to the number you registered. Date, time and venue will be shared via WhatsApp and email. If the payment is found to be fake or incorrect, the registration will be cancelled.")));
     return out_({status:"success",regId:regId});
   }catch(err){
     console.error(err); return fail_("Something went wrong. Please try again.");
@@ -99,25 +100,23 @@ function doPost(e){
 /* ---------- Sheet menu: select row(s), then Verified / Rejected ---------- */
 function onOpen(){
   SpreadsheetApp.getUi().createMenu("XENESIS")
-    .addItem("Mark selected as Verified (email)","markVerified")
-    .addItem("Mark selected as Rejected (email)","markRejected").addToUi();
+    .addItem("Mark selected as Verified","markVerified")
+    .addItem("Mark selected as Rejected","markRejected").addToUi();
 }
 function markVerified(){ setStatus_("Verified"); }
 function markRejected(){ setStatus_("Rejected"); }
 function setStatus_(status){
   const s = SpreadsheetApp.getActiveSheet();
   if(s.getName()!==SHEET_NAME) return SpreadsheetApp.getUi().alert("Open the '"+SHEET_NAME+"' tab first.");
-  const r = s.getActiveRange(), first=Math.max(2,r.getRow()), last=r.getLastRow(); let sent=0;
+  const r = s.getActiveRange(), first=Math.max(2,r.getRow()), last=r.getLastRow(); let n=0;
   for(let row=first; row<=last; row++){
-    const v = s.getRange(row,1,1,HEAD.length).getValues()[0];
-    if(!v[C.ID-1] || v[C.STATUS-1]===status) continue;
+    const id = s.getRange(row,C.ID).getValue();
+    if(!id || s.getRange(row,C.STATUS).getValue()===status) continue;
     s.getRange(row,C.STATUS).setValue(status);
-    const ok = status==="Verified"
-      ? body_("Payment verified",v[C.ID-1],v[C.EVENT-1],String(v[C.MEM-1]).split(", "),v[C.AMT-1],"Your payment has been <b>verified</b> and your registration is now <b>confirmed</b>. See you at XENESIS 4.0!","Date, time and venue will be shared via WhatsApp and email.")
-      : body_("Registration cancelled",v[C.ID-1],v[C.EVENT-1],String(v[C.MEM-1]).split(", "),v[C.AMT-1],"We could not verify your payment, so your registration has been <b>cancelled</b>.","If you believe this is a mistake, please contact the organising team.");
-    s.getRange(row,C.SMAIL).setValue(sendMail_(v[C.EMAIL-1],(status==="Verified"?"Payment verified · ":"Registration cancelled · ")+v[C.ID-1],ok)); sent++;
+    s.getRange(row,C.SMAIL).setValue("WhatsApp (manual)");   // no email is sent; confirmation goes via WhatsApp
+    n++;
   }
-  SpreadsheetApp.getActive().toast(sent+" row(s) updated.","XENESIS");
+  SpreadsheetApp.getActive().toast(n+" row(s) marked "+status+". Send the WhatsApp message to the student.","XENESIS");
 }
 
 /* ---------- helpers ---------- */
@@ -147,9 +146,10 @@ function body_(title,regId,event,members,amount,msg,note){
    ${LOGO_URL?`<img src="${LOGO_URL}" alt="XENESIS" height="48" style="display:block;margin:0 0 10px;background:#0b0f12;padding:8px 12px;border-radius:4px">`:""}
    <p style="margin:0;letter-spacing:5px;font-size:12px;font-weight:bold;color:#7a1f24">XENESIS 4.0</p>
    <h2 style="margin:10px 0 4px;font-size:22px;text-transform:uppercase;letter-spacing:2px">${h_(title)}</h2>
+   ${regId?`<p style="margin:10px 0 14px;padding:12px;border:2px dashed #b0202a;text-align:center;font-size:11px;letter-spacing:3px;color:#7a1f24">YOUR REGISTRATION ID<br><span style="font-size:24px;letter-spacing:4px;color:#12171b;font-weight:bold">${h_(regId)}</span></p>`:""}
    <p style="margin:0 0 18px;font-size:14px;line-height:1.6">${msg}</p>
    <table style="width:100%;border-collapse:collapse;font-size:14px">
-    ${[["Registration ID",regId],["Event",event],["Participants",members.join(", ")],["Amount","₹"+amount]].map(r=>`<tr><td style="padding:8px 0;border-bottom:1px solid #c9c3b3;color:#7a1f24;font-size:11px;letter-spacing:2px;text-transform:uppercase;width:38%">${r[0]}</td><td style="padding:8px 0;border-bottom:1px solid #c9c3b3;font-weight:bold">${h_(r[1])}</td></tr>`).join("")}
+    ${[["Event",event],["Participants",members.join(", ")],["Amount","₹"+amount]].map(r=>`<tr><td style="padding:8px 0;border-bottom:1px solid #c9c3b3;color:#7a1f24;font-size:11px;letter-spacing:2px;text-transform:uppercase;width:38%">${r[0]}</td><td style="padding:8px 0;border-bottom:1px solid #c9c3b3;font-weight:bold">${h_(r[1])}</td></tr>`).join("")}
    </table>
    <p style="margin:18px 0 0;padding:10px 12px;border-left:3px solid #b0202a;background:#f1ece0;font-size:13px;line-height:1.55">${note}</p>
    <p style="margin:20px 0 0;font-size:12px;opacity:.7">Dept. of Computer Science &amp; Engineering · Government College of Engineering, Keonjhar</p>
