@@ -15,12 +15,19 @@ document.body.insertAdjacentHTML("afterbegin",`
 ${leaf(12,60,19,4)}${leaf(34,-80,26,12)}${leaf(58,90,22,8)}${leaf(77,-50,30,20)}${leaf(90,-100,24,1)}</div>
 <div class="vignette"></div><div class="grain"></div><div class="shoji shut" id="shoji" aria-hidden="true"><div class="l"></div><div class="r"></div></div>`);
 const app=document.querySelector(".app");
-app.insertAdjacentHTML("afterbegin",`<header class="top"><a class="brand" href="index.html" aria-label="XENESIS 4.0 home"><img src="assets/xenesis-logo.png" alt="" width="750" height="603" decoding="async"><span>Xenesis 4.0<small>祭</small></span></a><nav class="nav" aria-label="Main">${nav.map(([h,t])=>`<a href="${h}"${h.startsWith(here)&&here?' aria-current="page"':""}>${t}</a>`).join("")}</nav></header>`);
+app.insertAdjacentHTML("afterbegin",`<header class="top"><a class="brand" href="index.html" aria-label="XENESIS 4.0 home"><img src="assets/xenesis-logo.png" alt="" width="750" height="603" decoding="async"><span>Xenesis 4.0<small>祭</small></span></a><button class="burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="mainnav"><i></i><i></i></button><nav class="nav" id="mainnav" aria-label="Main">${nav.map(([h,t])=>`<a href="${h}"${h.startsWith(here)&&here?' aria-current="page"':""}>${t}</a>`).join("")}</nav><div class="navbk"></div></header>`);
+const hd=document.querySelector("header.top"),bg=hd.querySelector(".burger");
+const setMenu=o=>{hd.classList.toggle("open",o);document.body.classList.toggle("menu-open",o);bg.setAttribute("aria-expanded",String(o))};
+bg.addEventListener("click",()=>setMenu(!hd.classList.contains("open")));
+hd.querySelector(".navbk").addEventListener("click",()=>setMenu(false));
+hd.querySelectorAll(".nav a").forEach(a=>a.addEventListener("click",()=>setMenu(false)));
+addEventListener("keydown",e=>{if(e.key==="Escape")setMenu(false)});
+addEventListener("resize",()=>{if(innerWidth>820)setMenu(false)});
 app.insertAdjacentHTML("beforeend",`<footer class="foot">Designed with ❤️ by CSE, GCE KJR</footer>`);
 if(here!=="help.html")document.body.insertAdjacentHTML("beforeend",`<a class="helpfab" href="help.html" data-tip="Help" aria-label="Help desk and live chat" data-cursor><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.5-4.6A8 8 0 1 1 21 12z"/><path d="M9.5 10.5h5M9.5 13.5h3"/></svg></a>`);
 const s=document.getElementById("shoji");
 requestAnimationFrame(()=>requestAnimationFrame(()=>s.classList.remove("shut")));
-addEventListener("pageshow",e=>{if(e.persisted)s.classList.remove("shut")});
+addEventListener("pageshow",e=>{if(e.persisted){s.classList.remove("shut");setMenu(false)}});
 document.addEventListener("click",e=>{const a=e.target.closest("a[href]");
  if(!a||a.target||e.metaKey||e.ctrlKey||e.shiftKey||a.origin!==location.origin||a.getAttribute("href").startsWith("#")||a.hasAttribute("aria-disabled"))return;
  if(a.pathname===location.pathname&&a.search===location.search)return;

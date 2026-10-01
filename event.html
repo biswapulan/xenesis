@@ -5,7 +5,7 @@
 <link rel="icon" type="image/png" href="assets/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Shippori+Mincho:wght@500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="theme.css">
+<link rel="stylesheet" href="theme.css?v=3">
 <style>
 .back{display:inline-block;font-size:11px;letter-spacing:.26em;text-transform:uppercase;font-weight:600;opacity:.75;margin:4px 0 18px}.back:hover{opacity:1;color:var(--amber)}
 .hero{position:relative;padding:8px 0 4px}.hero::after{content:attr(data-jp);position:absolute;right:0;top:-10px;font:700 clamp(60px,14vw,130px) var(--min);color:rgba(176,32,42,.22);pointer-events:none;line-height:1}
@@ -27,11 +27,11 @@
 .fy{font-size:12.5px;opacity:.75;line-height:1.65}
 .pager{display:flex;justify-content:space-between;gap:12px;margin-top:28px;flex-wrap:wrap}
 .pager a{font-size:11px;letter-spacing:.2em;text-transform:uppercase;font-weight:600;opacity:.8;max-width:48%}.pager a:hover{opacity:1;color:var(--amber)}
-@media (max-width:860px){.layout{grid-template-columns:1fr}.side{position:static;order:-1}.panel{padding:22px 20px}.hero::after{opacity:.6}}
+@media (max-width:860px){.layout{grid-template-columns:minmax(0,1fr)}.pager a{max-width:100%}.side{position:static;order:-1}.panel{padding:22px 20px}.hero::after{opacity:.6}}
 </style></head>
 <body data-page="events.html">
 <div class="app"><main id="m"></main></div>
-<script src="events-data.js"></script><script src="events-details.js"></script><script src="shared.js"></script>
+<script src="events-data.js?v=3"></script><script src="events-details.js?v=3"></script><script src="shared.js?v=3"></script>
 <script>
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const id=new URLSearchParams(location.search).get("id"),i=XEN_EVENTS.findIndex(e=>e.id===id),m=document.getElementById("m");

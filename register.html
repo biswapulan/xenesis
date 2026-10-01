@@ -5,7 +5,7 @@
 <link rel="icon" type="image/png" href="assets/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Shippori+Mincho:wght@500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="theme.css">
+<link rel="stylesheet" href="theme.css?v=3">
 <style>
 main{display:flex;flex-direction:column;justify-content:center;align-items:center}
 #stage{width:100%;display:flex;justify-content:center}
@@ -42,11 +42,11 @@ input:focus{outline:0;border-color:var(--crim);box-shadow:0 2px 0 var(--crim)}::
 .hanko{width:100px;height:100px;margin:0 auto 12px;display:block;transform:rotate(-6deg);animation:stamp .7s cubic-bezier(.2,1.4,.4,1) .3s both}
 @keyframes stamp{0%{transform:scale(2.4) rotate(-14deg);opacity:0}55%{opacity:1}100%{transform:scale(1) rotate(-6deg);opacity:1}}
 .rid{font-size:22px;font-weight:700;letter-spacing:.18em;margin:10px 0 4px}.ok{text-align:center}.ok .row{justify-content:center;position:static;background:none}
-@media (max-width:520px){.opts label{padding:9px 12px;font-size:11px}.big label{padding:13px 20px}}
+@media (max-width:520px){.opts label{padding:9px 12px;font-size:11px}.big label{padding:13px 20px}.card{padding:24px 16px}input[type=text],input[type=tel],input[type=email]{font-size:16px}.nr{flex-wrap:wrap}.row .btn{flex:1}.amt b{font-size:32px}}
 </style></head>
 <body data-page="register.html">
 <div class="app"><main><div id="stage" aria-live="polite"></div></main></div>
-<script src="events-data.js"></script><script src="shared.js"></script>
+<script src="events-data.js?v=3"></script><script src="shared.js?v=3"></script>
 <script>
 const ENDPOINT="https://script.google.com/macros/s/AKfycbzEqyS9Bg0pQQNxLHTcq5Buyie9Gtgl0GlFYDFgZp-STic_mpy2t4s_MQqtoWN8nAhDJA/exec";  /* Google Apps Script web-app URL */
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));

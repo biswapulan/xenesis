@@ -927,6 +927,9 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
 .helpfab::before{content:attr(data-tip);position:absolute;right:62px;top:50%;translate:0 -50%;background:rgba(11,15,18,.92);border:1px solid rgba(232,228,218,.2);color:#e8e4da;font:600 11px/1 Montserrat,Arial,sans-serif;letter-spacing:.2em;text-transform:uppercase;padding:8px 12px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .2s}
 .helpfab:hover::before,.helpfab:focus-visible::before{opacity:1}
 @media (max-width:700px){.helpfab{width:46px;height:46px;right:14px}}
+@media (max-width:820px){.nav-links{overflow-y:auto;-webkit-overflow-scrolling:touch}.nav-link{touch-action:manipulation}}
+@media (max-width:820px) and (max-height:640px){.nav-links .nav-link{padding:12px 0}}
+@media (min-width:821px) and (max-width:1024px){.nav-links{gap:16px}.nav-link{letter-spacing:.14em}}
 </style>
 </head>
 <body data-layout-hero="b" data-layout-story="b" data-layout-gallery="b"
@@ -4395,7 +4398,12 @@ function wireNav() {
     if (vpW() > 820) return;
     setMenu(!nav.classList.contains('menu-open'));
   });
-  links.forEach(link => link.addEventListener('click', closeMenu));
+  links.forEach(link => link.addEventListener('click', e => {
+    closeMenu();
+    const h = link.getAttribute('href');
+    /* page links (events/register/help): navigate explicitly so the tap can never be swallowed by the closing sheet */
+    if (h && h.charAt(0) !== '#') { e.preventDefault(); setTimeout(() => { location.href = h; }, 80); }
+  }));
   addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
   addEventListener('resize', () => { if (vpW() > 820) closeMenu(); }, { passive:true });
   /* Which chapter each link actually points at, read off its href. The old

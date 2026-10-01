@@ -5,9 +5,9 @@
 <link rel="icon" type="image/png" href="assets/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Shippori+Mincho:wght@500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="theme.css">
+<link rel="stylesheet" href="theme.css?v=3">
 <style>
-.wrap{max-width:860px;margin:0 auto;width:100%;padding:8px clamp(18px,4vw,44px) 40px}
+.wrap{max-width:860px;margin:0 auto;width:100%;padding:8px clamp(14px,4vw,44px) 40px}
 .hero{position:relative;padding:8px 0 4px}.hero::after{content:"助";position:absolute;right:0;top:-10px;font:700 clamp(60px,14vw,130px) var(--min);color:rgba(176,32,42,.22);pointer-events:none;line-height:1}
 .grp{font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--amber);font-weight:600}
 .hero h1{font-size:clamp(24px,5.4vw,44px);margin:10px 0 8px}
@@ -22,7 +22,7 @@ details{border-bottom:1px solid rgba(232,228,218,.12);padding:14px 0}details:las
 summary{cursor:pointer;font-weight:600;font-size:14.5px;list-style:none;display:flex;justify-content:space-between;gap:14px}
 summary::-webkit-details-marker{display:none}summary::after{content:"+";color:var(--crim);font-size:20px;line-height:1}details[open] summary::after{content:"–"}
 details p{margin-top:10px}
-@media (max-width:640px){.panel{padding:22px 20px}}
+@media (max-width:640px){.panel{padding:20px 16px}.panel .btn{width:100%}summary{font-size:14px}}
 </style></head>
 <body data-page="help.html">
 <div class="app"><main class="wrap">
@@ -42,7 +42,7 @@ details p{margin-top:10px}
 <details><summary>When will I get the date, time and venue?</summary><p>They will be notified via WhatsApp and email.</p></details>
 <details><summary>How many members can a team have?</summary><p>It depends on the event. The format (solo or team size) is shown on each event page and on the registration step.</p></details>
 </section></main></div>
-<script src="shared.js"></script>
+<script src="shared.js?v=3"></script>
 <script>
 var Tawk_API=Tawk_API||{},Tawk_LoadStart=new Date(),ok=false;
 Tawk_API.onLoad=function(){ok=true;Tawk_API.maximize()};
