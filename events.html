@@ -36,7 +36,7 @@
  </div>
  <div class="grid" id="grid" role="tabpanel" aria-live="polite"></div>
 </main></div>
-<script src="events-data.js?v=4"></script><script src="shared.js?v=3"></script>
+<script src="events-data.js?v=6"></script><script src="shared.js?v=3"></script>
 <script>
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const grid=document.getElementById("grid");
@@ -46,7 +46,7 @@ function card(e){
  return `<article class="ev in" data-jp="${e.jp}"><p class="grp">${esc(e.group||(e.type==="tech"?"Tech Event":"Non-Tech Event"))}</p>
  <h2>${esc(e.name)}</h2><p class="s">${esc(e.summary)}</p>
  <div class="chips"><span class="chip">${xenTeam(e)}</span><span class="chip fee">${xenFee(e)}</span>${e.duration?`<span class="chip">${e.duration}</span>`:""}</div>
- <p class="pz"><b>Prize</b>${esc(e.prize)}</p>
+ ${e.prize?`<p class="pz"><b>Prize</b>${esc(e.prize)}</p>`:`<p class="pz"><b>Prize</b>Announced soon</p>`}
  <div class="acts"><a class="btn ghost" href="event.html?id=${e.id}">View Details</a>${reg}</div></article>`;
 }
 function select(t,push){

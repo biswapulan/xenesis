@@ -4,75 +4,82 @@ const XEN_INFO={
  notice:"Date, time and venue will be notified via WhatsApp and email to the registered mobile number and email ID.",
  coordinators:[/* {name:"Name",phone:"98XXXXXXXX"} */]
 };
-const GAME_RULES=["Each squad must have exactly 4 players.","Players must use their registered in-game IDs.","Hacks, scripts, cheats or unfair third-party help lead to disqualification.","Match format, map, room ID/password and detailed rules will be announced before the event.","Organizers' decisions on gameplay disputes are final."];
 const XEN_DETAILS={
-"free-fire":{tag:"Squad Battle",sections:[
- {h:"About",p:"Team up with your squad and compete against other teams in an intense Free Fire battle. Communication, strategy, coordination, survival skills and decision-making will be key to securing the top position."},
- {h:"Rules",items:GAME_RULES}]},
-"bgmi":{tag:"Squad Battle",sections:[
- {h:"About",p:"Bring your squad, build your strategy and compete against other teams in BGMI. Team coordination, survival, combat skills and tactical decision-making will determine your position."},
- {h:"Rules",items:["Each squad must have 4 players.","Only registered players may participate.","Hacks, cheats, scripts or any unfair advantage are strictly prohibited.","Match format and detailed rules will be announced before the event.","Organizers may disqualify teams violating the rules."]}]},
-"chess":{tag:"Checkmate Challenge",sections:[
- {h:"About",p:"A battle of patience, strategy and logical thinking. Test your ability to anticipate your opponent's moves and find the right strategy under pressure."},
- {h:"Rules",items:["Individual participation.","Standard chess rules will be followed.","Match format and time control will be announced before the event.","Maintain fair play throughout the competition.","Any form of external assistance is prohibited."]},
- {h:"Winner",p:"Determined according to the tournament format and final results."}]},
-"perfect-partner":{tag:"Bonding & Compatibility",sections:[
- {h:"About",p:"Think you know your best friend better than anyone else? Then prove it! Partners are asked questions about each other, answers are compared, and points are awarded for every correct match."},
- {h:"Who can participate",items:["2 Boys","2 Girls","1 Boy + 1 Girl"]},
- {h:"Questions may be based on",items:["Likes and dislikes","Habits","Preferences","Favourite things","Personality","Friendship memories","General knowledge about your partner"]},
- {h:"Scoring",p:"Each question carries equal marks. The team with the most correct answers gets the highest rank. The better you know your partner, the better your chances!"}]},
-"treasure-hunt":{tag:"The Ultimate Hunt",sections:[
- {h:"About",p:"This isn't your ordinary treasure hunt. Technology + Logic + Campus Knowledge + Teamwork. The hunt begins with a QR code: scan it, solve the first clue, find the location, discover the next clue and continue."},
- {h:"Clues may include",items:["Riddles","QR codes","Numeric codes","Patterns","Logical puzzles","Word puzzles","Location-based clues","Campus-related challenges"]},
- {h:"Why teamwork matters",p:"Clues lead teams through different locations in the college academic block. Members with different strengths (English, logic, campus awareness, creative thinking) give a real advantage."},
- {h:"Ranking",items:["Teams are ranked mainly by the time taken to complete the hunt.","The team finishing the required challenges correctly in the shortest time ranks highest.","Incorrect answers or failed attempts may add time or penalties as per event rules."]},
- {h:"Important",p:"Follow the designated route and event instructions. Entering restricted areas or disturbing regular college activities is strictly prohibited."}]},
-"dumsarash":{tag:"No Words Allowed",sections:[
- {h:"About",p:"One player acts. The rest of the team guesses. Simple? Maybe. The challenge is that NO WORDS ARE ALLOWED. The actor is given a word, phrase or concept and must communicate it only through actions, expressions, body language and gestures."},
- {h:"Rules",items:["The assigned player cannot speak.","No spelling through gestures.","No writing or using a mobile phone to communicate.","Teammates must guess within the allotted time."]},
- {h:"Scoring",p:"Teams are ranked by the number of correct words guessed within the given time."}]},
-"memography":{tag:"Memory Challenge",sections:[
- {h:"About",p:"Can you trust your memory? Twenty images are shown one after another, about 2 seconds each. Observe and memorise the images and their sequence. Afterwards you get an answer sheet and must write the objects or subjects shown, in the correct order."},
- {h:"Example",items:["1. Dog","2. Cat","3. Shoe"]},
- {h:"Scoring",items:["Each correct item in the correct sequence earns 1 mark.","Ranking is based on total score.","Ties may be settled by additional rules or tie-breaker questions."]},
- {h:"The challenge",p:"It's not about seeing the images. It's about remembering them."}]},
-"tech-painting":{tag:"Technology × Creativity",sections:[
- {h:"About",p:"A combination of technology, imagination and artistic creativity. A theme is announced about 5–10 minutes before the competition. You may use your phone during this preparation period to research the theme. Then: phones down, creativity begins."},
- {h:"Rules",items:["Phones must be submitted or kept aside once preparation ends.","Artwork must be created during the allotted time.","Follow the announced theme.","Copying another participant's artwork may lead to disqualification."]},
- {h:"Judging criteria",items:["Creativity","Relevance to the theme","Concept","Presentation","Artistic execution"]}]},
-"short-film":{tag:"Your Camera. Your Story.",sections:[
- {h:"About",p:"Create a short cinematic film capturing the spirit of XENESIS 4.0, and turn its moments into a short, engaging story that shows the energy, creativity and atmosphere of the fest."},
- {h:"Capture",items:["Events","Participants","Decorations","Performances","Campus atmosphere","Behind-the-scenes moments","Exciting interactions","Memorable moments"]},
- {h:"Judging criteria",items:["Creativity","Storytelling","Cinematography","Editing","Originality","Use of music/audio","Overall presentation"]},
- {h:"Note",p:"Duration, submission format and deadline will be announced by the organizers."}]},
-"story-writing":{tag:"Words to Worlds",sections:[
- {h:"About",p:"Think. Imagine. Write. On the day, you receive about 15–20 words and must create a complete, meaningful story using them. Use the words creatively and think beyond conventional ideas. There is no single correct story."},
- {h:"Judging criteria",items:["Creativity","Originality","Story structure","Use of given words","Language","Imagination","Overall impact"]}]},
-"photography":{tag:"See What Others Don't",sections:[
- {h:"About",p:"Capture photographs throughout XENESIS 4.0 and showcase the event through your perspective. The goal isn't simply to take a photograph. It's to capture a moment worth remembering."},
- {h:"Capture",items:["People","Emotions","Events","Decorations","Action","Campus","Behind-the-scenes moments","Creative perspectives"]},
- {h:"Judging criteria",items:["Creativity","Composition","Lighting","Timing","Subject selection","Originality","Overall visual impact"]},
- {h:"Note",p:"The registration fee will be announced soon."}]},
+/* ================= TECH ================= */
 "robo-drift":{tag:"Control. Speed. Precision.",sections:[
- {h:"About",p:"Put your robot car to the test! Control your robot through a designated track while completing the challenge with speed, precision and control."},
- {h:"Basic concept",items:["Robots compete on a designated track.","Participants control their robots remotely.","Technical specifications, track details and match rules will be announced before the event."]},
- {h:"Important",p:"Make sure your robot complies with the technical requirements announced by the organizers."}]},
-"robo-soccer":{tag:"Control. Strategy. Precision.",sections:[
- {h:"About",p:"Take your robot onto the arena and compete against another robot."},
- {h:"Basic concept",items:["Robots compete inside a designated arena.","Participants control their robots remotely.","The format may involve pushing, manoeuvring or scoring, depending on the announcement.","Technical specifications, arena dimensions and match rules will be announced before the event."]},
- {h:"Important",p:"Make sure your robot complies with the technical requirements announced by the organizers."}]},
+ {h:"About",p:"Pilot remote-controlled rovers along high-friction obstacle tracks. Robo Drift rewards the driver who combines raw speed with acute turning control, because one wrong line on the track can cost the race."},
+ {h:"Basic concept",items:["Robots compete on a designated obstacle track.","Participants control their rovers remotely.","Speed, turning control and clean runs decide the ranking.","Track layout, run format and technical specifications are announced before the event."]},
+ {h:"Team",p:"Register as a team. Every member must be listed at registration."},
+ {h:"Important",p:"Make sure your robot meets the technical requirements announced by the organizers. Bring spare batteries and basic tools."}]},
 "wordlord":{tag:"The Typing Battle",sections:[
- {h:"About",p:"How fast can you type? WordLord is a pure typing-speed challenge. You get a typing test with a limited time of about 15–30 seconds, depending on the final format. Type as fast and accurately as possible."},
- {h:"Ranking is based on",items:["Typing speed","Accuracy","Correctly typed characters/words"]},
- {h:"Winner",p:"The participant with the highest valid typing performance takes the top position. No AI. No shortcuts. Just you and your keyboard."}]},
+ {h:"About",p:"Type fast. Type accurately. WordLord is a 15–30 second typing sprint where only you and your keyboard matter."},
+ {h:"Judged on",items:["Words per minute (WPM)","Accuracy percentage","Zero error tolerance"]},
+ {h:"Rules",items:["Individual participation.","No AI. No shortcuts. No external help.","Exact test duration and text format are announced on the day.","Organizers' decisions on ties and disputes are final."]},
+ {h:"Winner",p:"The participant with the highest valid typing performance takes the top position."}]},
 "codemon":{tag:"Build Under Pressure",sections:[
- {h:"About",p:"A problem-solving and development challenge for students who want to build rather than just solve predefined coding questions. Teams receive a development task at the start of the event."},
- {h:"Skills you may need",items:["Problem solving","UI/UX","Frontend development","React.js / Next.js","HTML/CSS/JavaScript","Logical thinking","Team collaboration","AI-assisted development"]},
- {h:"AI agents are allowed",p:"You may use AI agents/tools for code generation, with specific conditions on how AI-generated code can be used. Be prepared to understand the code you generate, modify it, debug it and explain your implementation."},
- {h:"Duration",p:"3 hours. The exact task, technical requirements, AI usage conditions, judging criteria and detailed rules are revealed at the start of the event."}]},
-"kbc":{tag:"Kon Banega Coder",sections:[
- {h:"About",p:"Choose your language, prove your knowledge. Before the competition you select the programming language you're most comfortable with, then answer about 10–20 MCQs on it."},
- {h:"Language options may include",items:["Python","C","C++","Java","JavaScript","Other languages announced by the organizers"]},
- {h:"Questions may cover",items:["Syntax","Programming concepts","Data types","Functions","OOP concepts","Operators","Output prediction","Language-specific behaviour"]},
- {h:"Scoring",p:"The participant with the highest valid score takes the top position."}]}
+ {h:"About",p:"A 3-hour build challenge for students who want to create something real. Teams receive a development task at the start of the event and must deliver a working solution before time runs out."},
+ {h:"AI agents are allowed",p:"Teams may use LLMs and AI code copilots. Generating code is the easy part. The real test is whether you understand it."},
+ {h:"Critical criteria",items:["Show complete comprehension of the logic that was generated.","Modify the code on request.","Troubleshoot live bugs.","Defend your architectural choices in a viva."]},
+ {h:"Domains",items:["UI/UX","React.js","Next.js","Modern full-stack web development","Real-time problem solving"]},
+ {h:"Duration",p:"3 hours. The exact task, technical requirements and judging details are revealed at the start of the event. Bring a charged laptop."}]},
+"kbc":{tag:"Choose Your Blade. Prove Your Mastery.",sections:[
+ {h:"About",p:"Kon Banega Coder. Pick the language you trust most, then face 10–20 rapid MCQs on its quirks and fundamentals."},
+ {h:"Language options",items:["Python","C","C++","Java","JavaScript"]},
+ {h:"Questions may cover",items:["Syntax quirks","Runtime and output predictions","OOP concepts","Memory logic","Operators"]},
+ {h:"Winner",p:"The participant with the highest valid score takes the top position. Ties may be settled with extra questions."}]},
+"prompt-wars":{tag:"Command The Machine",sections:[
+ {h:"About",p:"A competitive AI prompting challenge. You are given tasks and constraints, and must write prompts that get the best possible output from an AI model."},
+ {h:"What is tested",items:["Creativity","Problem-solving","Prompt engineering skill","Getting optimal outputs under constraints"]},
+ {h:"Rules",items:["Individual participation.","Follow the constraints given for each round.","Task format, tools and time limit are announced before the event.","Organizers' decisions on judging are final."]},
+ {h:"Tip",p:"Be clear, be specific and iterate. The best prompter is not the one with the longest prompt."}]},
+
+/* ================= NON-TECH ================= */
+"battle-verse":{tag:"Free Fire & BGMI",sections:[
+ {h:"About",p:"Battle Verse is the XENESIS gaming arena. Squads of four fight it out in Free Fire and BGMI, where map awareness, squad synergy and clutch decisions decide who survives."},
+ {h:"Free Fire",p:"A high-stakes battle royale testing map awareness, squad synergy and precision gunplay."},
+ {h:"BGMI",p:"Tactical deployment, resource allocation and squad survival through intense zone rotations."},
+ {h:"Rules",items:["Each squad must have exactly 4 players.","Choose your game (Free Fire or BGMI) at registration. To play both, register once for each game.","Players must use their registered in-game IDs.","Hacks, scripts, cheats or unfair third-party help lead to disqualification.","Match format, map and room details are announced before the event.","Organizers' decisions on gameplay disputes are final."]}]},
+"one-piece":{tag:"The Ultimate Hunt",sections:[
+ {h:"About",p:"Technology + logic + campus knowledge + teamwork. Decode encrypted QR clues hidden across the campus and race the clock to the final treasure."},
+ {h:"Clues may include",items:["Encrypted QR codes","Riddles and word puzzles","Numeric codes and patterns","Logic puzzles","Location-based campus clues"]},
+ {h:"Ranking",items:["Teams are ranked by the time taken to finish the hunt.","Wrong answers, failed attempts and boundary infractions add time penalties."]},
+ {h:"Important",p:"Follow the designated route and event instructions. Entering restricted areas or disturbing regular college activities is strictly prohibited."}]},
+"perfect-partner":{tag:"Silent Intuition",sections:[
+ {h:"About",p:"How well do you really know your partner? Perfect Partner tests non-verbal communication, coordinated mini-challenges and shared intuition, all under timed pressure."},
+ {h:"Eligible teams",items:["2 Boys","2 Girls","1 Boy + 1 Girl"]},
+ {h:"Format",items:["Duo entry: exactly 2 players.","Teams complete a series of timed mini-challenges together.","Communication is non-verbal wherever the challenge says so."]},
+ {h:"Ranking",p:"Teams are ranked by their overall score and completion time across the challenges."}]},
+"dumb-charades":{tag:"Silent Signal",sections:[
+ {h:"About",p:"NO WORDS ALLOWED! One player acts and the team guesses. Technical terms, pop culture and cinematic clues must be expressed purely through gestures and expressions."},
+ {h:"Rules",items:["The acting player cannot speak.","No spelling out letters and no writing.","No mobile phones or props unless the organizers allow them.","Teammates must guess within the allotted time."]},
+ {h:"Scoring",p:"Teams are ranked by the number of correct guesses within the time limit."}]},
+"memography":{tag:"The Memory Arc",sections:[
+ {h:"About",p:"20 images. 2 seconds per slide. Test your visual memory under intense time pressure, then reproduce the sequence and details."},
+ {h:"How it works",items:["Twenty images are shown one after another, about 2 seconds each.","Afterwards you get an answer sheet.","Write what you saw, in the correct order."]},
+ {h:"Scoring",items:["Each correct item in the correct position earns marks.","Ranking is based on total score.","Ties may be settled by tie-breaker questions."]},
+ {h:"The challenge",p:"It's not about seeing the images. It's about remembering them."}]},
+"tech-painting":{tag:"Visual Horizons",sections:[
+ {h:"About",p:"Phones down. Creativity begins. Create original physical artwork on the themes of Cyberpunk Samurai or futuristic technology, with no digital aids."},
+ {h:"Rules",items:["Artwork must be physical and created during the allotted time.","No phones or digital aids while painting.","Follow the announced themes.","Copying another participant's work may lead to disqualification.","Bring your own colours, brushes and materials unless told otherwise."]},
+ {h:"Judging criteria",items:["Creativity","Relevance to the theme","Concept","Presentation","Artistic execution"]}]},
+"short-film":{tag:"The Final Cut",sections:[
+ {h:"About",p:"Capture the atmosphere of XENESIS 4.0 in a cinematic piece: student battles, campus backdrops and raw festival adrenaline."},
+ {h:"Registration",items:["Solo or Team entry, same fee of ₹99.","Team entries can have up to 5 members."]},
+ {h:"Capture",items:["Events and performances","Participants and crowds","Campus atmosphere","Behind-the-scenes moments"]},
+ {h:"Judging criteria",items:["Creativity","Storytelling","Cinematography","Editing","Originality","Use of music/audio"]},
+ {h:"Note",p:"Duration, submission format and deadline will be announced by the organizers."}]},
+"reels":{tag:"Reels x Render",sections:[
+ {h:"About",p:"Shoot, edit and deliver dynamic, high-engagement short-form vertical video that captures campus energy, creative cuts and fest vibes."},
+ {h:"Rules",items:["Individual participation.","Vertical (9:16) short-form video.","Content must be original and shot during XENESIS 4.0.","Keep it respectful and fest-appropriate.","Maximum length and submission method are announced by the organizers."]},
+ {h:"Judging criteria",items:["Creativity","Editing and cuts","Engagement and energy","Storytelling","Overall vibe"]}]},
+"photography":{tag:"Lens Craft",sections:[
+ {h:"About",p:"Document vivid festival moments through lens craft, composition and dynamic lighting. Don't just take a photo: capture a moment worth remembering."},
+ {h:"Capture",items:["People and emotions","Events and action","Decorations and campus","Behind-the-scenes moments","Creative perspectives"]},
+ {h:"Judging criteria",items:["Storytelling impact","Framing and composition","Lighting","Timing","Originality"]},
+ {h:"Note",p:"Submission format and deadline will be announced by the organizers."}]},
+"xen-z-show":{tag:"The Open Stage",sections:[
+ {h:"About",p:"The ultimate open stage for Gen-Z talent. Step up and own the crowd."},
+ {h:"Acts welcome",items:["Stand-up comedy","Mimicry","Music and acoustic jams","Open mic","Any crowd-captivating performance act"]},
+ {h:"Registration",items:["Solo entry: ₹49.","Group entry: ₹99 (2 to 10 members).","Pick Solo or Group on the registration page."]},
+ {h:"Rules",items:["Keep acts respectful and suitable for a college audience.","Time limits per act are announced before the event.","Bring your own instruments or backing tracks unless told otherwise."]}]}
 };

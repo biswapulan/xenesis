@@ -7,31 +7,46 @@
 const SHEET_NAME  = "Registrations";
 const FOLDER_NAME = "Xenesis 4.0 Payment Screenshots";
 const FROM_NAME   = "XENESIS 4.0 · CSE, GCE Keonjhar";   // display name students see
-const REPLY_TO    = "";            // optional: a team email; if set, student replies go here
-const LOGO_URL    = "";            // optional: public https URL of xenesis-logo.png to show the logo in emails
-const HEAD = ["Timestamp","Reg ID","Type","Event","Participants","Team Size","Mobile","Email","Amount (₹)","Screenshot","Payment Status","Confirmation Mail","Status Mail"];
-const C = {TS:1,ID:2,TYPE:3,EVENT:4,MEM:5,SIZE:6,MOB:7,EMAIL:8,AMT:9,SHOT:10,STATUS:11,MAIL:12,SMAIL:13};
+const REPLY_TO    = "info@xenesis.tech";            // optional: a team email; if set, student replies go here
+const LOGO_URL    = "https://www.xenesis.tech/logo.png";   // optional: public https URL of xenesis-logo.png to show the logo in emails
+// NOTE: "Entry Type" is a NEW column added at the END, so your existing rows/columns are not disturbed.
+const HEAD = ["Timestamp","Reg ID","Type","Event","Participants","Team Size","Mobile","Email","Amount (₹)","Screenshot","Payment Status","Confirmation Mail","Status Mail","Entry Type"];
+const C = {TS:1,ID:2,TYPE:3,EVENT:4,MEM:5,SIZE:6,MOB:7,EMAIL:8,AMT:9,SHOT:10,STATUS:11,MAIL:12,SMAIL:13,ENTRY:14};
 
-/* Must match events-data.js (id, name, min, max, fee). */
+/* Must match events-data.js (id, name, min, max, fee, modes).
+   "modes" = entry types with their own team size / fee (Solo vs Group, or which game). */
 const EVENTS = {
- "free-fire":{n:"Free Fire — Squad Battle",min:4,max:4,fee:99},
- "bgmi":{n:"BGMI — Squad Battle",min:4,max:4,fee:99},
- "chess":{n:"Chess — Checkmate Challenge",min:1,max:1,fee:49},
- "perfect-partner":{n:"Perfect Partner",min:2,max:2,fee:69},
- "treasure-hunt":{n:"Treasure Hunt — The Ultimate Hunt",min:2,max:4,fee:99},
- "dumsarash":{n:"Dumsarash",min:2,max:4,fee:49},
- "memography":{n:"Memography — Memory Challenge",min:1,max:1,fee:29},
- "tech-painting":{n:"Tech Painting",min:1,max:1,fee:29},
- "short-film":{n:"XENESIS Short Film Challenge",min:1,max:1,fee:99},
- "story-writing":{n:"Story Writing — Words to Worlds",min:1,max:1,fee:29},
- "photography":{n:"XENESIS Photography Challenge",min:1,max:1,fee:29},
+ /* ---- TECH ---- */
  "robo-drift":{n:"Robo Drift",min:1,max:4,fee:50,tech:1},
- "robo-soccer":{n:"Robo Soccer",min:1,max:4,fee:50,tech:1},
  "wordlord":{n:"WordLord — The Typing Battle",min:1,max:1,fee:49,tech:1},
  "codemon":{n:"CodeMon — Build Under Pressure",min:2,max:4,fee:199,tech:1},
- "kbc":{n:"KBC — Kon Banega Coder",min:1,max:1,fee:49,tech:1}
+ "kbc":{n:"KBC — Kon Banega Coder",min:1,max:1,fee:49,tech:1},
+ "prompt-wars":{n:"Prompt Wars",min:1,max:1,fee:49,tech:1},
+ /* ---- NON-TECH ---- */
+ "battle-verse":{n:"Battle Verse — Free Fire & BGMI",modes:{
+    "free-fire":{l:"Free Fire",min:4,max:4,fee:99},
+    "bgmi":{l:"BGMI",min:4,max:4,fee:99}}},
+ "one-piece":{n:"One Piece — Treasure Hunt",min:2,max:4,fee:99},
+ "perfect-partner":{n:"Perfect Partner",min:2,max:2,fee:80},
+ "dumb-charades":{n:"Dumb Charades — Silent Signal",min:2,max:4,fee:49},
+ "memography":{n:"Memography — The Memory Arc",min:1,max:1,fee:29},
+ "tech-painting":{n:"Tech Painting — Visual Horizons",min:1,max:1,fee:29},
+ "short-film":{n:"Short Film Making — The Final Cut",modes:{
+    "solo":{l:"Solo",min:1,max:1,fee:99},
+    "team":{l:"Team",min:2,max:5,fee:99}}},
+ "reels":{n:"Reels x Render (Xenesis Reels)",min:1,max:1,fee:29},
+ "photography":{n:"Xenesis Photography",min:1,max:1,fee:29},
+ "xen-z-show":{n:"The Xen-Z Show",modes:{
+    "solo":{l:"Solo",min:1,max:1,fee:49},
+    "group":{l:"Group",min:2,max:10,fee:99}}}
 };
 const typeOf = id => (EVENTS[id] && EVENTS[id].tech) ? "tech" : "non-tech";   // safe for unknown ids
+/* Resolve the effective rules for an event + entry type. Returns null if the entry type is missing/invalid. */
+function rule_(ev, modeId){
+  if(!ev.modes) return {min:ev.min,max:ev.max,fee:ev.fee,label:""};
+  const m = ev.modes[String(modeId||"")];
+  return m ? {min:m.min,max:m.max,fee:m.fee,label:m.l} : null;
+}
 
 /* ---------- run once from the editor to create the sheet/folder and grant permissions ---------- */
 function setup(){
@@ -44,7 +59,7 @@ function setup(){
 function testRegistration(){
   const tiny = "/9j/4AAQSkZJRgABAQEASABIAAD/2wBDAP//////////////////////////////////////////////////////////////////////////////////////wgALCAABAAEBAREA/8QAFBABAAAAAAAAAAAAAAAAAAAAAP/aAAgBAQABPxA=";
   const res = doPost({postData:{contents:JSON.stringify({
-    type:"non-tech", eventId:"photography", eventName:"XENESIS Photography Challenge",
+    type:"non-tech", eventId:"photography", eventName:"Xenesis Photography", mode:"",
     members:["Test Student"], mobile:"9876543210", email:"YOUR_EMAIL@gmail.com", amount:29,
     screenshot:{name:"t.jpg",mime:"image/jpeg",data:tiny}, website:""})}});
   Logger.log(res.getContent());
@@ -58,13 +73,15 @@ function doPost(e){
   try{
     lock.waitLock(30000);
     const d = JSON.parse(e.postData.contents);
-    if(d.website) return out_({status:"success",regId:""});           // honeypot: pretend OK
+    if(d.website) return fail_("Your browser auto-filled a hidden field. Please refresh the page and submit again.");   // honeypot (never fake success)
 
     const ev = EVENTS[d.eventId];
     if(!ev) return fail_("Unknown or closed event.");
     if(d.type !== typeOf(d.eventId)) return fail_("Event type mismatch.");
+    const rule = rule_(ev, d.mode);
+    if(!rule) return fail_("Please choose a valid entry type for this event.");
     const members = Array.isArray(d.members) ? d.members.map(s=>String(s).trim().replace(/\s+/g," ")) : [];
-    if(members.length<ev.min || members.length>ev.max) return fail_("Invalid number of participants for this event.");
+    if(members.length<rule.min || members.length>rule.max) return fail_("Invalid number of participants for this event.");
     if(members.some(n=>!/^[A-Za-z][A-Za-z .'-]{1,59}$/.test(n))) return fail_("Invalid participant name.");
     const mobile = String(d.mobile||"").replace(/\D/g,"").slice(-10);
     if(!/^[6-9]\d{9}$/.test(mobile)) return fail_("Invalid mobile number.");
@@ -74,24 +91,34 @@ function doPost(e){
     if(sh.mime!=="image/jpeg" || !sh.data || sh.data.length>4000000) return fail_("Invalid or oversized payment screenshot.");
 
     const s = sheet_(), rows = s.getLastRow()>1 ? s.getRange(2,1,s.getLastRow()-1,HEAD.length).getValues() : [];
-    const dup = rows.some(r=>r[C.EVENT-1]===ev.n && r[C.STATUS-1]!=="Rejected" &&
+    // duplicate = same event + same entry type (e.g. Free Fire vs BGMI are separate) + same email or mobile, unless rejected
+    const dup = rows.some(r=>r[C.EVENT-1]===ev.n && String(r[C.ENTRY-1]||"")===rule.label && r[C.STATUS-1]!=="Rejected" &&
                 (String(r[C.EMAIL-1]).toLowerCase()===email || String(r[C.MOB-1]).replace(/\D/g,"")===mobile));
-    if(dup) return fail_("This email or mobile number is already registered for this event.");
+    if(dup) return fail_("This email or mobile number is already registered for this event"+(rule.label?" ("+rule.label+")":"")+".");
 
     const props = PropertiesService.getScriptProperties(), tt = typeOf(d.eventId)==="tech"?"TECH":"NT";
     const n = (+props.getProperty("seq_"+tt)||0)+1; props.setProperty("seq_"+tt,String(n));
     const regId = "XEN4-"+tt+"-"+("000"+n).slice(-4);
 
-    const blob = Utilities.newBlob(Utilities.base64Decode(sh.data),"image/jpeg",regId+".jpg");
-    const file = folder_().createFile(blob);
-    s.appendRow([new Date(),regId,tt==="TECH"?"Tech":"Non-Tech",ev.n,members.join(", "),members.length,"'"+mobile,"'"+email,ev.fee,file.getUrl(),"Pending","",""]);
+    // Reserve the row FIRST (fast), so the lock is held for ~1s instead of the 5-15s a Drive upload + email take.
+    s.appendRow([new Date(),regId,tt==="TECH"?"Tech":"Non-Tech",ev.n,members.join(", "),members.length,"'"+mobile,"'"+email,rule.fee,"(uploading)","Pending","","",rule.label]);
     const row = s.getLastRow();
+    SpreadsheetApp.flush();
+    try{lock.releaseLock()}catch(_){}
 
-    s.getRange(row,C.MAIL).setValue(sendMail_(email,"Registration receipt · "+regId,
-      body_("Registration receipt",regId,ev.n,members,ev.fee,
+    // Slow work happens outside the lock; a failure here no longer loses the registration.
+    try{
+      const file = folder_().createFile(Utilities.newBlob(Utilities.base64Decode(sh.data),"image/jpeg",regId+".jpg"));
+      s.getRange(row,C.SHOT).setValue(file.getUrl());
+    }catch(upErr){ console.error(upErr); s.getRange(row,C.SHOT).setValue("UPLOAD FAILED - ask student to resend on WhatsApp"); }
+
+    const evLabel = ev.n + (rule.label ? " ("+rule.label+")" : "");
+    const mail = sendMail_(email,"Registration receipt · "+regId,
+      body_("Registration receipt",regId,evLabel,members,rule.fee,
       "Thank you for registering! This email is your <b>registration receipt</b> and your proof of registration. Please keep your <b>Registration ID</b> safe: you will need it for any query and at the event.",
-      "Our team will verify your payment and send your confirmation on <b>WhatsApp</b> to the number you registered. Date, time and venue will be shared via WhatsApp and email. If the payment is found to be fake or incorrect, the registration will be cancelled.")));
-    return out_({status:"success",regId:regId});
+      "Our team will verify your payment and send your confirmation on <b>WhatsApp</b> to the number you registered. Date, time and venue will be shared via WhatsApp and email. If the payment is found to be fake or incorrect, the registration will be cancelled."));
+    s.getRange(row,C.MAIL).setValue(mail);
+    return out_({status:"success",regId:regId,mail:mail});
   }catch(err){
     console.error(err); return fail_("Something went wrong. Please try again.");
   }finally{ try{lock.releaseLock()}catch(_){} }
@@ -125,6 +152,10 @@ function sheet_(){
   if(!s){ s=ss.insertSheet(SHEET_NAME); }
   if(s.getLastRow()===0){ s.appendRow(HEAD); s.setFrozenRows(1); s.getRange(1,1,1,HEAD.length).setFontWeight("bold").setBackground("#7a1f24").setFontColor("#fff");
     s.getRange(2,C.STATUS,2000).setDataValidation(SpreadsheetApp.newDataValidation().requireValueInList(["Pending","Verified","Rejected"],true).build()); }
+  // Upgrade an existing sheet (created with the old 13 columns): make room for and label the new "Entry Type" column.
+  if(s.getMaxColumns()<HEAD.length) s.insertColumnsAfter(s.getMaxColumns(), HEAD.length-s.getMaxColumns());
+  const hc = s.getRange(1,C.ENTRY);
+  if(!hc.getValue()) hc.setValue(HEAD[C.ENTRY-1]).setFontWeight("bold").setBackground("#7a1f24").setFontColor("#fff");
   return s;
 }
 function folder_(){

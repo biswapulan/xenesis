@@ -52,14 +52,16 @@ input:focus{outline:0;border-color:var(--crim);box-shadow:0 2px 0 var(--crim)}::
 </style></head>
 <body data-page="register.html">
 <div class="app"><main><div id="stage" aria-live="polite"></div></main></div>
-<script src="events-data.js?v=5"></script><script src="shared.js?v=4"></script>
+<script src="events-data.js?v=6"></script><script src="shared.js?v=4"></script>
 <script>
 const ENDPOINT="https://script.google.com/macros/s/AKfycbya7-J8tG72_JJAPKPdm2VcSadTzYvmKMazzDK3kG4sCw_6TbiG9PWBOhtg9W-cbTS0zg/exec";  /* Google Apps Script web-app URL */
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const $=s=>document.querySelector(s),stage=$("#stage");
-const A={type:"",event:"",names:[],mobile:"",email:"",shot:"",shotName:""};
+const A={type:"",event:"",mode:"",names:[],mobile:"",email:"",shot:"",shotName:""};
 let step=0,fromReview=false,busy=false,tmp=[];
 const ev=()=>XEN_EVENTS.find(e=>e.id===A.event);
+/* cur(): the effective rules (min/max/fee/unit) for the chosen event + entry type. null until an entry type is picked on events that have one. */
+const cur=()=>{const e=ev();if(!e.modes)return e;const m=e.modes.find(x=>x.id===A.mode);return m?{...e,min:m.min,max:m.max,fee:m.fee,unit:m.unit||e.unit,label:m.label}:null};
 const NAME=/^[A-Za-z][A-Za-z .'-]{1,59}$/;
 
 function compress(file){return new Promise((res,rej)=>{const img=new Image(),u=URL.createObjectURL(file);
@@ -70,20 +72,28 @@ function compress(file){return new Promise((res,rej)=>{const img=new Image(),u=U
 const STEPS=[
 {t:"Event type",jp:"種別",
  html:()=>`<div class="opts big" role="radiogroup" aria-labelledby="qt">${[["tech","Tech"],["non-tech","Non-Tech"]].map(([v,l],j)=>`<input type="radio" name="r" id="o${j}" value="${v}" ${A.type===v?"checked":""}><label for="o${j}">${l}</label>`).join("")}</div>`,
- take(){const c=stage.querySelector("input:checked");if(!c)return"Choose Tech or Non-Tech.";if(c.value!==A.type){A.type=c.value;A.event="";A.names=[];fromReview=false}return""}},
+ take(){const c=stage.querySelector("input:checked");if(!c)return"Choose Tech or Non-Tech.";if(c.value!==A.type){A.type=c.value;A.event="";A.mode="";A.names=[];fromReview=false}return""}},
 {t:"Choose your event",jp:"競技",
  html:()=>`<div class="opts col" role="radiogroup" aria-labelledby="qt">${XEN_EVENTS.filter(e=>e.type===A.type).map((e,j)=>`<input type="radio" name="r" id="o${j}" value="${e.id}" ${A.event===e.id?"checked":""} ${e.fee==null?"disabled":""}><label for="o${j}">${esc(e.name)}<small>${xenTeam(e)} · ${xenFee(e)}</small></label>`).join("")}</div>`,
- take(){const c=stage.querySelector("input:checked");if(!c)return"Choose an event.";if(c.value!==A.event){A.event=c.value;A.names=[];fromReview=false}return""}},
+ take(){const c=stage.querySelector("input:checked");if(!c)return"Choose an event.";if(c.value!==A.event){A.event=c.value;A.mode="";A.names=[];fromReview=false}return""}},
 {t:"Participants",jp:"参加者",
- html(){const e=ev();tmp=A.names.length?[...A.names]:[];while(tmp.length<e.min)tmp.push("");
-  return `<p class="note" style="margin:-8px 0 8px;max-width:none">${esc(e.name)} · ${e.min===e.max?(e.max===1?"Solo event":`Exactly ${e.max} players`):`${e.min} to ${e.max} players`}</p><div id="nl"></div>${e.max>e.min?'<button class="mini" id="add" type="button">+ Add member</button>':""}`},
- bind(){const e=ev(),nl=$("#nl");
-  const draw=()=>{nl.innerHTML=tmp.map((v,j)=>`<label class="fl" for="n${j}">${e.max===1?"Your name":j===0?"Player 1 (team leader)":"Player "+(j+1)}</label><div class="nr"><input type="text" class="nm" id="n${j}" autocomplete="off" placeholder="Full name" value="${esc(v)}">${j>=e.min?`<button class="mini" type="button" data-r="${j}">Remove</button>`:""}</div>`).join("");
+ html(){const e=ev();tmp=[...A.names];
+  const mp=e.modes?`<span class="fl" id="ml" style="margin-top:0">${esc(e.modeLabel||"Registration type")}</span><div class="opts" role="radiogroup" aria-labelledby="ml" style="margin:8px 0 18px">${e.modes.map((m,j)=>`<input type="radio" name="md" id="m${j}" value="${m.id}" ${A.mode===m.id?"checked":""}><label for="m${j}">${esc(m.label)} · ₹${m.fee}</label>`).join("")}</div>`:"";
+  return `${mp}<p class="note" id="nt" style="margin:-8px 0 8px;max-width:none"></p><div id="nl"></div><button class="mini" id="add" type="button" style="display:none">+ Add member</button>`},
+ bind(){const e=ev(),nl=$("#nl"),add=$("#add"),nt=$("#nt");
+  const draw=()=>{const c=cur();
+   if(!c){nt.textContent=e.name+" · choose an option above";nl.innerHTML="";add.style.display="none";return}
+   while(tmp.length<c.min)tmp.push("");if(tmp.length>c.max)tmp.length=c.max;
+   nt.textContent=e.name+" · "+(c.min===c.max?(c.max===1?"Solo entry":`Exactly ${c.max} players`):`${c.min} to ${c.max} players`);
+   nl.innerHTML=tmp.map((v,j)=>`<label class="fl" for="n${j}">${c.max===1?"Your name":j===0?"Player 1 (team leader)":"Player "+(j+1)}</label><div class="nr"><input type="text" class="nm" id="n${j}" autocomplete="off" placeholder="Full name" value="${esc(v)}">${j>=c.min?`<button class="mini" type="button" data-r="${j}">Remove</button>`:""}</div>`).join("");
    nl.querySelectorAll(".nm").forEach((x,j)=>x.oninput=()=>{tmp[j]=x.value;$("#e").textContent=""});
    nl.querySelectorAll("[data-r]").forEach(b=>b.onclick=()=>{tmp.splice(+b.dataset.r,1);draw()});
-   if($("#add"))$("#add").style.display=tmp.length>=e.max?"none":""};
-  draw();if($("#add"))$("#add").onclick=()=>{tmp.push("");draw();nl.querySelectorAll(".nm")[tmp.length-1].focus()}},
- take(){const v=tmp.map(x=>x.trim().replace(/\s+/g," "));const b=v.findIndex(x=>!NAME.test(x));
+   add.style.display=tmp.length>=c.max?"none":""};
+  stage.querySelectorAll('input[name="md"]').forEach(r=>r.addEventListener("change",()=>{A.mode=r.value;draw()}));
+  add.onclick=()=>{tmp.push("");draw();nl.querySelectorAll(".nm")[tmp.length-1].focus()};
+  draw()},
+ take(){const e=ev(),c=cur();if(!c)return"Pick "+e.modes.map(m=>m.label).join(" or ")+" to continue.";
+  const v=tmp.map(x=>x.trim().replace(/\s+/g," "));const b=v.findIndex(x=>!NAME.test(x));
   if(b>=0)return `Player ${b+1}: enter a full name (letters only, 2–60 characters).`;
   if(new Set(v.map(x=>x.toLowerCase())).size<v.length)return"Each member needs a different name.";A.names=v;return""}},
 {t:"Contact details",jp:"連絡先",
@@ -92,7 +102,7 @@ const STEPS=[
   if(!/^[6-9]\d{9}$/.test(m))return"Enter 10 digits starting with 6, 7, 8 or 9.";
   if(em.length>254||!/^[^\s@]+@[^\s@]+\.[A-Za-z]{2,}$/.test(em))return"Enter a valid email address, like name@example.com.";A.mobile=m;A.email=em;return""}},
 {t:"Payment",jp:"支払い",
- html:()=>{const e=ev();return `<div class="pay"><div class="amt"><span>Amount to pay</span><b>₹${e.fee}</b><small>${e.unit==="person"?"per person":"per "+e.unit} · ${esc(e.name)}</small></div>
+ html:()=>{const e=cur();return `<div class="pay"><div class="amt"><span>Amount to pay</span><b>₹${e.fee}</b><small>${e.unit==="person"?"per person":"per "+e.unit} · ${esc(e.name)}${e.label?" · "+esc(e.label):""}</small></div>
   <img class="qr" src="${XEN_UPI.qr}" alt="Payment QR code"><a class="dl" href="${XEN_UPI.qr}" download="xenesis-payment-qr.jpeg">Save QR image</a>
   <p class="note">Scan with any UPI app and pay the exact amount. On a phone, save the QR and choose it from your UPI app's gallery. Then upload the screenshot of the successful payment.</p>
   <label class="drop"><span class="fl" style="margin:0 0 8px">Payment screenshot</span><input type="file" id="sh" accept="image/*"></label>
@@ -122,7 +132,7 @@ function next(){const m=STEPS[step].take();if(m){$("#e").textContent=m;return}
 function edit(i){fromReview=true;step=i;view()}
 
 function review(){
- const e=ev(),rows=[["Event type",A.type==="tech"?"Tech":"Non-Tech",0],["Event",e.name,1],["Participants",A.names.map((n,i)=>(i+1)+". "+n).join("  ·  "),2],["Mobile",A.mobile,3],["Email",A.email,3],["Amount",`₹${e.fee}`,4],["Screenshot",A.shotName||"Uploaded",4]];
+ const e=cur(),rows=[["Event type",A.type==="tech"?"Tech":"Non-Tech",0],["Event",e.name,1],...(e.label?[[e.modeLabel==="Choose your game"?"Game":"Entry type",e.label,2]]:[]),["Participants",A.names.map((n,i)=>(i+1)+". "+n).join("  ·  "),2],["Mobile",A.mobile,3],["Email",A.email,3],["Amount",`₹${e.fee}`,4],["Screenshot",A.shotName||"Uploaded",4]];
  stage.innerHTML=`<section class="card in"><p class="qn">Step ${total} of ${total}</p><h2 id="qt">Review &amp; submit<span class="kj" lang="ja">確認</span></h2>
  <ul class="rv">${rows.map(([l,v,i])=>`<li><b>${l}</b><span>${esc(v)}</span><button type="button" data-i="${i}" aria-label="Edit ${l}">Edit</button></li>`).join("")}</ul>
  <p class="warn">Your registration is confirmed only after we verify your payment. Fake or incorrect payment screenshots will lead to cancellation of the registration.</p>
@@ -133,23 +143,23 @@ function review(){
 }
 
 async function submit(){
- if(busy)return;const e=ev(),b=$("#sub"),er=$("#e");
+ if(busy)return;const e=cur(),b=$("#sub"),er=$("#e");
  busy=true;b.disabled=true;b.textContent="Sending…";er.textContent="";
  try{
   if(!/^https:\/\//.test(ENDPOINT))throw new Error("The form isn't connected to the sheet yet.");
   const ctl=new AbortController(),t=setTimeout(()=>ctl.abort(),90000);
   const r=await fetch(ENDPOINT,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},signal:ctl.signal,
-   body:JSON.stringify({type:A.type,eventId:e.id,eventName:e.name,members:A.names,mobile:A.mobile,email:A.email,amount:e.fee,screenshot:{name:A.shotName,mime:"image/jpeg",data:A.shot.split(",")[1]},website:$("#hp").value})});
+   body:JSON.stringify({type:A.type,eventId:e.id,eventName:e.name,mode:A.mode,members:A.names,mobile:A.mobile,email:A.email,amount:e.fee,screenshot:{name:A.shotName,mime:"image/jpeg",data:A.shot.split(",")[1]},website:$("#hp").value})});
   clearTimeout(t);const raw=await r.text();let d;try{d=JSON.parse(raw)}catch(_){throw new Error("The registration server sent an unexpected reply (the Apps Script may not be deployed for public access, or has an error).")}
   if(d&&d.status==="success")done(d.regId,d.mail);else throw new Error((d&&d.message)||"The server rejected the registration.");
  }catch(x){b.disabled=false;b.textContent="Submit";er.textContent=(x.name==="AbortError"?"The request timed out. It may still have gone through: if you retry and see \"already registered\", your registration is saved; message us on Help with your mobile number.":(x.message==="Failed to fetch"?"Could not reach the server. Check your internet connection and try again.":x.message))+" Your answers are still saved here."}
  finally{busy=false}
 }
 function done(id,mail){
- const e=ev();window.scrollTo(0,0);
+ const e=cur();window.scrollTo(0,0);
  stage.innerHTML=`<section class="card ok in"><img class="clogo" src="assets/xenesis-logo.png" alt="XENESIS 4.0" width="750" height="603"><svg class="hanko" viewBox="0 0 100 100" role="img" aria-label="Red hanko seal"><rect x="6" y="6" width="88" height="88" rx="4" fill="#b0202a"/><rect x="13" y="13" width="74" height="74" fill="none" stroke="#e8e4da" stroke-width="2" opacity=".8"/><text x="50" y="66" text-anchor="middle" font-family="Shippori Mincho,serif" font-weight="700" font-size="52" fill="#e8e4da">承</text></svg>
  <h2 style="margin:0" id="qt">Registration received<span class="kj" lang="ja">受付完了</span></h2><hr class="blade">
- ${id?`<p class="qn">Registration ID</p><p class="rid">${esc(id)}</p>`:""}<p><b>${esc(e.name)}</b></p>
+ ${id?`<p class="qn">Registration ID</p><p class="rid">${esc(id)}</p>`:""}<p><b>${esc(e.name)}</b>${e.label?` · ${esc(e.label)}`:""}</p>
  ${mail&&mail!=="Sent"
  ?`<div class="mailbox no" role="status"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg><div><b>Save this screen</b><p>We couldn't email your receipt right now. <u>Take a screenshot of this page</u> and keep your Registration ID: it is your proof of registration.</p></div></div>`
  :`<div class="mailbox" role="status"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg><div><b>Check your mailbox</b><p>Your registration receipt has been sent to <u>${esc(A.email)}</u>. If you don't see it, <u>check your Spam / Junk folder too</u>.</p></div></div>`}

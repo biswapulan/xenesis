@@ -31,7 +31,7 @@
 </style></head>
 <body data-page="events.html">
 <div class="app"><main id="m"></main></div>
-<script src="events-data.js?v=4"></script><script src="events-details.js?v=4"></script><script src="shared.js?v=3"></script>
+<script src="events-data.js?v=6"></script><script src="events-details.js?v=6"></script><script src="shared.js?v=3"></script>
 <script>
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const id=new URLSearchParams(location.search).get("id"),i=XEN_EVENTS.findIndex(e=>e.id===id),m=document.getElementById("m");
@@ -43,11 +43,11 @@ else{
  const sec=s=>`<div class="sec"><h2>${esc(s.h)}</h2>${s.p?`<p>${esc(s.p)}</p>`:""}${s.items?`<ul>${s.items.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>`:""}</div>`;
  const co=I.coordinators.length?`<div class="sec"><h2>Coordinators</h2><ul>${I.coordinators.map(c=>`<li>${esc(c.name)} · <a href="tel:${esc(c.phone)}">${esc(c.phone)}</a></li>`).join("")}</ul></div>`:"";
  const reg=e.fee==null?`<a class="btn" aria-disabled="true" href="#">Fee TBA</a>`:`<a class="btn" href="register.html?event=${e.id}">Register Now</a>`;
- const p=XEN_EVENTS[i-1],n=XEN_EVENTS[i+1];
+ const same=XEN_EVENTS.filter(x=>x.type===e.type),k=same.findIndex(x=>x.id===e.id),p=same[k-1],n=same[k+1];
  m.innerHTML=`<a class="back" href="events.html${tab}">← All events</a>
  <section class="hero in" data-jp="${e.jp}"><p class="grp">${esc(e.group||(e.type==="tech"?"Tech Event":"Non-Tech Event"))}</p><h1>${esc(e.name)}</h1>${d.tag?`<p class="tg">${esc(d.tag)}</p>`:""}<hr class="blade"></section>
  <div class="layout in"><article class="panel">${d.sections.map(sec).join("")}
-  <div class="sec"><h2>Prizes</h2><p>${esc(e.prize)}</p><p class="fy" style="margin-top:10px">All position holders receive certificates. If no first-year student secures a top-three position, the highest-ranked eligible first-year participant/team receives a special gift.</p></div>${co}</article>
+  <div class="sec"><h2>Prizes</h2><p>${esc(e.prize||"Prize details will be announced soon.")}</p><p class="fy" style="margin-top:10px">All position holders receive certificates. If no first-year student secures a top-three position, the highest-ranked eligible first-year participant/team receives a special gift.</p></div>${co}</article>
  <aside class="panel side"><dl>${row("Registration fee",xenFee(e),"big")}${row("Format",xenTeam(e))}${row("Duration",e.duration)}${row("Date",I.date)}${row("Time",I.time)}${row("Venue",I.venue)}</dl>${I.notice?`<p class="fy" style="margin-top:14px">${esc(I.notice)}</p>`:""}${reg}<p class="fy" style="margin-top:12px;text-align:center">Questions? <a href="help.html" style="color:var(--amber)">Ask the help desk</a></p><a class="btn ghost" href="events.html${tab}">Browse Events</a></aside></div>
  <nav class="pager" aria-label="Other events"><span>${p?`<a href="event.html?id=${p.id}">← ${esc(p.name)}</a>`:""}</span><span>${n?`<a href="event.html?id=${n.id}">${esc(n.name)} →</a>`:""}</span></nav>`;
 }
