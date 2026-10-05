@@ -22,6 +22,11 @@ const XEN_EVENTS=[
  prize:"1st ₹1,000 · Runner-up ₹500 · Merit Certificates",
  summary:"A competitive generative AI challenge testing prompt engineering, creative problem-solving and output optimization under tight prompt and time limits."},
 /* ---------- NON-TECH ---------- */
+{id:"xen-z-show",type:"non-tech",jp:"舞台",name:"The Xen-Z Show",min:1,max:10,fee:49,unit:"entry",
+ prize:"1st ₹600 · 2nd ₹300 · 3rd Memento + Certificate",
+ format:"Solo / Group",feeText:"₹49 solo · ₹99 group",modeLabel:"Registering as",
+ modes:[{id:"solo",label:"Solo",min:1,max:1,fee:49,unit:"person"},{id:"group",label:"Group",min:2,max:10,fee:99,unit:"group"}],
+ summary:"An open-stage platform for dance routines, stand-up comedy, music, beatboxing, mimicry and stage variety acts."},
 {id:"battle-verse",type:"non-tech",jp:"戦場",name:"Battle Verse — Free Fire & BGMI",group:"Gaming Arena",min:4,max:4,fee:99,unit:"squad",
  prize:"1st ₹600 · 2nd ₹300 · 3rd Memento + Certificate",
  format:"Squad of 4",feeText:"₹99 / squad",modeLabel:"Choose your game",
@@ -56,12 +61,7 @@ const XEN_EVENTS=[
  summary:"Capture the spirit, student competition and vibe of the fest in a short, edited cinematic film judged on narrative flow, color grading and audio design."},
 {id:"reels",type:"non-tech",jp:"動画",name:"Reels x Render",min:1,max:1,fee:29,unit:"person",
  prize:"1st ₹600 · 2nd ₹300 · 3rd Memento + Certificate",
- summary:"A vertical 9:16 content creation sprint. Film, edit, beat-match and deliver high-energy social reels documenting the festival."},
-{id:"xen-z-show",type:"non-tech",jp:"舞台",name:"The Xen-Z Show",min:1,max:10,fee:49,unit:"entry",
- prize:"1st ₹600 · 2nd ₹300 · 3rd Memento + Certificate",
- format:"Solo / Group",feeText:"₹49 solo · ₹99 group",modeLabel:"Registering as",
- modes:[{id:"solo",label:"Solo",min:1,max:1,fee:49,unit:"person"},{id:"group",label:"Group",min:2,max:10,fee:99,unit:"group"}],
- summary:"An open-stage platform for dance routines, stand-up comedy, music, beatboxing, mimicry and stage variety acts."}
+ summary:"A vertical 9:16 content creation sprint. Film, edit, beat-match and deliver high-energy social reels documenting the festival."}
 ];
 const XEN_UPI={qr:"assets/payment-qr.jpeg"};
 const xenTeam=e=>e.format||(e.min===1&&e.max===1?"Solo":e.min===e.max?`${e.min} players`:`${e.min}–${e.max} players`);
