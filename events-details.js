@@ -58,10 +58,19 @@ const XEN_DETAILS={
  {h:"How it works",items:["Twenty images are shown one after another, about 2 seconds each.","Afterwards you get an answer sheet.","Write what you saw, in the correct order."]},
  {h:"Scoring",items:["Each correct item in the correct position earns marks.","Ranking is based on total score.","Ties may be settled by tie-breaker questions."]},
  {h:"The challenge",p:"It's not about seeing the images. It's about remembering them."}]},
-"tech-painting":{tag:"Visual Horizons",sections:[
- {h:"About",p:"Phones down. Creativity begins. Create original physical artwork on the themes of Cyberpunk Samurai or futuristic technology, with no digital aids."},
- {h:"Rules",items:["Artwork must be physical and created during the allotted time.","No phones or digital aids while painting.","Follow the announced themes.","Copying another participant's work may lead to disqualification.","Bring your own colours, brushes and materials unless told otherwise."]},
- {h:"Judging criteria",items:["Creativity","Relevance to the theme","Concept","Presentation","Artistic execution"]}]},
+"ad-mad":{tag:"Pitch It. Perform It.",sections:[
+ {h:"About",p:"A live marketing pitch with a humorous skit. Teams are handed quirky, unexpected products and must sell them on the spot with taglines, jingles and brand pitches."},
+ {h:"Registration",items:["Solo entry or a team of 2 to 4 members.","Same entry fee of ₹49 for solo and team."]},
+ {h:"Judged on",items:["Creativity and humour","Quality of the pitch and tagline","Jingle and performance","Team coordination and stage presence"]},
+ {h:"Rules",items:["Keep content respectful and suitable for a college audience.","Product and time limit are announced on the spot.","Organizers' decisions are final."]}]},
+"ipl-auction":{tag:"Bid. Build. Win.",sections:[
+ {h:"About",p:"A simulated cricket auction. Manage a fixed virtual budget, win the paddle wars and assemble a balanced playing XI under tactical constraints."},
+ {h:"Format",items:["Team of 2 to 3 members.","Every team gets the same virtual budget.","Teams bid for players in live auction rounds.","Squads must be balanced and meet the announced constraints."]},
+ {h:"Ranking",p:"Teams are ranked on the strength and balance of the final playing XI. Exact scoring rules are announced before the event."}]},
+"chess":{tag:"The Grandmaster Gambit",sections:[
+ {h:"About",p:"A fast-paced rapid/blitz tournament that tests board awareness, tactical openings, endgame strategy and time management."},
+ {h:"Rules",items:["Individual participation.","Rapid/blitz time control, announced before the event.","Standard chess rules apply, with touch-move.","Organizers' decisions on disputes are final."]},
+ {h:"Format",p:"Match format and pairing system depend on the number of entries and are announced before the event."}]},
 "short-film":{tag:"The Final Cut",sections:[
  {h:"About",p:"Capture the atmosphere of XENESIS 4.0 in a cinematic piece: student battles, campus backdrops and raw festival adrenaline."},
  {h:"Registration",items:["Solo or Team entry, same fee of ₹99.","Team entries can have up to 5 members."]},
@@ -72,11 +81,6 @@ const XEN_DETAILS={
  {h:"About",p:"Shoot, edit and deliver dynamic, high-engagement short-form vertical video that captures campus energy, creative cuts and fest vibes."},
  {h:"Rules",items:["Individual participation.","Vertical (9:16) short-form video.","Content must be original and shot during XENESIS 4.0.","Keep it respectful and fest-appropriate.","Maximum length and submission method are announced by the organizers."]},
  {h:"Judging criteria",items:["Creativity","Editing and cuts","Engagement and energy","Storytelling","Overall vibe"]}]},
-"photography":{tag:"Lens Craft",sections:[
- {h:"About",p:"Document vivid festival moments through lens craft, composition and dynamic lighting. Don't just take a photo: capture a moment worth remembering."},
- {h:"Capture",items:["People and emotions","Events and action","Decorations and campus","Behind-the-scenes moments","Creative perspectives"]},
- {h:"Judging criteria",items:["Storytelling impact","Framing and composition","Lighting","Timing","Originality"]},
- {h:"Note",p:"Submission format and deadline will be announced by the organizers."}]},
 "xen-z-show":{tag:"The Open Stage",sections:[
  {h:"About",p:"The ultimate open stage for Gen-Z talent. Step up and own the crowd."},
  {h:"Acts welcome",items:["Stand-up comedy","Mimicry","Music and acoustic jams","Open mic","Any crowd-captivating performance act"]},

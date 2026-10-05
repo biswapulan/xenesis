@@ -19,23 +19,24 @@ const EVENTS = {
  /* ---- TECH ---- */
  "robo-drift":{n:"Robo Drift",min:1,max:4,fee:50,tech:1},
  "wordlord":{n:"WordLord — The Typing Battle",min:1,max:1,fee:49,tech:1},
- "codemon":{n:"CodeMon — Build Under Pressure",min:2,max:4,fee:199,tech:1},
+ "codemon":{n:"Codemon — Build Under Pressure",min:2,max:4,fee:199,tech:1},
  "kbc":{n:"KBC — Kon Banega Coder",min:1,max:1,fee:49,tech:1},
  "prompt-wars":{n:"Prompt Wars",min:1,max:1,fee:49,tech:1},
  /* ---- NON-TECH ---- */
  "battle-verse":{n:"Battle Verse — Free Fire & BGMI",modes:{
     "free-fire":{l:"Free Fire",min:4,max:4,fee:99},
     "bgmi":{l:"BGMI",min:4,max:4,fee:99}}},
- "one-piece":{n:"One Piece — Treasure Hunt",min:2,max:4,fee:99},
+ "one-piece":{n:"One Piece — Campus Treasure Hunt",min:2,max:4,fee:99},
  "perfect-partner":{n:"Perfect Partner",min:2,max:2,fee:80},
  "dumb-charades":{n:"Dumb Charades — Silent Signal",min:2,max:4,fee:49},
  "memography":{n:"Memography — The Memory Arc",min:1,max:1,fee:29},
- "tech-painting":{n:"Tech Painting — Visual Horizons",min:1,max:1,fee:29},
+ "ad-mad":{n:"Ad-Mad",min:1,max:4,fee:49},
+ "ipl-auction":{n:"IPL Auction",min:2,max:3,fee:99},
+ "chess":{n:"Chess — The Grandmaster Gambit",min:1,max:1,fee:49},
  "short-film":{n:"Short Film Making — The Final Cut",modes:{
     "solo":{l:"Solo",min:1,max:1,fee:99},
     "team":{l:"Team",min:2,max:5,fee:99}}},
- "reels":{n:"Reels x Render (Xenesis Reels)",min:1,max:1,fee:29},
- "photography":{n:"Xenesis Photography",min:1,max:1,fee:29},
+ "reels":{n:"Reels x Render",min:1,max:1,fee:29},
  "xen-z-show":{n:"The Xen-Z Show",modes:{
     "solo":{l:"Solo",min:1,max:1,fee:49},
     "group":{l:"Group",min:2,max:10,fee:99}}}
@@ -59,8 +60,8 @@ function setup(){
 function testRegistration(){
   const tiny = "/9j/4AAQSkZJRgABAQEASABIAAD/2wBDAP//////////////////////////////////////////////////////////////////////////////////////wgALCAABAAEBAREA/8QAFBABAAAAAAAAAAAAAAAAAAAAAP/aAAgBAQABPxA=";
   const res = doPost({postData:{contents:JSON.stringify({
-    type:"non-tech", eventId:"photography", eventName:"Xenesis Photography", mode:"",
-    members:["Test Student"], mobile:"9876543210", email:"YOUR_EMAIL@gmail.com", amount:29,
+    type:"non-tech", eventId:"chess", eventName:"Chess — The Grandmaster Gambit", mode:"",
+    members:["Test Student"], mobile:"9876543210", email:"YOUR_EMAIL@gmail.com", amount:49,
     screenshot:{name:"t.jpg",mime:"image/jpeg",data:tiny}, website:""})}});
   Logger.log(res.getContent());
 }
