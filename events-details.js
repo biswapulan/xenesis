@@ -71,12 +71,6 @@ const XEN_DETAILS={
  {h:"About",p:"A fast-paced rapid/blitz tournament that tests board awareness, tactical openings, endgame strategy and time management."},
  {h:"Rules",items:["Individual participation.","Rapid/blitz time control, announced before the event.","Standard chess rules apply, with touch-move.","Organizers' decisions on disputes are final."]},
  {h:"Format",p:"Match format and pairing system depend on the number of entries and are announced before the event."}]},
-"short-film":{tag:"The Final Cut",sections:[
- {h:"About",p:"Capture the atmosphere of XENESIS 4.0 in a cinematic piece: student battles, campus backdrops and raw festival adrenaline."},
- {h:"Registration",items:["Solo or Team entry, same fee of ₹99.","Team entries can have up to 5 members."]},
- {h:"Capture",items:["Events and performances","Participants and crowds","Campus atmosphere","Behind-the-scenes moments"]},
- {h:"Judging criteria",items:["Creativity","Storytelling","Cinematography","Editing","Originality","Use of music/audio"]},
- {h:"Note",p:"Duration, submission format and deadline will be announced by the organizers."}]},
 "reels":{tag:"Reels x Render",sections:[
  {h:"About",p:"Shoot, edit and deliver dynamic, high-engagement short-form vertical video that captures campus energy, creative cuts and fest vibes."},
  {h:"Rules",items:["Individual participation.","Vertical (9:16) short-form video.","Content must be original and shot during XENESIS 4.0.","Keep it respectful and fest-appropriate.","Maximum length and submission method are announced by the organizers."]},

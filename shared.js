@@ -23,7 +23,7 @@ hd.querySelector(".navbk").addEventListener("click",()=>setMenu(false));
 hd.querySelectorAll(".nav a").forEach(a=>a.addEventListener("click",()=>setMenu(false)));
 addEventListener("keydown",e=>{if(e.key==="Escape")setMenu(false)});
 addEventListener("resize",()=>{if(innerWidth>820)setMenu(false)});
-app.insertAdjacentHTML("beforeend",`<footer class="foot">Designed with ❤️ by CSE, GCE KJR</footer>`);
+app.insertAdjacentHTML("beforeend",`<footer class="foot">Designed with ❤️ by CSE, GCE KJR<br><span class="fm">Support &amp; queries: <a href="mailto:info@xenesis.tech">info@xenesis.tech</a> · Sponsorships: <a href="mailto:sponsorships@xenesis.tech">sponsorships@xenesis.tech</a></span></footer>`);
 if(here!=="help.html")document.body.insertAdjacentHTML("beforeend",`<a class="helpfab" href="help.html" data-tip="Help" aria-label="Help desk and live chat" data-cursor><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.5-4.6A8 8 0 1 1 21 12z"/><path d="M9.5 10.5h5M9.5 13.5h3"/></svg></a>`);
 const s=document.getElementById("shoji");
 requestAnimationFrame(()=>requestAnimationFrame(()=>s.classList.remove("shut")));

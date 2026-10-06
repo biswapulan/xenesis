@@ -455,6 +455,9 @@ h1,h2,h3{ font-weight:400; margin:0; letter-spacing:-.005em; }
 .foot li a{ font-size:13px; color:#8f9a93; transition:color .35s; }
 .foot li a:hover{ color:var(--bone); }
 .foot-brand p{ margin:16px 0 0; max-width:34ch; font-size:13px; color:#79847e; }
+.foot-brand .foot-mail{ max-width:none; line-height:1.9; font-size:12.5px; }
+.foot-brand .foot-mail a{ color:#8f9a93; text-decoration:underline; text-underline-offset:3px; transition:color .35s; }
+.foot-brand .foot-mail a:hover{ color:var(--bone); }
 .foot-base{ display:flex; justify-content:space-between; align-items:center; gap:20px; flex-wrap:wrap;
   margin-top:clamp(38px,6vh,74px); padding-top:20px; border-top:1px solid var(--line-soft);
   font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); }
@@ -1206,6 +1209,7 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
     <div class="foot-brand">
       <img src="assets/xenesis-logo.png" alt="" width="750" height="603" decoding="async">
       <p>XENESIS 4.0 — the departmental tech fest of Computer Science and Engineering, Government College of Engineering, Keonjhar.</p>
+      <p class="foot-mail">Support &amp; queries: <a href="mailto:info@xenesis.tech" data-cursor>info@xenesis.tech</a><br>Sponsorships: <a href="mailto:sponsorships@xenesis.tech" data-cursor>sponsorships@xenesis.tech</a></p>
     </div>
     <div><h4>Explore</h4><ul>
       <li><a href="#gate" data-cursor>About</a></li>

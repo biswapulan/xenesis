@@ -27,15 +27,12 @@ const EVENTS = {
     "free-fire":{l:"Free Fire",min:4,max:4,fee:99},
     "bgmi":{l:"BGMI",min:4,max:4,fee:99}}},
  "one-piece":{n:"One Piece — Campus Treasure Hunt",min:2,max:4,fee:99},
- "perfect-partner":{n:"Perfect Partner",min:2,max:2,fee:80},
+ "perfect-partner":{n:"Perfect Partner",min:2,max:2,fee:69},
  "dumb-charades":{n:"Dumb Charades — Silent Signal",min:2,max:4,fee:49},
  "memography":{n:"Memography — The Memory Arc",min:1,max:1,fee:29},
  "ad-mad":{n:"Ad-Mad",min:1,max:4,fee:49},
  "ipl-auction":{n:"IPL Auction",min:2,max:3,fee:99},
  "chess":{n:"Chess — The Grandmaster Gambit",min:1,max:1,fee:49},
- "short-film":{n:"Short Film Making — The Final Cut",modes:{
-    "solo":{l:"Solo",min:1,max:1,fee:99},
-    "team":{l:"Team",min:2,max:5,fee:99}}},
  "reels":{n:"Reels x Render",min:1,max:1,fee:29},
  "xen-z-show":{n:"The Xen-Z Show",modes:{
     "solo":{l:"Solo",min:1,max:1,fee:49},
