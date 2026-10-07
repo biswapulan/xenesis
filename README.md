@@ -20,3 +20,4 @@ Department of CSE, Government College of Engineering, Keonjhar
 - Perfect Partner fee is now ₹69. Dumb Charades and Memography prizes are 1st ₹400 · 2nd ₹300. Short Film Making removed (events-data.js, events-details.js, Code.gs, help FAQ).
 - Contact emails added to the footers and Help Desk: support/queries `info@xenesis.tech`, sponsorships `sponsorships@xenesis.tech`.
 - `backend/Code.gs` changed (Perfect Partner fee, Short Film removed): paste into Apps Script and **redeploy** (Deploy → Manage deployments → Edit → New version).
+- IPL Auction: fee ₹149, team of 4, prizes 1st ₹800 · 2nd ₹400, new description. `backend/Code.gs` changed again: paste and **redeploy as a New version**.

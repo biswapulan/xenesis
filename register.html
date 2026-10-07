@@ -52,9 +52,9 @@ input:focus{outline:0;border-color:var(--crim);box-shadow:0 2px 0 var(--crim)}::
 </style></head>
 <body data-page="register.html">
 <div class="app"><main><div id="stage" aria-live="polite"></div></main></div>
-<script src="events-data.js?v=7"></script><script src="shared.js?v=4"></script>
+<script src="events-data.js?v=8"></script><script src="shared.js?v=5"></script>
 <script>
-const ENDPOINT="https://script.google.com/macros/s/AKfycbwKNG5kuhcxTDK9yKpPTy6BIyS6it3cK3tve1M3qJuh5oq04IyVlfGvrBilGVf8Tk7RFw/exec";  /* Google Apps Script web-app URL */
+const ENDPOINT="https://script.google.com/macros/s/AKfycbykq9fGO26OCNNo8Hw9QIa1Q7w-vbEbqaGQKW666yBqj2otWp-TVsMRdYopWNvUHJWMMQ/exec";  /* Google Apps Script web-app URL */
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const $=s=>document.querySelector(s),stage=$("#stage");
 const A={type:"",event:"",mode:"",names:[],mobile:"",email:"",shot:"",shotName:""};
@@ -147,6 +147,7 @@ async function submit(){
  busy=true;b.disabled=true;b.textContent="Sending…";er.textContent="";
  try{
   if(!/^https:\/\//.test(ENDPOINT))throw new Error("The form isn't connected to the sheet yet.");
+  if(A.names.length<e.min||A.names.length>e.max)throw new Error((e.min===e.max?"This event needs exactly "+e.min:"This event needs "+e.min+" to "+e.max)+" player(s). Go back to the Participants step and fix the team.");
   const ctl=new AbortController(),t=setTimeout(()=>ctl.abort(),90000);
   const r=await fetch(ENDPOINT,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},signal:ctl.signal,
    body:JSON.stringify({type:A.type,eventId:e.id,eventName:e.name,mode:A.mode,members:A.names,mobile:A.mobile,email:A.email,amount:e.fee,screenshot:{name:A.shotName,mime:"image/jpeg",data:A.shot.split(",")[1]},website:$("#hp").value})});

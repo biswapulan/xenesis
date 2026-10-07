@@ -64,8 +64,8 @@ const XEN_DETAILS={
  {h:"Judged on",items:["Creativity and humour","Quality of the pitch and tagline","Jingle and performance","Team coordination and stage presence"]},
  {h:"Rules",items:["Keep content respectful and suitable for a college audience.","Product and time limit are announced on the spot.","Organizers' decisions are final."]}]},
 "ipl-auction":{tag:"Bid. Build. Win.",sections:[
- {h:"About",p:"A simulated cricket auction. Manage a fixed virtual budget, win the paddle wars and assemble a balanced playing XI under tactical constraints."},
- {h:"Format",items:["Team of 2 to 3 members.","Every team gets the same virtual budget.","Teams bid for players in live auction rounds.","Squads must be balanced and meet the announced constraints."]},
+ {h:"About",p:"Simulated cricket auction. Manage a fixed virtual budget, strategize bidder paddle wars, and assemble a balanced squad under tactical constraints."},
+ {h:"Format",items:["Team of 4 members.","Every team gets the same virtual budget.","Teams bid for players in live auction rounds.","Squads must be balanced and meet the announced constraints."]},
  {h:"Ranking",p:"Teams are ranked on the strength and balance of the final playing XI. Exact scoring rules are announced before the event."}]},
 "chess":{tag:"The Grandmaster Gambit",sections:[
  {h:"About",p:"A fast-paced rapid/blitz tournament that tests board awareness, tactical openings, endgame strategy and time management."},
