@@ -5,7 +5,7 @@
  * The Sheet menu only marks a row Verified / Rejected.
  */
 // Bump this every time you paste new code. Open the /exec URL in a browser: it must show this same version.
-const VERSION     = "2026-10-07-ipl-team-of-4";
+const VERSION     = "2026-10-08-tech-hackathons";
 const SHEET_NAME  = "Registrations";
 const FOLDER_NAME = "Xenesis 4.0 Payment Screenshots";
 const FROM_NAME   = "XENESIS 4.0 · CSE, GCE Keonjhar";   // display name students see
@@ -19,11 +19,11 @@ const C = {TS:1,ID:2,TYPE:3,EVENT:4,MEM:5,SIZE:6,MOB:7,EMAIL:8,AMT:9,SHOT:10,STA
    "modes" = entry types with their own team size / fee (Solo vs Group, or which game). */
 const EVENTS = {
  /* ---- TECH ---- */
- "robo-drift":{n:"Robo Drift",min:1,max:4,fee:50,tech:1},
+ "robo-drift":{n:"Robo Drift Hackathon",min:1,max:4,fee:50,tech:1},
  "wordlord":{n:"WordLord — The Typing Battle",min:1,max:1,fee:49,tech:1},
  "codemon":{n:"Codemon — Build Under Pressure",min:2,max:4,fee:199,tech:1},
- "kbc":{n:"KBC — Kon Banega Coder",min:1,max:1,fee:49,tech:1},
- "prompt-wars":{n:"Prompt Wars",min:1,max:1,fee:49,tech:1},
+ "kbc":{n:"KBC — Kon Banega Coder — Coding and Software Development Hackathon",min:1,max:1,fee:49,tech:1},
+ "prompt-wars":{n:"MATLAB/Simulink-based Hackathon",min:1,max:1,fee:49,tech:1},
  /* ---- NON-TECH ---- */
  "battle-verse":{n:"Battle Verse — Free Fire & BGMI",modes:{
     "free-fire":{l:"Free Fire",min:4,max:4,fee:99},

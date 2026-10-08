@@ -3,7 +3,8 @@ Department of CSE, Government College of Engineering, Keonjhar
 
 
 ## Updates
-- **Final events list (15 events)**: Tech = Robo Drift, WordLord, Codemon, KBC, Prompt Wars. Non-Tech = Battle Verse (Free Fire & BGMI), One Piece Campus Treasure Hunt, Perfect Partner, Dumb Charades, Memography, Ad-Mad, IPL Auction, Chess, Reels x Render, The Xen-Z Show. Edit them in `events-data.js` (+ `events-details.js` for the detail pages).
+- Tech events renamed/rewritten: Robo Drift -> Robo Drift Hackathon; KBC -> KBC — Kon Banega Coder — Coding and Software Development Hackathon; Prompt Wars -> MATLAB/Simulink-based Hackathon (ids unchanged). **Redeploy the Apps Script** (new version) so names match.
+- **Final events list (15 events)**: Tech = Robo Drift Hackathon, WordLord, Codemon, KBC (Coding and Software Development Hackathon), MATLAB/Simulink-based Hackathon. Non-Tech = Battle Verse (Free Fire & BGMI), One Piece Campus Treasure Hunt, Perfect Partner, Dumb Charades, Memography, Ad-Mad, IPL Auction, Chess, Reels x Render, The Xen-Z Show. Edit them in `events-data.js` (+ `events-details.js` for the detail pages).
 - Events can now have entry types (`modes` in `events-data.js`): Xen-Z Show (Solo ₹49 / Group ₹99) and Battle Verse (choose Free Fire or BGMI). The register page shows the choice on the Participants step.
 - `backend/Code.gs`: new event list + `modes`, and a new last column **Entry Type**. Keep its `EVENTS` table in sync with `events-data.js`. **Redeploy the Apps Script** (Deploy → Manage deployments → Edit → New version).
 - Events updated to the latest list: added Ad-Mad, IPL Auction and Chess; removed Tech Painting and Photography; prizes updated per event.

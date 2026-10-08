@@ -6,21 +6,21 @@
    Keep backend/Code.gs EVENTS in sync with this file (id, name, min, max, fee, modes). */
 const XEN_EVENTS=[
 /* ---------- TECH ---------- */
-{id:"robo-drift",type:"tech",jp:"走行",name:"Robo Drift",min:1,max:4,fee:50,unit:"team",format:"Team",
+{id:"robo-drift",type:"tech",jp:"走行",name:"Robo Drift Hackathon",min:1,max:4,fee:50,unit:"team",format:"Team",
  prize:"1st ₹1,000 · Runner-up ₹500 · Memento + Merit Certificates",
- summary:"Pilot remote-controlled rovers along high-friction obstacle tracks, testing acceleration, turning control and drift precision under strict clock constraints."},
+ summary:"A robotics hackathon where teams build or tune a remote-controlled rover and race it through a high-friction obstacle track, scored on speed, turning control, drift precision and clean runs."},
 {id:"wordlord",type:"tech",jp:"速打",name:"WordLord — The Typing Battle",min:1,max:1,fee:49,unit:"person",
  prize:"1st ₹600 · 2nd ₹300 · 3rd Memento + Certificate",
  summary:"A rapid 15–30 second typing sprint judged on raw WPM, accuracy and zero error tolerance. No AI, no external tools, just keyboard speed."},
 {id:"codemon",type:"tech",jp:"開発",name:"Codemon — Build Under Pressure",min:2,max:4,fee:199,unit:"team",duration:"3 hours",
  prize:"1st ₹1,000 · Runner-up ₹500 · Memento + Merit Certificates",
  summary:"A rapid full-stack sprint on React.js, Next.js and modern web frameworks. AI agents are allowed, but you must defend your architecture, debug live and answer viva questions."},
-{id:"kbc",type:"tech",jp:"知識",name:"KBC — Kon Banega Coder",min:1,max:1,fee:49,unit:"person",
+{id:"kbc",type:"tech",jp:"知識",name:"KBC — Kon Banega Coder — Coding and Software Development Hackathon",min:1,max:1,fee:49,unit:"person",
  prize:"1st ₹1,000 · 2nd ₹500 · 3rd Memento + Certificate",
- summary:"Rapid-fire MCQs on Python, C, C++, Java and JavaScript: runtime outputs, tricky syntax quirks, OOP principles and memory management logic."},
-{id:"prompt-wars",type:"tech",jp:"呪文",name:"Prompt Wars",min:1,max:1,fee:49,unit:"person",
+ summary:"An individual coding and software development hackathon. Solve real programming problems and build working software in your choice of language, judged on correctness, code quality and problem-solving."},
+{id:"prompt-wars",type:"tech",jp:"呪文",name:"MATLAB/Simulink-based Hackathon",min:1,max:1,fee:49,unit:"person",
  prize:"1st ₹1,000 · Runner-up ₹500 · Merit Certificates",
- summary:"A competitive generative AI challenge testing prompt engineering, creative problem-solving and output optimization under tight prompt and time limits."},
+ summary:"A hands-on hackathon built on MATLAB and Simulink. Model, simulate and analyse engineering problems such as signals, control systems and data, and present a working, well-explained solution."},
 /* ---------- NON-TECH ---------- */
 {id:"xen-z-show",type:"non-tech",jp:"舞台",name:"The Xen-Z Show",min:1,max:10,fee:49,unit:"entry",
  prize:"1st ₹600 · 2nd ₹300 · 3rd Memento + Certificate",

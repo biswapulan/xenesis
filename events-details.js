@@ -6,10 +6,11 @@ const XEN_INFO={
 };
 const XEN_DETAILS={
 /* ================= TECH ================= */
-"robo-drift":{tag:"Control. Speed. Precision.",sections:[
- {h:"About",p:"Pilot remote-controlled rovers along high-friction obstacle tracks. Robo Drift rewards the driver who combines raw speed with acute turning control, because one wrong line on the track can cost the race."},
- {h:"Basic concept",items:["Robots compete on a designated obstacle track.","Participants control their rovers remotely.","Speed, turning control and clean runs decide the ranking.","Track layout, run format and technical specifications are announced before the event."]},
- {h:"Team",p:"Register as a team. Every member must be listed at registration."},
+"robo-drift":{tag:"Build. Control. Drift.",sections:[
+ {h:"About",p:"Robo Drift Hackathon is a robotics challenge for teams who want to engineer a fast, controllable rover and prove it on the track. Speed alone will not win: the best team balances design, control and precision."},
+ {h:"Basic concept",items:["Teams bring a remote-controlled rover and compete on a designated high-friction obstacle track.","Rovers are driven remotely by the team's pilot.","Acceleration, turning control, drift precision and clean runs decide the ranking.","Track layout, run format and technical specifications are announced before the event."]},
+ {h:"Judged on",items:["Lap or run time","Turning and drift control","Obstacle clearance and clean runs","Robot design and build quality"]},
+ {h:"Team",p:"Register as a team of 1 to 4 members. Every member must be listed at registration."},
  {h:"Important",p:"Make sure your robot meets the technical requirements announced by the organizers. Bring spare batteries and basic tools."}]},
 "wordlord":{tag:"The Typing Battle",sections:[
  {h:"About",p:"Type fast. Type accurately. WordLord is a 15–30 second typing sprint where only you and your keyboard matter."},
@@ -22,16 +23,18 @@ const XEN_DETAILS={
  {h:"Critical criteria",items:["Show complete comprehension of the logic that was generated.","Modify the code on request.","Troubleshoot live bugs.","Defend your architectural choices in a viva."]},
  {h:"Domains",items:["UI/UX","React.js","Next.js","Modern full-stack web development","Real-time problem solving"]},
  {h:"Duration",p:"3 hours. The exact task, technical requirements and judging details are revealed at the start of the event. Bring a charged laptop."}]},
-"kbc":{tag:"Choose Your Blade. Prove Your Mastery.",sections:[
- {h:"About",p:"Kon Banega Coder. Pick the language you trust most, then face 10–20 rapid MCQs on its quirks and fundamentals."},
- {h:"Language options",items:["Python","C","C++","Java","JavaScript"]},
- {h:"Questions may cover",items:["Syntax quirks","Runtime and output predictions","OOP concepts","Memory logic","Operators"]},
- {h:"Winner",p:"The participant with the highest valid score takes the top position. Ties may be settled with extra questions."}]},
-"prompt-wars":{tag:"Command The Machine",sections:[
- {h:"About",p:"A competitive AI prompting challenge. You are given tasks and constraints, and must write prompts that get the best possible output from an AI model."},
- {h:"What is tested",items:["Creativity","Problem-solving","Prompt engineering skill","Getting optimal outputs under constraints"]},
- {h:"Rules",items:["Individual participation.","Follow the constraints given for each round.","Task format, tools and time limit are announced before the event.","Organizers' decisions on judging are final."]},
- {h:"Tip",p:"Be clear, be specific and iterate. The best prompter is not the one with the longest prompt."}]},
+"kbc":{tag:"Code. Build. Compete.",sections:[
+ {h:"About",p:"KBC (Kon Banega Coder) is an individual coding and software development hackathon. You are given real programming problems and must design, code and deliver working solutions within the time limit."},
+ {h:"What you will do",items:["Solve problem statements announced at the start of the event.","Write clean, working code in a language of your choice from those allowed by the organizers.","Build and demonstrate a working solution or mini software project.","Explain your logic and approach to the judges."]},
+ {h:"Skills tested",items:["Problem solving and logic","Data structures and algorithms","Software development fundamentals","Code quality, debugging and optimization"]},
+ {h:"Rules",items:["Individual participation.","Problem statements, allowed languages, tools and time limit are announced before the event.","Bring a charged laptop.","Organizers' decisions on judging are final."]},
+ {h:"Winner",p:"The participant with the best overall score on correctness, code quality and presentation takes the top position. Ties may be settled with an extra problem."}]},
+"prompt-wars":{tag:"Model. Simulate. Solve.",sections:[
+ {h:"About",p:"The MATLAB/Simulink-based Hackathon is a hands-on technical challenge where you use MATLAB and Simulink to model, simulate and analyse an engineering problem, then present a working solution."},
+ {h:"What you will do",items:["Receive problem statements at the start of the event.","Build models and simulations in Simulink and scripts in MATLAB.","Analyse results with plots and data.","Present your approach and findings to the judges."]},
+ {h:"Skills tested",items:["MATLAB programming","Simulink modelling and simulation","Signals, systems and control basics","Data analysis and visualization","Problem solving under time limits"]},
+ {h:"Rules",items:["Individual participation.","Problem statements, toolboxes and time limit are announced before the event.","Bring a laptop with MATLAB and Simulink installed and working.","Organizers' decisions on judging are final."]},
+ {h:"Tip",p:"Check your MATLAB and Simulink installation and licence before the event, and practise basic modelling so no time is lost on setup."}]},
 
 /* ================= NON-TECH ================= */
 "battle-verse":{tag:"Free Fire & BGMI",sections:[
