@@ -7,7 +7,7 @@ const XEN_INFO={
 const XEN_DETAILS={
 /* ================= TECH ================= */
 "robo-drift":{tag:"Build. Control. Drift.",sections:[
- {h:"About",p:"Robo Drift Hackathon is a robotics challenge for teams who want to engineer a fast, controllable rover and prove it on the track. Speed alone will not win: the best team balances design, control and precision."},
+ {h:"About",p:"Robo Drift is a robotics challenge for teams who want to engineer a fast, controllable rover and prove it on the track. Speed alone will not win: the best team balances design, control and precision."},
  {h:"Basic concept",items:["Teams bring a remote-controlled rover and compete on a designated high-friction obstacle track.","Rovers are driven remotely by the team's pilot.","Acceleration, turning control, drift precision and clean runs decide the ranking.","Track layout, run format and technical specifications are announced before the event."]},
  {h:"Judged on",items:["Lap or run time","Turning and drift control","Obstacle clearance and clean runs","Robot design and build quality"]},
  {h:"Team",p:"Register as a team of 1 to 4 members. Every member must be listed at registration."},
@@ -30,7 +30,7 @@ const XEN_DETAILS={
  {h:"Rules",items:["Individual participation.","Problem statements, allowed languages, tools and time limit are announced before the event.","Bring a charged laptop.","Organizers' decisions on judging are final."]},
  {h:"Winner",p:"The participant with the best overall score on correctness, code quality and presentation takes the top position. Ties may be settled with an extra problem."}]},
 "prompt-wars":{tag:"Model. Simulate. Solve.",sections:[
- {h:"About",p:"The MATLAB/Simulink-based Hackathon is a hands-on technical challenge where you use MATLAB and Simulink to model, simulate and analyse an engineering problem, then present a working solution."},
+ {h:"About",p:"Prompt Wars is a hands-on technical challenge where you use MATLAB and Simulink to model, simulate and analyse an engineering problem, then present a working solution."},
  {h:"What you will do",items:["Receive problem statements at the start of the event.","Build models and simulations in Simulink and scripts in MATLAB.","Analyse results with plots and data.","Present your approach and findings to the judges."]},
  {h:"Skills tested",items:["MATLAB programming","Simulink modelling and simulation","Signals, systems and control basics","Data analysis and visualization","Problem solving under time limits"]},
  {h:"Rules",items:["Individual participation.","Problem statements, toolboxes and time limit are announced before the event.","Bring a laptop with MATLAB and Simulink installed and working.","Organizers' decisions on judging are final."]},
