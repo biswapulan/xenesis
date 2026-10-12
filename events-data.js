@@ -51,7 +51,7 @@ const XEN_EVENTS=[
 {id:"ipl-auction",type:"non-tech",jp:"競売",name:"IPL Auction",min:4,max:4,fee:149,unit:"team",
  prize:"1st ₹800 · 2nd ₹400 · 3rd Memento + Certificate",
  summary:"Simulated cricket auction. Manage a fixed virtual budget, strategize bidder paddle wars, and assemble a balanced squad under tactical constraints."},
-{id:"chess",type:"non-tech",jp:"盤上",name:"Chess — The Grandmaster Gambit",min:1,max:1,fee:49,unit:"person",
+{id:"chess",type:"non-tech",jp:"盤上",name:"MindX4.0 — Chess Championship",min:1,max:1,fee:49,unit:"person",
  prize:"1st ₹600 · 2nd ₹300 · 3rd Memento + Certificate",
  summary:"A fast-paced rapid/blitz tournament testing board awareness, tactical openings, endgame strategy and time management."},
 {id:"reels",type:"non-tech",jp:"動画",name:"Reels x Render",min:1,max:1,fee:29,unit:"person",

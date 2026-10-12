@@ -70,7 +70,7 @@ const XEN_DETAILS={
  {h:"About",p:"Simulated cricket auction. Manage a fixed virtual budget, strategize bidder paddle wars, and assemble a balanced squad under tactical constraints."},
  {h:"Format",items:["Team of 4 members.","Every team gets the same virtual budget.","Teams bid for players in live auction rounds.","Squads must be balanced and meet the announced constraints."]},
  {h:"Ranking",p:"Teams are ranked on the strength and balance of the final playing XI. Exact scoring rules are announced before the event."}]},
-"chess":{tag:"The Grandmaster Gambit",sections:[
+"chess":{tag:"Chess Championship",sections:[
  {h:"About",p:"A fast-paced rapid/blitz tournament that tests board awareness, tactical openings, endgame strategy and time management."},
  {h:"Rules",items:["Individual participation.","Rapid/blitz time control, announced before the event.","Standard chess rules apply, with touch-move.","Organizers' decisions on disputes are final."]},
  {h:"Format",p:"Match format and pairing system depend on the number of entries and are announced before the event."}]},

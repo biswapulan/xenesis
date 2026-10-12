@@ -5,7 +5,7 @@
  * The Sheet menu only marks a row Verified / Rejected.
  */
 // Bump this every time you paste new code. Open the /exec URL in a browser: it must show this same version.
-const VERSION     = "2026-10-12-fees-prizes-update";
+const VERSION     = "2026-10-12-mindx-chess";
 const SHEET_NAME  = "Registrations";
 const FOLDER_NAME = "Xenesis 4.0 Payment Screenshots";
 const FROM_NAME   = "XENESIS 4.0 · CSE, GCE Keonjhar";   // display name students see
@@ -34,7 +34,7 @@ const EVENTS = {
  "memography":{n:"Memography — The Memory Arc",min:1,max:1,fee:29},
  "ad-mad":{n:"Ad-Mad",min:1,max:4,fee:49},
  "ipl-auction":{n:"IPL Auction",min:4,max:4,fee:149},
- "chess":{n:"Chess — The Grandmaster Gambit",min:1,max:1,fee:49},
+ "chess":{n:"MindX4.0 — Chess Championship",min:1,max:1,fee:49},
  "reels":{n:"Reels x Render",min:1,max:1,fee:29},
  "xen-z-show":{n:"The Xen-Z Show",modes:{
     "solo":{l:"Solo",min:1,max:1,fee:49},
@@ -59,7 +59,7 @@ function setup(){
 function testRegistration(){
   const tiny = "/9j/4AAQSkZJRgABAQEASABIAAD/2wBDAP//////////////////////////////////////////////////////////////////////////////////////wgALCAABAAEBAREA/8QAFBABAAAAAAAAAAAAAAAAAAAAAP/aAAgBAQABPxA=";
   const res = doPost({postData:{contents:JSON.stringify({
-    type:"non-tech", eventId:"chess", eventName:"Chess — The Grandmaster Gambit", mode:"",
+    type:"non-tech", eventId:"chess", eventName:"MindX4.0 — Chess Championship", mode:"",
     members:["Test Student"], mobile:"9876543210", email:"YOUR_EMAIL@gmail.com", amount:49,
     screenshot:{name:"t.jpg",mime:"image/jpeg",data:tiny}, website:""})}});
   Logger.log(res.getContent());
