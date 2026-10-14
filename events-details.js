@@ -23,18 +23,19 @@ const XEN_DETAILS={
  {h:"Critical criteria",items:["Show complete comprehension of the logic that was generated.","Modify the code on request.","Troubleshoot live bugs.","Defend your architectural choices in a viva."]},
  {h:"Domains",items:["UI/UX","React.js","Next.js","Modern full-stack web development","Real-time problem solving"]},
  {h:"Duration",p:"3 hours. The exact task, technical requirements and judging details are revealed at the start of the event. Bring a charged laptop."}]},
-"kbc":{tag:"Code. Build. Compete.",sections:[
- {h:"About",p:"KBC (Kon Banega Coder) is an individual coding and software development hackathon. You are given real programming problems and must design, code and deliver working solutions within the time limit."},
- {h:"What you will do",items:["Solve problem statements announced at the start of the event.","Write clean, working code in a language of your choice from those allowed by the organizers.","Build and demonstrate a working solution or mini software project.","Explain your logic and approach to the judges."]},
- {h:"Skills tested",items:["Problem solving and logic","Data structures and algorithms","Software development fundamentals","Code quality, debugging and optimization"]},
- {h:"Rules",items:["Individual participation.","Problem statements, allowed languages, tools and time limit are announced before the event.","Bring a charged laptop.","Organizers' decisions on judging are final."]},
- {h:"Winner",p:"The participant with the best overall score on correctness, code quality and presentation takes the top position. Ties may be settled with an extra problem."}]},
-"prompt-wars":{tag:"Model. Simulate. Solve.",sections:[
- {h:"About",p:"Prompt Wars is a hands-on technical challenge where you use MATLAB and Simulink to model, simulate and analyse an engineering problem, then present a working solution."},
- {h:"What you will do",items:["Receive problem statements at the start of the event.","Build models and simulations in Simulink and scripts in MATLAB.","Analyse results with plots and data.","Present your approach and findings to the judges."]},
- {h:"Skills tested",items:["MATLAB programming","Simulink modelling and simulation","Signals, systems and control basics","Data analysis and visualization","Problem solving under time limits"]},
- {h:"Rules",items:["Individual participation.","Problem statements, toolboxes and time limit are announced before the event.","Bring a laptop with MATLAB and Simulink installed and working.","Organizers' decisions on judging are final."]},
- {h:"Tip",p:"Check your MATLAB and Simulink installation and licence before the event, and practise basic modelling so no time is lost on setup."}]},
+"kbc":{tag:"Quiz. Climb. Win.",sections:[
+ {h:"About",p:"KBC (Kon Banega Coder) is an individual tech quiz inspired by Kaun Banega Crorepati. Answer questions on programming, computer science and technology, climb the ladder level by level, and see who sits in the hot seat as the top coder."},
+ {h:"What you will do",items:["Answer rounds of multiple-choice and quick-fire questions announced at the start of the event.","Face questions that get harder as you move up the levels.","Use lifelines wisely when you are stuck (details announced on the day).","Think fast: every question is timed."]},
+ {h:"Topics covered",items:["Programming languages and coding concepts","Data structures and algorithms basics","Computer science fundamentals","Web, AI, gadgets and current tech trends","Tech history, logos and general tech knowledge"]},
+ {h:"Rules",items:["Individual participation.","Quiz format, number of rounds, scoring and lifelines are announced before the event.","No mobile phones, internet or external help during the quiz.","Organizers' decisions on scoring and disputes are final."]},
+ {h:"Winner",p:"The participant with the highest overall score takes the top position. Ties may be settled with a sudden-death question."}]},
+"tech-escape-room":{tag:"Think. Decode. Escape.",sections:[
+ {h:"About",p:"Tech Escape Room is a team-based puzzle-solving event where participants use logical reasoning, observation, basic computer science knowledge and teamwork to overcome a series of technology-inspired challenges."},
+ {h:"How it works",items:["Teams of two work through seven mini-tasks.","Each task you complete moves you closer to the final challenge.","Collect and connect the clues from every stage to discover the final code or solution.","Crack the final code to complete the escape room."]},
+ {h:"Types of challenges",items:["Decoding secret messages","Solving logic puzzles","Predicting code outputs","Identifying hidden clues","Interpreting basic technical concepts","Other computer-related puzzles"]},
+ {h:"Skills tested",items:["Logical reasoning","Observation and attention to detail","Basic computer science knowledge","Teamwork and communication"]},
+ {h:"Team",p:"Register as a team of exactly 2 members. Both members must be listed at registration."},
+ {h:"Rules",items:["Each team must have exactly 2 players.","Task details, time limit and scoring are announced before the event.","No mobile phones, internet or outside help while solving the tasks.","Organizers' decisions on scoring and disputes are final."]}]},
 
 /* ================= NON-TECH ================= */
 "battle-verse":{tag:"Free Fire & BGMI",sections:[
