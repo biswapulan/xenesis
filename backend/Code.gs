@@ -5,7 +5,7 @@
  * The Sheet menu only marks a row Verified / Rejected.
  */
 // Bump this every time you paste new code. Open the /exec URL in a browser: it must show this same version.
-const VERSION     = "2026-10-14-tech-escape-room";
+const VERSION     = "2026-10-14-tech-escape-room-solo";
 const SHEET_NAME  = "Registrations";
 const FOLDER_NAME = "Xenesis 4.0 Payment Screenshots";
 const FROM_NAME   = "XENESIS 4.0 · CSE, GCE Keonjhar";   // display name students see
@@ -23,7 +23,7 @@ const EVENTS = {
  "wordlord":{n:"WordLord — The Typing Battle",min:1,max:1,fee:49,tech:1},
  "codemon":{n:"Codemon — Build Under Pressure",min:2,max:4,fee:99,tech:1},
  "kbc":{n:"KBC — Kon Banega Coder",min:1,max:1,fee:49,tech:1},
- "tech-escape-room":{n:"Tech Escape Room",min:2,max:2,fee:49,tech:1},
+ "tech-escape-room":{n:"Tech Escape Room",min:1,max:1,fee:49,tech:1},
  /* ---- NON-TECH ---- */
  "battle-verse":{n:"Battle Verse — Free Fire & BGMI",modes:{
     "free-fire":{l:"Free Fire",min:4,max:4,fee:99},

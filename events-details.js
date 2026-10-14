@@ -30,12 +30,12 @@ const XEN_DETAILS={
  {h:"Rules",items:["Individual participation.","Quiz format, number of rounds, scoring and lifelines are announced before the event.","No mobile phones, internet or external help during the quiz.","Organizers' decisions on scoring and disputes are final."]},
  {h:"Winner",p:"The participant with the highest overall score takes the top position. Ties may be settled with a sudden-death question."}]},
 "tech-escape-room":{tag:"Think. Decode. Escape.",sections:[
- {h:"About",p:"Tech Escape Room is a team-based puzzle-solving event where participants use logical reasoning, observation, basic computer science knowledge and teamwork to overcome a series of technology-inspired challenges."},
- {h:"How it works",items:["Teams of two work through seven mini-tasks.","Each task you complete moves you closer to the final challenge.","Collect and connect the clues from every stage to discover the final code or solution.","Crack the final code to complete the escape room."]},
+ {h:"About",p:"Tech Escape Room is a solo puzzle-solving event where participants use logical reasoning, observation and basic computer science knowledge to overcome a series of technology-inspired challenges."},
+ {h:"How it works",items:["Each participant works through seven mini-tasks on their own.","Each task you complete moves you closer to the final challenge.","Collect and connect the clues from every stage to discover the final code or solution.","Crack the final code to complete the escape room."]},
  {h:"Types of challenges",items:["Decoding secret messages","Solving logic puzzles","Predicting code outputs","Identifying hidden clues","Interpreting basic technical concepts","Other computer-related puzzles"]},
- {h:"Skills tested",items:["Logical reasoning","Observation and attention to detail","Basic computer science knowledge","Teamwork and communication"]},
- {h:"Team",p:"Register as a team of exactly 2 members. Both members must be listed at registration."},
- {h:"Rules",items:["Each team must have exactly 2 players.","Task details, time limit and scoring are announced before the event.","No mobile phones, internet or outside help while solving the tasks.","Organizers' decisions on scoring and disputes are final."]}]},
+ {h:"Skills tested",items:["Logical reasoning","Observation and attention to detail","Basic computer science knowledge","Focus and time management"]},
+ {h:"Participation",p:"Individual entry only. There are no teams for this event."},
+ {h:"Rules",items:["Individual participation only. No teams.","Task details, time limit and scoring are announced before the event.","No mobile phones, internet or outside help while solving the tasks.","Organizers' decisions on scoring and disputes are final."]}]},
 
 /* ================= NON-TECH ================= */
 "battle-verse":{tag:"Free Fire & BGMI",sections:[

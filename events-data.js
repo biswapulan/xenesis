@@ -18,9 +18,9 @@ const XEN_EVENTS=[
 {id:"kbc",type:"tech",jp:"知識",name:"KBC — Kon Banega Coder",min:1,max:1,fee:49,unit:"person",
  prize:"1st ₹1,000 · 2nd ₹500 · 3rd Memento + Certificate",
  summary:"An individual quiz contest in the style of Kaun Banega Crorepati. Answer rounds of questions on programming, computer science fundamentals and the tech world, with rising difficulty, lifelines and no time to waste."},
-{id:"tech-escape-room",type:"tech",jp:"脱出",name:"Tech Escape Room",min:2,max:2,fee:49,unit:"team",format:"Team of 2",
+{id:"tech-escape-room",type:"tech",jp:"脱出",name:"Tech Escape Room",min:1,max:1,fee:49,unit:"person",
  prize:"1st ₹1,000 · Runner-up ₹500 · Merit Certificates",
- summary:"A team-based puzzle-solving escape room. Teams of two crack seven tech-inspired mini-tasks (secret messages, logic puzzles, code-output prediction and hidden clues) and connect the clues to find the final code."},
+ summary:"An individual puzzle-solving escape room. Crack seven tech-inspired mini-tasks (secret messages, logic puzzles, code-output prediction and hidden clues) and connect the clues to find the final code."},
 /* ---------- NON-TECH ---------- */
 {id:"xen-z-show",type:"non-tech",jp:"舞台",name:"The Xen-Z Show",min:1,max:10,fee:49,unit:"entry",
  prize:"1st ₹800 · 2nd ₹400 · 3rd Memento + Certificate",
