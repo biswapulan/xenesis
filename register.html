@@ -54,7 +54,7 @@ input:focus{outline:0;border-color:var(--crim);box-shadow:0 2px 0 var(--crim)}::
 <div class="app"><main><div id="stage" aria-live="polite"></div></main></div>
 <script src="events-data.js?v=10"></script><script src="shared.js?v=5"></script>
 <script>
-const ENDPOINT="https://script.google.com/macros/s/AKfycbznn_UHr04vNibF5AlFZJqkJsG2CyJesxCLKtvdIZfIeAcQ8pydowE3DtKMopgb3ykeHA/exec";  /* Google Apps Script web-app URL */
+const ENDPOINT="https://script.google.com/macros/s/AKfycbzlSknmnFFnEuV_z8kEGmkzvCYI5YQ22m0XxhioFZgYOrVvgwuGbCJnxpgcjBWn9_7zdQ/exec";  /* Google Apps Script web-app URL */
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const $=s=>document.querySelector(s),stage=$("#stage");
 const A={type:"",event:"",mode:"",names:[],mobile:"",email:"",shot:"",shotName:""};
@@ -142,6 +142,21 @@ function review(){
  $("#bk").onclick=()=>{step=STEPS.length-1;view()};$("#sub").onclick=submit;
 }
 
+/* Recovery when the browser blocks Apps Script's reply (the row may still have been written).
+   A <script> request is not subject to CORS, so use it to look the registration up by event + entry type + email + mobile. */
+function jsonp(url,ms){return new Promise(res=>{const cb="xenCb"+Date.now()+Math.floor(Math.random()*1e4),s=document.createElement("script");let t;
+ const fin=v=>{clearTimeout(t);delete window[cb];s.remove();res(v)};window[cb]=fin;t=setTimeout(()=>fin(null),ms);s.onerror=()=>fin(null);
+ s.src=url+"&callback="+cb+"&_="+Date.now();document.head.appendChild(s)})}
+async function recover(e){
+ const q="?action=lookup&event="+encodeURIComponent(e.id)+"&mode="+encodeURIComponent(A.mode||"")+"&email="+encodeURIComponent(A.email)+"&mobile="+encodeURIComponent(A.mobile);
+ let found=null;
+ for(let i=0;i<6;i++){
+  const r=await jsonp(ENDPOINT+q,15000);
+  if(r&&r.status==="success"){found=r;if(r.mail)return r}
+  await new Promise(z=>setTimeout(z,3000));
+ }
+ return found?{regId:found.regId,mail:found.mail||"Pending"}:null;
+}
 async function submit(){
  if(busy)return;const e=cur(),b=$("#sub"),er=$("#e");
  busy=true;b.disabled=true;b.textContent="Sending…";er.textContent="";
@@ -153,7 +168,16 @@ async function submit(){
    body:JSON.stringify({type:A.type,eventId:e.id,eventName:e.name,mode:A.mode,members:A.names,mobile:A.mobile,email:A.email,amount:e.fee,screenshot:{name:A.shotName,mime:"image/jpeg",data:A.shot.split(",")[1]},website:$("#hp").value})});
   clearTimeout(t);const raw=await r.text();let d;try{d=JSON.parse(raw)}catch(_){throw new Error("The registration server sent an unexpected reply (the Apps Script may not be deployed for public access, or has an error).")}
   if(d&&d.status==="success")done(d.regId,d.mail);else throw new Error((d&&d.message)||"The server rejected the registration.");
- }catch(x){b.disabled=false;b.textContent="Submit";er.textContent=(x.name==="AbortError"?"The request timed out. It may still have gone through: if you retry and see \"already registered\", your registration is saved; message us on Help with your mobile number.":(x.message==="Failed to fetch"?"Could not reach the server. Check your internet connection and try again.":x.message))+" Your answers are still saved here."}
+ }catch(x){
+  const net=!!x&&(x.name==="AbortError"||x instanceof TypeError);
+  if(net){ /* the reply was blocked/lost: the registration may already be saved, so ask the sheet before showing an error */
+   b.textContent="Checking…";er.textContent="Confirming whether your registration was saved…";
+   const r=await recover(e);
+   if(r){done(r.regId,r.mail);return}
+  }
+  b.disabled=false;b.textContent="Submit";
+  er.textContent=(x.name==="AbortError"?"The request timed out and we could not confirm it. If you got a receipt email, your registration is saved and you should not pay again. Otherwise tap Submit again: if you see \"already registered\", it is saved; message us on Help with your mobile number.":(net?"We could not confirm your registration. Check your internet connection and try again. If you already received a receipt email, your registration is saved and you should not pay again.":x.message))+" Your answers are still saved here."
+ }
  finally{busy=false}
 }
 function done(id,mail){

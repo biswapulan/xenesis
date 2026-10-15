@@ -5,7 +5,7 @@
  * The Sheet menu only marks a row Verified / Rejected.
  */
 // Bump this every time you paste new code. Open the /exec URL in a browser: it must show this same version.
-const VERSION     = "2026-10-15-ipl-auction-tiers";
+const VERSION     = "2026-10-15-reply-recovery";
 const SHEET_NAME  = "Registrations";
 const FOLDER_NAME = "Xenesis 4.0 Payment Screenshots";
 const FROM_NAME   = "XENESIS 4.0 · CSE, GCE Keonjhar";   // display name students see
@@ -67,7 +67,38 @@ function testRegistration(){
   Logger.log(res.getContent());
 }
 
-function doGet(){ return out_({status:"ok",version:VERSION,message:"XENESIS registration endpoint is running.",ipl:EVENTS["ipl-auction"]}); }
+function doGet(e){
+  if(e && e.parameter && e.parameter.action==="lookup") return lookup_(e.parameter);
+  return out_({status:"ok",version:VERSION,message:"XENESIS registration endpoint is running.",ipl:EVENTS["ipl-auction"]});
+}
+
+/* Used by the website when the browser blocks the reply to a POST (the row may already be saved).
+   Returns the Reg ID of the most recent matching registration made in the last 20 minutes (needs event + entry type + email + mobile).
+   Served as JSONP (callback=...) because a <script> request is not blocked by CORS. */
+function lookup_(p){
+  const cb = /^[A-Za-z_]\w{0,60}$/.test(String(p.callback||"")) ? String(p.callback) : "";
+  let res = {status:"notfound"};
+  try{
+    const ev = EVENTS[p.event], rule = ev && rule_(ev, p.mode);
+    const email = String(p.email||"").trim().toLowerCase(), mobile = String(p.mobile||"").replace(/\D/g,"").slice(-10);
+    if(rule && email && mobile){
+      const s = sheet_(), last = s.getLastRow();
+      if(last>1){
+        const start = Math.max(2,last-99), rows = s.getRange(start,1,last-start+1,HEAD.length).getValues(), now = Date.now();
+        for(let i=rows.length-1;i>=0;i--){
+          const r = rows[i], ts = (r[C.TS-1] instanceof Date) ? r[C.TS-1].getTime() : 0;
+          if(now-ts > 20*60*1000) break;   // rows are in time order; nothing older matters
+          if(r[C.EVENT-1]===ev.n && String(r[C.ENTRY-1]||"")===rule.label && r[C.STATUS-1]!=="Rejected" &&
+             String(r[C.EMAIL-1]).toLowerCase()===email && String(r[C.MOB-1]).replace(/\D/g,"").slice(-10)===mobile){
+            res = {status:"success",regId:r[C.ID-1],mail:String(r[C.MAIL-1]||""),recovered:true}; break;
+          }
+        }
+      }
+    }
+  }catch(err){ console.error(err); }
+  if(cb) return ContentService.createTextOutput(cb+"("+JSON.stringify(res)+");").setMimeType(ContentService.MimeType.JAVASCRIPT);
+  return out_(res);
+}
 
 function doPost(e){
   if(!e || !e.postData) return fail_("No data received. This endpoint only accepts form submissions from the website.");
