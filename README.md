@@ -3,6 +3,7 @@ Department of CSE, Government College of Engineering, Keonjhar
 
 
 ## Updates
+- **IPL Auction pricing:** now two team-size options on the registration page: **1 to 3 players = ₹99**, **full team of 4 = ₹149** (entry types `small` / `full`). Updated `events-data.js`, `events-details.js` and `backend/Code.gs`. **Redeploy the Apps Script as a New version.**
 - **Latest:** KBC is now a quiz (the word "Hackathon" is removed): name is "KBC — Kon Banega Coder". Prompt Wars is replaced by **Tech Escape Room** (id `tech-escape-room`, solo only, 7 mini-tasks). Updated `events-data.js`, `events-details.js` and `backend/Code.gs`. **Redeploy the Apps Script as a New version.** Fee for Tech Escape Room is currently ₹49 per person (change in both `events-data.js` and `Code.gs` if needed).
 - Tech events renamed/rewritten: Robo Drift -> Robo Drift Hackathon; KBC -> KBC — Kon Banega Coder — Coding and Software Development Hackathon; Prompt Wars -> MATLAB/Simulink-based Hackathon (ids unchanged). **Redeploy the Apps Script** (new version) so names match.
 - **Final events list (15 events)**: Tech = Robo Drift Hackathon, WordLord, Codemon, KBC (Coding and Software Development Hackathon), MATLAB/Simulink-based Hackathon. Non-Tech = Battle Verse (Free Fire & BGMI), One Piece Campus Treasure Hunt, Perfect Partner, Dumb Charades, Memography, Ad-Mad, IPL Auction, Chess, Reels x Render, The Xen-Z Show. Edit them in `events-data.js` (+ `events-details.js` for the detail pages).
