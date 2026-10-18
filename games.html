@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>X Games · XENESIS 4.0</title><meta name="theme-color" content="#0b0f12">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Shippori+Mincho:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="theme.css?v=3">
+<style>
+.hd{text-align:center;padding:10px 0 6px}.hd h1{font-size:clamp(26px,6vw,46px)}.hd p{max-width:46ch;margin:12px auto 0;opacity:.85;font-size:14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),380px));justify-content:center;gap:20px;margin-top:28px}
+.gm{position:relative;display:flex;flex-direction:column;background:linear-gradient(180deg,rgba(11,15,18,.62),rgba(11,15,18,.86));border:1px solid rgba(232,228,218,.14);backdrop-filter:blur(3px);transition:.3s;overflow:hidden}
+.gm:hover{border-color:var(--crim);transform:translateY(-3px);box-shadow:0 18px 50px rgba(0,0,0,.5),0 0 30px rgba(176,32,42,.18)}
+.gm .th{display:block;width:100%;height:auto;aspect-ratio:2.6/1;object-fit:cover;border-bottom:1px solid rgba(232,228,218,.14)}
+.gm .bd{display:flex;flex-direction:column;flex:1;padding:22px 24px 22px}
+.grp{font-size:10.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--amber);font-weight:600}
+.gm h2{font-size:17px;margin:8px 0 12px;letter-spacing:.1em}
+.gm p.s{font-size:13.5px;opacity:.82;line-height:1.65;flex:1}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}
+.chip{border:1px solid rgba(232,228,218,.3);padding:5px 11px;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:600}
+.gm .btn{padding:12px 10px;font-size:10.5px;letter-spacing:.18em;text-align:center}
+</style></head>
+<body data-page="games.html">
+<div class="app"><main>
+ <section class="hd in"><h1>X Games<span class="kj" lang="ja">遊戯</span></h1><hr class="blade" style="width:min(260px,60%);margin:18px auto">
+ <p>Take a break between events. Play the Xenesis arcade right here in your browser.</p></section>
+ <div class="grid" id="grid">
+  <article class="gm in">
+   <img class="th" src="games/dino-samurai-worlds.jpg" alt="Dino Samurai Worlds: the Xenesis X over a blood-red moon" loading="lazy">
+   <div class="bd">
+    <p class="grp">Arcade Runner</p>
+    <h2>Dino Samurai Worlds</h2>
+    <p class="s">Run, jump and duck through eight Japanese-inspired worlds. Collect coins to evolve, unlock a new feature every 100 points and watch the world transform, until the Xenesis X pulls you up to the moon.</p>
+    <div class="chips"><span class="chip">Solo</span><span class="chip">Keyboard / Touch</span></div>
+    <a class="btn" href="games/dino-samurai-worlds.html">Play Now</a>
+   </div>
+  </article>
+ </div>
+</main></div>
+<script src="shared.js?v=3"></script>
+</body></html>
