@@ -111,3 +111,8 @@ window.XEN_GAMES = [
   ]
  }
 ];
+
+/* "Coming soon" card shown next to the playable games. Delete it when the next game is ready and add that game above. */
+window.XEN_SOON = [
+ {"title":"A New X Game","text":"A new game is on its way to the arcade. Play Dino x Samurai while you wait."}
+];

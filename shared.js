@@ -1,7 +1,7 @@
 /* Builds the shared scene, header, footer and shoji page transition */
 (function(){
 const here=document.body.dataset.page||"";
-const nav=[["index.html","Home"],["events.html","Events"],["register.html","Register"],["help.html","Help"],["games.html","X Games"]];
+const nav=[["index.html","Home"],["events.html","Events"],["register.html","Register"],["games.html","X Games"],["help.html","Help"]];
 let p="",cx=250,y=400;p+=`<rect x="${cx-46}" y="${y-14}" width="92" height="14"/>`;y-=14;
 [[58,34],[52,32],[46,30],[40,28],[34,26]].forEach(([w,h])=>{p+=`<rect x="${cx-w*.55}" y="${y-h}" width="${w*1.1}" height="${h}"/>`;const R=w+22;p+=`<path d="M${cx-R} ${y-h+9} Q${cx-R+14} ${y-h+5} ${cx-R+34} ${y-h-8} L${cx+R-34} ${y-h-8} Q${cx+R-14} ${y-h+5} ${cx+R} ${y-h+9} Q${cx} ${y-h+2} ${cx-R} ${y-h+9}Z"/>`;y-=h+6});
 p+=`<rect x="${cx-1.5}" y="${y-44}" width="3" height="46"/>`;

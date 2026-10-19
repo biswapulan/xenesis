@@ -83,8 +83,8 @@ h1,h2,.btn,.opts label,.rv span{overflow-wrap:anywhere}
 }
 @media (max-width:380px){.brand span{letter-spacing:.2em;font-size:11px}.brand img{height:34px}}
 /* X Games: gold "premium" pill in the menu */
-.nav a[href="games.html"]{display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:8px 18px;border:1px solid #f6d37a;border-radius:999px;background:linear-gradient(180deg,#f8d160 0%,#e2a929 55%,#c98b12 100%);color:#1b1304;font-weight:700;opacity:1;box-shadow:0 2px 14px rgba(226,169,41,.38),inset 0 1px 0 rgba(255,255,255,.55);text-shadow:0 1px 0 rgba(255,255,255,.35);transition:transform .2s,box-shadow .2s,filter .2s}
+.nav a[href="games.html"]{display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:8px 18px;margin:-6px 0 -3px;border:1px solid #f6d37a;border-radius:999px;background:linear-gradient(180deg,#f8d160 0%,#e2a929 55%,#c98b12 100%);color:#1b1304;font-weight:700;opacity:1;box-shadow:0 2px 14px rgba(226,169,41,.38),inset 0 1px 0 rgba(255,255,255,.55);text-shadow:0 1px 0 rgba(255,255,255,.35);transition:transform .2s,box-shadow .2s,filter .2s}
 .nav a[href="games.html"]::before{content:"\2726";font-size:12px}
 .nav a[href="games.html"]:hover,.nav a[href="games.html"][aria-current]{border-color:#fbe3a0;color:#1b1304;filter:brightness(1.06);box-shadow:0 4px 20px rgba(226,169,41,.55),inset 0 1px 0 rgba(255,255,255,.6)}
 .nav a[href="games.html"]:hover{transform:translateY(-1px)}
-@media (max-width:820px){.nav a[href="games.html"]{display:flex;margin-top:20px;padding:14px 18px;border-bottom:1px solid #f6d37a}}
+@media (max-width:820px){.nav a[href="games.html"]{display:flex;margin:14px 0;padding:14px 18px;border-bottom:1px solid #f6d37a}}

@@ -13,6 +13,9 @@ main.gpw{max-width:1180px;min-width:0}.gp>*,.about{min-width:0}
 .tb h1{font-size:clamp(24px,5vw,36px);letter-spacing:.08em;text-align:left;text-transform:none}
 .tb .back{border:1px solid rgba(232,228,218,.3);padding:9px 16px;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;font-weight:600;color:inherit;text-decoration:none;background:rgba(11,15,18,.6)}
 .tb .back:hover{border-color:var(--amber);color:var(--amber)}
+.tb .acts{display:flex;align-items:stretch;gap:10px;flex-wrap:wrap}
+.tb .playbtn{display:flex;align-items:center;justify-content:center;padding:12px 30px;font-size:12px;letter-spacing:.2em}
+@media (max-width:600px){.tb .acts{width:100%}.tb .playbtn{flex:1}}
 .gp{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:22px;align-items:start}
 .panel{background:linear-gradient(180deg,rgba(11,15,18,.66),rgba(11,15,18,.88));border:1px solid rgba(232,228,218,.14);backdrop-filter:blur(3px)}
 .viewer{position:relative;aspect-ratio:16/9;background:#000;border:1px solid rgba(232,228,218,.14);overflow:hidden}
@@ -67,7 +70,8 @@ main.gpw{max-width:1180px;min-width:0}.gp>*,.about{min-width:0}
   /* breadcrumb + title bar */
   var crumb=el('nav','crumb in'); var a1=el('a','','X Games'); a1.href='games.html'; crumb.appendChild(a1); crumb.appendChild(el('i','','›')); crumb.appendChild(el('span','',G.title));
   var back=el('a','back','← All X Games'); back.href='games.html';
-  root.appendChild(crumb); root.appendChild(el('div','tb in',null,[el('h1','',G.title),back]));
+  var play=el('a','btn playbtn','▶  Play Now'); play.href=G.play;
+  root.appendChild(crumb); root.appendChild(el('div','tb in',null,[el('h1','',G.title),el('div','acts',null,[back,play])]));
 
   /* left: viewer + thumbnail strip (video first, then screenshots) */
   var items=[{type:'video',thumb:G.poster,alt:'Gameplay video'}].concat(G.shots.map(function(s){return {type:'img',src:s.src,thumb:s.thumb,alt:s.alt}}));
@@ -99,8 +103,7 @@ main.gpw{max-width:1180px;min-width:0}.gp>*,.about{min-width:0}
   var meta=el('dl','meta'); [['Genre',G.genre],['Developer',G.developer],['Publisher',G.publisher],['Platform',G.platform],['Players',G.players]].forEach(function(r){meta.appendChild(el('dt','',r[0])); meta.appendChild(el('dd','',r[1]));});
   var tags=el('div','tags'); G.tags.forEach(function(t){tags.appendChild(el('span','tg',t))});
   var cap=document.createElement('img'); cap.className='cap'; cap.src=G.banner; cap.alt=G.title+' banner';
-  var play=el('a','btn playbtn','▶  Play Now'); play.href=G.play;
-  var side=el('aside','panel side in',null,[cap,el('div','bd',null,[el('p','short',G.short),meta,el('div','tagl','Popular tags for this game'),tags,play])]);
+  var side=el('aside','panel side in',null,[cap,el('div','bd',null,[el('p','short',G.short),meta,el('div','tagl','Popular tags for this game'),tags])]);
   root.appendChild(el('div','gp',null,[left,side]));
 
   /* about, features, controls */

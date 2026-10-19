@@ -18,6 +18,13 @@
 .gm p.s{font-size:13.5px;opacity:.82;line-height:1.65;flex:1}
 .chips{display:flex;flex-wrap:wrap;gap:7px;margin:14px 0 16px}
 .chip{border:1px solid rgba(232,228,218,.3);padding:4px 10px;font-size:10px;letter-spacing:.14em;text-transform:uppercase;font-weight:600}
+.gm.soon{cursor:default;border-style:dashed;border-color:rgba(217,161,91,.35);background:linear-gradient(180deg,rgba(11,15,18,.5),rgba(11,15,18,.78))}
+.gm.soon:hover{transform:none;border-color:rgba(217,161,91,.35);box-shadow:none}
+.sk{position:relative;display:grid;place-items:center;aspect-ratio:920/430;border-bottom:1px dashed rgba(217,161,91,.3);overflow:hidden;background:radial-gradient(circle at 50% 40%,rgba(176,32,42,.45),rgba(11,15,18,.9) 70%)}
+.sk b{font:700 clamp(56px,9vw,84px)/1 var(--min);color:rgba(217,161,91,.85);text-shadow:0 0 30px rgba(176,32,42,.7)}
+.rib{position:absolute;top:14px;left:-34px;transform:rotate(-35deg);width:150px;text-align:center;padding:5px 0;background:var(--amber);color:#1c1008;font-size:9.5px;letter-spacing:.2em;font-weight:700;text-transform:uppercase}
+.gm.soon p.s{opacity:.7;margin-bottom:16px}
+.soonbtn{display:flex;align-items:center;justify-content:center;padding:12px 10px;border:1px dashed rgba(217,161,91,.5);color:var(--amber);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;font-weight:600}
 .gm .btn{padding:12px 10px;font-size:10.5px;letter-spacing:.18em;text-align:center}
 </style></head>
 <body data-page="games.html">
@@ -40,6 +47,11 @@
     var c=document.createElement('div'); c.className='chips'; x.tags.slice(0,4).forEach(function(t){var s=document.createElement('span'); s.className='chip'; s.textContent=t; c.appendChild(s);}); bd.appendChild(c);
     var b=document.createElement('span'); b.className='btn'; b.textContent='View Game'; bd.appendChild(b);
     a.appendChild(bd); g.appendChild(a);
+  });
+  (window.XEN_SOON||[]).forEach(function(x){
+    function el(tag,cls,txt){var e=document.createElement(tag); if(cls)e.className=cls; if(txt!=null)e.textContent=txt; return e;}
+    var c=el('article','gm soon in'), sk=el('div','sk'); sk.setAttribute('aria-hidden','true'); sk.appendChild(el('span','rib','Coming Soon')); sk.appendChild(el('b','','?')); c.appendChild(sk);
+    var bd=el('div','bd'); bd.appendChild(el('p','grp','Stay tuned')); bd.appendChild(el('h2','',x.title)); bd.appendChild(el('p','s',x.text)); bd.appendChild(el('div','soonbtn','Coming Soon')); c.appendChild(bd); g.appendChild(c);
   });
 })();
 </script>
