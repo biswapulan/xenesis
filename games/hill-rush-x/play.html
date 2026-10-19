@@ -12,12 +12,21 @@
         background: rgba(20,20,28,.55); color: #ddd; border: 1px solid rgba(255,255,255,.35); text-decoration: none; transition: opacity .4s; }
   #fs { top: 12px; } #back { top: 52px; }
   #back:hover, #fs:hover { background: rgba(60,60,80,.75); color: #fff; }
+  #reg { position: fixed; top: 12px; left: 50%; transform: translateX(-50%); z-index: 3; display: none; max-width: calc(100vw - 150px); box-sizing: border-box;
+         font: 600 12.5px/1.3 system-ui, sans-serif; padding: 7px 14px; border-radius: 999px; text-align: center; text-decoration: none; color: #fff;
+         background: rgba(16,12,14,.82); border: 1px solid #d9a15b; box-shadow: 0 2px 12px rgba(0,0,0,.35); }
+  #reg b { color: #f2c14e; font-weight: 700; } #reg:hover { background: rgba(176,32,42,.92); }
 </style>
 </head>
 <body>
 <canvas id="game"></canvas>
 <button id="fs" tabindex="-1">Fullscreen (F)</button>
 <a id="back" href="../../games.html" aria-label="Back to X Games">&larr; X Games</a>
+<a id="reg" href="../../register.html" target="_blank" rel="noopener">Enjoying the game? Don&rsquo;t forget to <b>register for XENESIS 4.0</b> &rarr;</a>
+<script>
+/* keep taps on the register note from restarting the game */
+(function(){var r=document.getElementById('reg');['pointerdown','mousedown','touchstart','click','keydown'].forEach(function(n){r.addEventListener(n,function(e){e.stopPropagation();});});})();
+</script>
 <script>
 (() => {
 'use strict';
@@ -277,7 +286,8 @@ function update(dt) {
   }
   ambient(dt);
   engineSound();
-  const hide = state !== 'menu'; fsBtn.style.opacity = backBtn.style.opacity = hide ? 0 : 1; fsBtn.style.pointerEvents = backBtn.style.pointerEvents = hide ? 'none' : 'auto';
+  { const rg = document.getElementById('reg'), want = state === 'over' ? 'block' : 'none'; if (rg.style.display !== want) rg.style.display = want; }
+  const hide = state === 'play' || state === 'pause'; fsBtn.style.opacity = backBtn.style.opacity = hide ? 0 : 1; fsBtn.style.pointerEvents = backBtn.style.pointerEvents = hide ? 'none' : 'auto';
 }
 
 function gameplay(dt, gas, brake, info) {
@@ -566,8 +576,8 @@ function overScreen() {
   text(String(score()), cx, H * .14 + 92, 44, '#fff', 'center', '#0b1020'); text(run.newBest ? 'NEW BEST!' : 'SCORE', cx, H * .14 + 108, 10.5, run.newBest ? '#7affd0' : 'rgba(255,255,255,.7)', 'center', null, 800);
   text(Math.floor(run.maxDist) + ' m   ·   ' + run.coins + ' coins   ·   best ' + hi, cx, H * .14 + 134, 12, '#fff', 'center', null, 600);
   text('Reached stage ' + (run.stage + 1) + ': ' + THEMES[(startTheme + run.stage) % NT].n, cx, H * .14 + 154, 11, 'rgba(255,255,255,.75)', 'center', null, 600);
-  btn.go = button(cx - 100, H * .14 + H * .66 - 98, 200, 42, 'DRIVE AGAIN', '#b0202a');
-  text('Space / tap to retry  ·  Esc for the menu', cx, H * .14 + H * .66 - 28, 9.5, 'rgba(255,255,255,.65)', 'center', null, 600);
+  btn.go = button(cx - 100, H * .14 + H * .66 - 76, 200, 42, 'DRIVE AGAIN', '#b0202a');
+  text('Space / tap to retry  ·  Esc for the menu', cx, H * .14 + H * .66 - 16, 9.5, 'rgba(255,255,255,.65)', 'center', null, 600);
   btn.menuBtn = null;
 }
 
@@ -592,7 +602,7 @@ function render() {
   drawAmbient();
   if ((state === 'play' || state === 'pause') && showHud) hud();
   if (state === 'menu') menu();
-  if (state === 'over') { hud(); overScreen(); }
+  if (state === 'over') overScreen();
   if (state === 'pause') { ctx.fillStyle = 'rgba(0,0,0,.5)'; ctx.fillRect(0, 0, W, H); text('PAUSED', W / 2, H / 2, 34, '#fff', 'center', '#000'); text('Press P or tap to resume', W / 2, H / 2 + 24, 12, 'rgba(255,255,255,.8)', 'center', null, 600); }
 }
 
