@@ -109,10 +109,140 @@ window.XEN_GAMES = [
     "alt": "The Xenesis X in space"
    }
   ]
+ },
+ {
+   "id": "hill-rush-x",
+   "title": "Hill Rush X",
+   "genre": "Hill Climb Driving",
+   "short": "Drive the Dino x Samurai buggy up endless hills. Grab coins and fuel, nail big air and flips, and race through 14 themed worlds, from Samurai Dawn to the low-gravity Lunar X.",
+   "banner": "games/hill-rush-x/media/banner.jpg",
+   "poster": "games/hill-rush-x/media/poster.jpg",
+   "video": "games/hill-rush-x/media/gameplay.mp4",
+   "play": "games/hill-rush-x/play.html",
+   "developer": "CSE, GCE Keonjhar",
+   "publisher": "XENESIS 4.0",
+   "platform": "Browser (desktop and mobile)",
+   "players": "Single-player",
+   "tags": [
+     "Driving",
+     "Physics",
+     "Hill Climb",
+     "Endless",
+     "Japanese",
+     "Singleplayer"
+   ],
+   "about": [
+     "Hill Rush X is the Xenesis hill-climb driver: a samurai dino behind the wheel of a tough little buggy, climbing hills that never end. Manage your fuel, keep your head off the ground and see how far you can get.",
+     "Every 500 metres the whole world changes. You start in any of 14 themes and travel on through the rest: the eight Dino x Samurai worlds plus six new ones, Sakura Meadow, Bamboo Grove, Golden Dunes, Autumn Maple, Aurora Peak and Lunar X."
+   ],
+   "features": [
+     "14 themes with their own sky, scenery, weather and car colours. Pick your starting world on the menu.",
+     "Themes change how you drive: Winter Shrine and Aurora Peak are slippery, Golden Dunes is loose sand, and Lunar X has low gravity for huge jumps.",
+     "Real suspension physics: your buggy bounces, tilts and wheelies over hills and ramps.",
+     "Coins add to your score. Fuel cans keep you going. Run dry and the run is over.",
+     "Air time and flips earn bonus points. Land on your head and it's a crash.",
+     "Works with keyboard or touch pedals, and your best score is saved on your device."
+   ],
+   "controls": [
+     [
+       "→ or D",
+       "Gas (in the air: tilt the car back)"
+     ],
+     [
+       "← or A",
+       "Brake and reverse (in the air: tilt the car forward)"
+     ],
+     [
+       "P or Esc",
+       "Pause"
+     ],
+     [
+       "F",
+       "Toggle fullscreen"
+     ],
+     [
+       "M",
+       "Mute sound"
+     ],
+     [
+       "Touch",
+       "Tap and hold the right side for gas, the left side for brake"
+     ]
+   ],
+   "shots": [
+     {
+       "src": "games/hill-rush-x/media/ss01.jpg",
+       "thumb": "games/hill-rush-x/media/t01.jpg",
+       "alt": "Classic world"
+     },
+     {
+       "src": "games/hill-rush-x/media/ss02.jpg",
+       "thumb": "games/hill-rush-x/media/t02.jpg",
+       "alt": "Samurai Dawn world"
+     },
+     {
+       "src": "games/hill-rush-x/media/ss03.jpg",
+       "thumb": "games/hill-rush-x/media/t03.jpg",
+       "alt": "Volcano Shrine world"
+     },
+     {
+       "src": "games/hill-rush-x/media/ss04.jpg",
+       "thumb": "games/hill-rush-x/media/t04.jpg",
+       "alt": "Neon Tokyo world"
+     },
+     {
+       "src": "games/hill-rush-x/media/ss05.jpg",
+       "thumb": "games/hill-rush-x/media/t05.jpg",
+       "alt": "Winter Shrine world"
+     },
+     {
+       "src": "games/hill-rush-x/media/ss06.jpg",
+       "thumb": "games/hill-rush-x/media/t06.jpg",
+       "alt": "Moonlit Ninja world"
+     },
+     {
+       "src": "games/hill-rush-x/media/ss07.jpg",
+       "thumb": "games/hill-rush-x/media/t07.jpg",
+       "alt": "Great Wave world"
+     },
+     {
+       "src": "games/hill-rush-x/media/ss08.jpg",
+       "thumb": "games/hill-rush-x/media/t08.jpg",
+       "alt": "Xenesis world"
+     },
+     {
+       "src": "games/hill-rush-x/media/ss09.jpg",
+       "thumb": "games/hill-rush-x/media/t09.jpg",
+       "alt": "Sakura Meadow world"
+     },
+     {
+       "src": "games/hill-rush-x/media/ss10.jpg",
+       "thumb": "games/hill-rush-x/media/t10.jpg",
+       "alt": "Bamboo Grove world"
+     },
+     {
+       "src": "games/hill-rush-x/media/ss11.jpg",
+       "thumb": "games/hill-rush-x/media/t11.jpg",
+       "alt": "Golden Dunes world"
+     },
+     {
+       "src": "games/hill-rush-x/media/ss12.jpg",
+       "thumb": "games/hill-rush-x/media/t12.jpg",
+       "alt": "Autumn Maple world"
+     },
+     {
+       "src": "games/hill-rush-x/media/ss13.jpg",
+       "thumb": "games/hill-rush-x/media/t13.jpg",
+       "alt": "Aurora Peak world"
+     },
+     {
+       "src": "games/hill-rush-x/media/ss14.jpg",
+       "thumb": "games/hill-rush-x/media/t14.jpg",
+       "alt": "Lunar X world"
+     }
+   ]
  }
 ];
 
-/* "Coming soon" card shown next to the playable games. Delete it when the next game is ready and add that game above. */
-window.XEN_SOON = [
- {"title":"A New X Game","text":"A new game is on its way to the arcade. Play Dino x Samurai while you wait."}
-];
+/* "Coming soon" card shown next to the playable games. Add {"title","text"} entries here to show a Coming Soon card next to the games. */
+window.XEN_SOON = [];
