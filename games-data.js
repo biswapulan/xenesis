@@ -111,3 +111,9 @@ window.XEN_GAMES = [
   ]
  }
 ];
+
+/* "Coming soon" teasers shown under the playable games. Delete an entry when that game is ready and add it above. */
+window.XEN_SOON = [
+ {"title":"A New X Game","text":"A new game is on its way to the arcade. Play Dino x Samurai while you wait."},
+ {"title":"Another X Game","text":"More games will be added to X Games. Check back soon."}
+];

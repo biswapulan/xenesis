@@ -7,40 +7,62 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Shippori+Mincho:wght@500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="theme.css?v=3">
 <style>
-.hd{text-align:center;padding:10px 0 6px}.hd h1{font-size:clamp(26px,6vw,46px)}.hd p{max-width:46ch;margin:12px auto 0;opacity:.85;font-size:14px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),380px));justify-content:center;gap:20px;margin-top:28px}
-.gm{position:relative;display:flex;flex-direction:column;color:inherit;text-decoration:none;background:linear-gradient(180deg,rgba(11,15,18,.62),rgba(11,15,18,.86));border:1px solid rgba(232,228,218,.14);backdrop-filter:blur(3px);transition:.3s;overflow:hidden}
-.gm:hover,.gm:focus-visible{border-color:var(--amber);transform:translateY(-3px);box-shadow:0 18px 50px rgba(0,0,0,.5),0 0 30px rgba(217,161,91,.18)}
+.hd{text-align:center;padding:10px 0 6px}.hd h1{font-size:clamp(26px,6vw,46px)}.hd p{max-width:48ch;margin:12px auto 0;opacity:.85;font-size:14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),380px));justify-content:center;gap:20px;margin-top:26px}
+.gm{position:relative;display:flex;flex-direction:column;background:linear-gradient(180deg,rgba(11,15,18,.62),rgba(11,15,18,.86));border:1px solid rgba(232,228,218,.14);backdrop-filter:blur(3px);transition:.3s;overflow:hidden}
+.gm.play:hover{border-color:var(--amber);transform:translateY(-3px);box-shadow:0 18px 50px rgba(0,0,0,.5),0 0 30px rgba(217,161,91,.18)}
+.gm .thl{display:block}
 .gm .th{display:block;width:100%;height:auto;aspect-ratio:920/430;object-fit:cover;border-bottom:1px solid rgba(232,228,218,.14)}
-.gm .bd{display:flex;flex-direction:column;flex:1;padding:20px 22px 22px}
+.gm .bd{display:flex;flex-direction:column;flex:1;padding:18px 22px 22px}
 .grp{font-size:10.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--amber);font-weight:600}
-.gm h2{font-size:17px;margin:8px 0 10px;letter-spacing:.1em;text-transform:none}
+.gm h2{font-size:17px;margin:8px 0 14px;letter-spacing:.1em;text-transform:none}.gm h2 a{color:inherit;text-decoration:none}
+.acts{display:grid;grid-template-columns:1fr auto;gap:10px;margin-bottom:16px}
+.ghost{display:flex;align-items:center;padding:0 16px;border:1px solid rgba(232,228,218,.3);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;font-weight:600;color:inherit;text-decoration:none}
+.ghost:hover{border-color:var(--amber);color:var(--amber)}
 .gm p.s{font-size:13.5px;opacity:.82;line-height:1.65;flex:1}
-.chips{display:flex;flex-wrap:wrap;gap:7px;margin:14px 0 16px}
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px}
 .chip{border:1px solid rgba(232,228,218,.3);padding:4px 10px;font-size:10px;letter-spacing:.14em;text-transform:uppercase;font-weight:600}
-.gm .btn{padding:12px 10px;font-size:10.5px;letter-spacing:.18em;text-align:center}
+.sh{text-align:center;margin-top:46px;font-size:clamp(18px,3.4vw,24px);letter-spacing:.2em;text-transform:uppercase}.sh small{display:block;font:500 12px var(--min);letter-spacing:.3em;color:var(--amber);margin-top:6px}
+.gm.soon{border-style:dashed;border-color:rgba(217,161,91,.35);background:linear-gradient(180deg,rgba(11,15,18,.5),rgba(11,15,18,.78))}
+.sk{position:relative;display:grid;place-items:center;aspect-ratio:920/430;border-bottom:1px dashed rgba(217,161,91,.3);overflow:hidden;background:radial-gradient(circle at 50% 40%,rgba(176,32,42,.45),rgba(11,15,18,.9) 70%)}
+.sk b{font:700 clamp(56px,9vw,84px)/1 var(--min);color:rgba(217,161,91,.85);text-shadow:0 0 30px rgba(176,32,42,.7)}
+.rib{position:absolute;top:14px;left:-34px;transform:rotate(-35deg);width:150px;text-align:center;padding:5px 0;background:var(--amber);color:#1c1008;font-size:9.5px;letter-spacing:.2em;font-weight:700;text-transform:uppercase}
+.gm.soon h2{opacity:.9}.gm.soon p.s{opacity:.7}
+.soonbtn{display:flex;align-items:center;justify-content:center;padding:13px 10px;border:1px dashed rgba(217,161,91,.5);color:var(--amber);font-size:11px;letter-spacing:.22em;text-transform:uppercase;font-weight:600;margin-bottom:16px}
+.xg-play{display:flex;align-items:center;justify-content:center;gap:8px;padding:13px 18px;border:1px solid rgba(246,214,160,.6);border-radius:3px;background:linear-gradient(180deg,#e7bd7e 0%,#d9a15b 52%,#b4793a 100%);color:#1c1008;font:700 12px/1 var(--sans);letter-spacing:.2em;text-transform:uppercase;text-decoration:none;text-shadow:0 1px 0 rgba(255,236,200,.35);box-shadow:0 0 0 1px rgba(122,31,36,.35),0 4px 18px rgba(217,161,91,.3),inset 0 1px 0 rgba(255,240,210,.5);transition:transform .2s,filter .2s;animation:xgPulse 2.8s ease-in-out infinite}
+.xg-play:hover,.xg-play:focus-visible{filter:brightness(1.08);transform:translateY(-1px)}
+@keyframes xgPulse{0%,100%{box-shadow:0 0 0 1px rgba(122,31,36,.35),0 4px 18px rgba(217,161,91,.28),inset 0 1px 0 rgba(255,240,210,.5)}50%{box-shadow:0 0 0 1px rgba(122,31,36,.35),0 4px 28px rgba(217,161,91,.62),inset 0 1px 0 rgba(255,240,210,.5)}}
+@media (prefers-reduced-motion:reduce){.xg-play{animation:none}}
 </style></head>
 <body data-page="games.html">
 <div class="app"><main>
  <section class="hd in"><h1>X Games<span class="kj" lang="ja">遊戯</span></h1><hr class="blade" style="width:min(260px,60%);margin:18px auto">
- <p>Take a break between events. Play the Xenesis arcade right here in your browser.</p></section>
+ <p>Take a break between events. Jump in and play now, and keep checking back: more games are coming soon.</p></section>
  <div class="grid" id="grid"></div>
+ <section id="soon" class="in"><h2 class="sh">Coming Soon<small>近日公開</small></h2><div class="grid" id="soongrid"></div></section>
 </main></div>
 <script src="shared.js?v=3"></script>
 <script src="games-data.js"></script>
 <script>
 (function(){
+  function el(tag,cls,txt,kids){var e=document.createElement(tag); if(cls)e.className=cls; if(txt!=null)e.textContent=txt; (kids||[]).forEach(function(k){e.appendChild(k)}); return e;}
+  function link(cls,txt,href){var a=el('a',cls,txt); a.href=href; return a;}
   var g=document.getElementById('grid');
   (window.XEN_GAMES||[]).forEach(function(x){
-    var a=document.createElement('a'); a.className='gm in'; a.href='game.html?id='+encodeURIComponent(x.id);
-    var img=document.createElement('img'); img.className='th'; img.src=x.banner; img.alt=x.title+' banner'; img.loading='lazy'; a.appendChild(img);
-    var bd=document.createElement('div'); bd.className='bd';
-    function add(tag,cls,txt){var e=document.createElement(tag); if(cls)e.className=cls; e.textContent=txt; bd.appendChild(e); return e;}
-    add('p','grp',x.genre); add('h2','',x.title); add('p','s',x.short);
-    var c=document.createElement('div'); c.className='chips'; x.tags.slice(0,4).forEach(function(t){var s=document.createElement('span'); s.className='chip'; s.textContent=t; c.appendChild(s);}); bd.appendChild(c);
-    var b=document.createElement('span'); b.className='btn'; b.textContent='View Game'; bd.appendChild(b);
-    a.appendChild(bd); g.appendChild(a);
+    var det='game.html?id='+encodeURIComponent(x.id);
+    var thl=link('thl','',det); var img=document.createElement('img'); img.className='th'; img.src=x.banner; img.alt=x.title+' banner'; img.loading='lazy'; thl.appendChild(img);
+    var h2=el('h2','',null,[link('',x.title,det)]);
+    var acts=el('div','acts',null,[link('xg-play','▶  Play Now',x.play),link('ghost','Details',det)]);
+    var chips=el('div','chips'); x.tags.slice(0,4).forEach(function(t){chips.appendChild(el('span','chip',t))});
+    g.appendChild(el('article','gm play in',null,[thl,el('div','bd',null,[el('p','grp',x.genre),h2,acts,el('p','s',x.short),chips])]));
   });
+  var sg=document.getElementById('soongrid'), soon=window.XEN_SOON||[];
+  if(!soon.length) document.getElementById('soon').style.display='none';
+  soon.forEach(function(x){
+    var sk=el('div','sk',null,[el('span','rib','Coming Soon'),el('b','','?')]); sk.setAttribute('aria-hidden','true');
+    sg.appendChild(el('article','gm soon in',null,[sk,el('div','bd',null,[el('p','grp','Stay tuned'),el('h2','',x.title),el('div','soonbtn','Coming Soon'),el('p','s',x.text)])]));
+  });
+  if(location.hash==='#soon'){var s=document.getElementById('soon'); setTimeout(function(){s.scrollIntoView({behavior:'smooth'})},400);}
 })();
 </script>
 </body></html>

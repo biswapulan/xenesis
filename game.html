@@ -35,7 +35,12 @@ main.gpw{max-width:1180px;min-width:0}.gp>*,.about{min-width:0}
 .tagl{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;opacity:.55;margin-bottom:8px}
 .tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:20px}
 .tg{background:rgba(217,161,91,.14);border:1px solid rgba(217,161,91,.35);color:var(--amber);padding:4px 10px;font-size:11.5px}
-.playbtn{display:block;text-align:center;padding:14px 10px;font-size:12px;letter-spacing:.2em}
+.xg-play{display:flex;align-items:center;justify-content:center;gap:8px;padding:13px 18px;border:1px solid rgba(246,214,160,.6);border-radius:3px;background:linear-gradient(180deg,#e7bd7e 0%,#d9a15b 52%,#b4793a 100%);color:#1c1008;font:700 12px/1 var(--sans);letter-spacing:.2em;text-transform:uppercase;text-decoration:none;text-shadow:0 1px 0 rgba(255,236,200,.35);box-shadow:0 0 0 1px rgba(122,31,36,.35),0 4px 18px rgba(217,161,91,.3),inset 0 1px 0 rgba(255,240,210,.5);transition:transform .2s,filter .2s;animation:xgPulse 2.8s ease-in-out infinite}
+.xg-play:hover,.xg-play:focus-visible{filter:brightness(1.08);transform:translateY(-1px)}
+@keyframes xgPulse{0%,100%{box-shadow:0 0 0 1px rgba(122,31,36,.35),0 4px 18px rgba(217,161,91,.28),inset 0 1px 0 rgba(255,240,210,.5)}50%{box-shadow:0 0 0 1px rgba(122,31,36,.35),0 4px 28px rgba(217,161,91,.62),inset 0 1px 0 rgba(255,240,210,.5)}}
+@media (prefers-reduced-motion:reduce){.xg-play{animation:none}}
+.side .xg-play{margin:0 0 18px;padding:15px 18px;font-size:13px}
+.soonnote{display:block;margin-top:16px;text-align:center;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--amber);text-decoration:none;border-top:1px solid rgba(232,228,218,.12);padding-top:14px}.soonnote:hover{text-decoration:underline}
 .about{margin-top:22px;padding:26px clamp(18px,3vw,34px) 30px}
 .about h2{font-size:18px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:6px}
 .about h3{font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--amber);margin:26px 0 12px}
@@ -99,8 +104,9 @@ main.gpw{max-width:1180px;min-width:0}.gp>*,.about{min-width:0}
   var meta=el('dl','meta'); [['Genre',G.genre],['Developer',G.developer],['Publisher',G.publisher],['Platform',G.platform],['Players',G.players]].forEach(function(r){meta.appendChild(el('dt','',r[0])); meta.appendChild(el('dd','',r[1]));});
   var tags=el('div','tags'); G.tags.forEach(function(t){tags.appendChild(el('span','tg',t))});
   var cap=document.createElement('img'); cap.className='cap'; cap.src=G.banner; cap.alt=G.title+' banner';
-  var play=el('a','btn playbtn','▶  Play Now'); play.href=G.play;
-  var side=el('aside','panel side in',null,[cap,el('div','bd',null,[el('p','short',G.short),meta,el('div','tagl','Popular tags for this game'),tags,play])]);
+  var play=el('a','xg-play','▶  Play Now'); play.href=G.play;
+  var soon=el('a','soonnote','✦ More games coming soon'); soon.href='games.html#soon';
+  var side=el('aside','panel side in',null,[cap,el('div','bd',null,[play,el('p','short',G.short),meta,el('div','tagl','Popular tags for this game'),tags,soon])]);
   root.appendChild(el('div','gp',null,[left,side]));
 
   /* about, features, controls */
