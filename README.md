@@ -39,3 +39,10 @@ Department of CSE, Government College of Engineering, Keonjhar
 - Opens with the Xenesis intro, then the game. Leaderboard and attempt limits use the existing Supabase project (publishable key is in `play.html`; Edge Functions `start-game` / `finish-game` and RPC `get_branch_battle_leaderboard` must exist).
 - Fixes: signal cards were stretched and clipped (now compact and kept inside the arena); the card label no longer reveals CSE vs decoy; the old "Demo only" footnote was replaced.
 - Screenshots and video were recorded with a mocked backend, so the leaderboard names in them are sample data.
+
+## Zen Roads X: 14 realistic worlds
+- Every world is its own natural place with its own scenery, so nothing mixes between worlds: Samurai Hills (farms, pines), Coastal Cliffs (sea, guard rail, lighthouse), Bamboo Grove, Alpine Pass (spruce, river, guard rail), Desert Canyon (mesas, buttes, cactus), Scottish Highlands (sheep, stone walls, crofts), Lavender Fields (rows, stone cottages, cypress), Xenesis Moon, Kyoto Blossom Road (blossoms, machiya houses), Tokyo City Drive (buildings along both sides, street lamps, vending machines, Tokyo Tower), Nikko Autumn (maples, cedar, stream), Lake Country (lake, birch, reeds, cabin), Festival Village (houses, stalls, lanterns), Wisteria Garden Road (wisteria pergolas).
+- Shrine gates and pagodas only appear in Japanese-style worlds.
+- New engine features in `games/zen-roads-x/play.html`: water beside the road (sea, lake, stream), guard rails, house and building sprites, mesa mountains. World data is `LOCS`.
+- Fixed: share codes for worlds 10-14 failed to load (parser only accepted one digit).
+- The old screenshots/video in `games/zen-roads-x/media/` still show the previous worlds.
