@@ -33,3 +33,9 @@ Department of CSE, Government College of Engineering, Keonjhar
 - Contact emails added to the footers and Help Desk: support/queries `info@xenesis.tech`, sponsorships `sponsorships@xenesis.tech`.
 - `backend/Code.gs` changed (Perfect Partner fee, Short Film removed): paste into Apps Script and **redeploy** (Deploy → Manage deployments → Edit → New version).
 - IPL Auction: fee ₹149, team of 4, prizes 1st ₹800 · 2nd ₹400, new description. `backend/Code.gs` changed again: paste and **redeploy as a New version**.
+
+## X Games update (Branch Battle)
+- **Branch Battle** added in the same format as the other games: `games/branch-battle/play.html` + `media/` (banner, poster, 12 screenshots + thumbnails, gameplay mp4/webm) and an entry in `games-data.js` (`"new": true`).
+- Opens with the Xenesis intro, then the game. Leaderboard and attempt limits use the existing Supabase project (publishable key is in `play.html`; Edge Functions `start-game` / `finish-game` and RPC `get_branch_battle_leaderboard` must exist).
+- Fixes: signal cards were stretched and clipped (now compact and kept inside the arena); the card label no longer reveals CSE vs decoy; the old "Demo only" footnote was replaced.
+- Screenshots and video were recorded with a mocked backend, so the leaderboard names in them are sample data.

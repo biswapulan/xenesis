@@ -244,6 +244,119 @@ window.XEN_GAMES = [
     "alt": "Xenesis Moon on a winter night"
    }
   ]
+ },
+ {
+  "id": "branch-battle",
+  "title": "Branch Battle",
+  "genre": "Reflex Arcade",
+  "new": true,
+  "added": "2026-10-20",
+  "short": "Signals pop up across the arena and you have 60 seconds to tap the CSE ones. Python, SQL, firewalls and neural nets score; lathes, turbines and blast furnaces are decoys. Climb the live Xenesis leaderboard.",
+  "banner": "games/branch-battle/media/banner.jpg",
+  "poster": "games/branch-battle/media/poster.jpg",
+  "video": "games/branch-battle/media/gameplay.mp4",
+  "videoWebm": "games/branch-battle/media/gameplay.webm",
+  "play": "games/branch-battle/play.html",
+  "developer": "CSE, GCE Keonjhar",
+  "publisher": "XENESIS 4.0",
+  "platform": "Browser (best on mobile)",
+  "players": "Single-player, shared leaderboard",
+  "tags": [
+   "Arcade",
+   "Reflex",
+   "Quiz",
+   "Engineering",
+   "Leaderboard",
+   "Singleplayer"
+  ],
+  "about": [
+   "Branch Battle is the Xenesis branch-recognition arcade: signals from every engineering branch appear at random spots on the screen, and only the Computer Science ones count. Read fast, tap right, ignore the rest.",
+   "It opens with the Xenesis intro, then you enter your name, branch and year. You get two 60-second attempts and your best score goes to the live leaderboard shared by everyone at the fest."
+  ],
+  "features": [
+   "48 signals from CSE, Mechanical, Electrical, Mining, Civil, Metallurgy and Mineral Engineering.",
+   "+10 for every CSE signal, a bonus on every 4th in a row, and -5 for tapping a decoy. Missing a signal costs nothing.",
+   "Signals move, pulse and vanish, and the pace picks up as the round goes on.",
+   "Two attempts per player, checked by the server. Your best score counts.",
+   "A live leaderboard with name, branch, year and score.",
+   "Plays in the browser with touch or mouse."
+  ],
+  "controls": [
+   [
+    "Tap or click a signal",
+    "Classify it: tap CSE signals, leave the others"
+   ],
+   [
+    "Streak",
+    "Every 4 correct taps in a row earns bonus points"
+   ],
+   [
+    "Wrong tap",
+    "A decoy costs 5 points"
+   ]
+  ],
+  "shots": [
+   {
+    "src": "games/branch-battle/media/ss01.jpg",
+    "thumb": "games/branch-battle/media/t01.jpg",
+    "alt": "Title screen"
+   },
+   {
+    "src": "games/branch-battle/media/ss02.jpg",
+    "thumb": "games/branch-battle/media/t02.jpg",
+    "alt": "Intro: sunset over the torii gate"
+   },
+   {
+    "src": "games/branch-battle/media/ss03.jpg",
+    "thumb": "games/branch-battle/media/t03.jpg",
+    "alt": "Intro: the Xenesis X rises"
+   },
+   {
+    "src": "games/branch-battle/media/ss04.jpg",
+    "thumb": "games/branch-battle/media/t04.jpg",
+    "alt": "Intro: the X flies at the camera"
+   },
+   {
+    "src": "games/branch-battle/media/ss05.jpg",
+    "thumb": "games/branch-battle/media/t05.jpg",
+    "alt": "Mission briefing"
+   },
+   {
+    "src": "games/branch-battle/media/ss06.jpg",
+    "thumb": "games/branch-battle/media/t06.jpg",
+    "alt": "Player sign-up"
+   },
+   {
+    "src": "games/branch-battle/media/ss07.jpg",
+    "thumb": "games/branch-battle/media/t07.jpg",
+    "alt": "Attempt 1 of 2 ready"
+   },
+   {
+    "src": "games/branch-battle/media/ss08.jpg",
+    "thumb": "games/branch-battle/media/t08.jpg",
+    "alt": "Signals on the field"
+   },
+   {
+    "src": "games/branch-battle/media/ss09.jpg",
+    "thumb": "games/branch-battle/media/t09.jpg",
+    "alt": "Streak bonus"
+   },
+   {
+    "src": "games/branch-battle/media/ss10.jpg",
+    "thumb": "games/branch-battle/media/t10.jpg",
+    "alt": "Decoy tapped for -5"
+   },
+   {
+    "src": "games/branch-battle/media/ss11.jpg",
+    "thumb": "games/branch-battle/media/t11.jpg",
+    "alt": "Round result"
+   },
+   {
+    "src": "games/branch-battle/media/ss12.jpg",
+    "thumb": "games/branch-battle/media/t12.jpg",
+    "alt": "Live leaderboard"
+   }
+  ]
  }
 ];
 
