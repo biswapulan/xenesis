@@ -151,7 +151,7 @@ window.XEN_GAMES = [
   "features": [
    "8 worlds: Samurai Hills, Shrine Valley, Bamboo Grove, Alpine Pass, Golden Dunes, Misty Highlands, Lavender Meadows and Xenesis Moon.",
    "Make the road your own: 4 road styles, 4 seasons, 4 times of day (dawn, day, dusk, night) and 4 kinds of weather (clear, cloudy, rain, fog).",
-   "8 vehicles, from a coupe and a hatchback to a school bus, a Cat Bus, a truck, a van and a tuk-tuk, with 4 paint colours and 3 handling styles.",
+   "8 vehicles: a sleek Sports Car, a Bike, a Bus, a School Bus, a Cat Bus, a Truck, a Tuk-Tuk and a Van, with 4 paint colours and 3 handling styles.",
    "A built-in radio: paste a YouTube or Spotify link, or add songs from your device. It shows the song name, a seek bar and dancing sound bars.",
    "Autodrive, chase, hood and cockpit views, and a world code you can copy and share so a friend drives the same road.",
    "Plays right in the browser with keyboard or touch. No score, no game over."
@@ -206,57 +206,42 @@ window.XEN_GAMES = [
    {
     "src": "games/zen-roads-x/media/ss01.jpg",
     "thumb": "games/zen-roads-x/media/t01.jpg",
-    "alt": "Samurai Hills"
+    "alt": "Samurai Hills at dawn in spring"
    },
    {
     "src": "games/zen-roads-x/media/ss02.jpg",
     "thumb": "games/zen-roads-x/media/t02.jpg",
-    "alt": "Shrine Valley"
+    "alt": "Shrine Valley at dusk in autumn"
    },
    {
     "src": "games/zen-roads-x/media/ss03.jpg",
     "thumb": "games/zen-roads-x/media/t03.jpg",
-    "alt": "Bamboo Grove"
+    "alt": "Bamboo Grove in summer rain"
    },
    {
     "src": "games/zen-roads-x/media/ss04.jpg",
     "thumb": "games/zen-roads-x/media/t04.jpg",
-    "alt": "Alpine Pass"
+    "alt": "Alpine Pass on a cloudy winter day"
    },
    {
     "src": "games/zen-roads-x/media/ss05.jpg",
     "thumb": "games/zen-roads-x/media/t05.jpg",
-    "alt": "Golden Dunes"
+    "alt": "Golden Dunes at summer dusk"
    },
    {
     "src": "games/zen-roads-x/media/ss06.jpg",
     "thumb": "games/zen-roads-x/media/t06.jpg",
-    "alt": "Misty Highlands"
+    "alt": "Misty Highlands in autumn fog"
    },
    {
     "src": "games/zen-roads-x/media/ss07.jpg",
     "thumb": "games/zen-roads-x/media/t07.jpg",
-    "alt": "Lavender Meadows"
+    "alt": "Lavender Meadows on a cloudy spring day"
    },
    {
     "src": "games/zen-roads-x/media/ss08.jpg",
     "thumb": "games/zen-roads-x/media/t08.jpg",
-    "alt": "Xenesis Moon"
-   },
-   {
-    "src": "games/zen-roads-x/media/ss09.jpg",
-    "thumb": "games/zen-roads-x/media/t09.jpg",
-    "alt": "Dusk on the road"
-   },
-   {
-    "src": "games/zen-roads-x/media/ss10.jpg",
-    "thumb": "games/zen-roads-x/media/t10.jpg",
-    "alt": "Night drive"
-   },
-   {
-    "src": "games/zen-roads-x/media/ss11.jpg",
-    "thumb": "games/zen-roads-x/media/t11.jpg",
-    "alt": "Back to dawn"
+    "alt": "Xenesis Moon on a winter night"
    }
   ]
  }
