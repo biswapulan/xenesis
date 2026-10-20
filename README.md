@@ -46,3 +46,14 @@ Department of CSE, Government College of Engineering, Keonjhar
 - New engine features in `games/zen-roads-x/play.html`: water beside the road (sea, lake, stream), guard rails, house and building sprites, mesa mountains. World data is `LOCS`.
 - Fixed: share codes for worlds 10-14 failed to load (parser only accepted one digit).
 - The old screenshots/video in `games/zen-roads-x/media/` still show the previous worlds.
+
+- **Zen Roads X vehicles:** the Cat Bus was replaced by a **Tractor** (`carTractor`). At dusk and night its tail lamps, roof work lights and amber beacon switch on and headlight beams light the road ahead.
+
+- **Zen Roads X:** Bamboo Grove is now much denser (extra rows of bamboo). New 15th world **Sakura Forest**: a dense, calm forest of realistic cherry trees only, petal-strewn ground, falling petals, benches and stone lanterns.
+
+- **Zen Roads X:** new 16th world **Matsuri Festival**: repeating sections of red gate tunnels, lantern-string streets with stalls and houses, and shrine grounds with banners. At night fireworks burst across the sky with boom and crackle sounds (`drawFireworks`, `auBoom`). Reduced-motion users get fewer bursts and no flash.
+
+## Zen Roads X: consistent worlds (latest)
+- Worlds reduced from 16 to 13: Kyoto Blossom Road (too close to Sakura Forest), Festival Village (same as Matsuri Festival) and Wisteria Garden Road were removed. Old share codes that pointed past those slots now open a different world.
+- Each world now has one ecosystem, so scenes no longer mix tree types: Samurai Hills (broadleaf), Coastal Cliffs (windswept Japanese pines), Bamboo Grove, Alpine Pass (spruce), Desert Canyon (saguaro, Joshua trees, boulders, tumbleweed; the pyramid-like buttes were removed), Scottish Highlands (treeless moor), Lavender Fields (cypress), Xenesis Moon (Japanese pines), Nikko Autumn (maples only), Lake Country (birch only), Sakura Forest (cherry only).
+- Vehicles are drawn about 1.6x larger so they read at the right size against trees, houses and gates.

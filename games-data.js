@@ -149,9 +149,9 @@ window.XEN_GAMES = [
    "It opens with the Xenesis intro (the sunset, the torii gate and the spinning X), then drops you onto the road in Samurai Hills. Eight worlds are one key press away, and you can switch on autodrive and simply watch."
   ],
   "features": [
-   "14 worlds, each with its own scenery: Samurai Hills, Coastal Cliffs, Bamboo Grove, Alpine Pass, Desert Canyon, Scottish Highlands, Lavender Fields, Xenesis Moon, Kyoto Blossom Road, Tokyo City Drive, Nikko Autumn, Lake Country, Festival Village and Wisteria Garden Road.",
+   "13 worlds, each with its own climate and plants: Samurai Hills, Coastal Cliffs, Bamboo Grove, Alpine Pass, Desert Canyon, Scottish Highlands, Lavender Fields, Xenesis Moon, Tokyo City Drive, Nikko Autumn, Lake Country, Sakura Forest and Matsuri Festival with night fireworks.",
    "Make the road your own: 4 road styles, 4 seasons, 4 times of day (dawn, day, dusk, night) and 4 kinds of weather (clear, cloudy, rain, fog).",
-   "8 vehicles: a sleek Sports Car, a Bike, a Bus, a School Bus, a Cat Bus, a Truck, a Tuk-Tuk and a Van, with 4 paint colours and 3 handling styles.",
+   "8 vehicles: a sleek Sports Car, a Bike, a Bus, a School Bus, a Tractor, a Truck, a Tuk-Tuk and a Van, with 4 paint colours and 3 handling styles.",
    "A built-in radio: paste a YouTube or Spotify link, or add songs from your device. It shows the song name, a seek bar and dancing sound bars.",
    "Autodrive, chase, hood and cockpit views, and a world code you can copy and share so a friend drives the same road.",
    "Plays right in the browser with keyboard or touch. No score, no game over."
