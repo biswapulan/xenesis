@@ -2,6 +2,12 @@
 Department of CSE, Government College of Engineering, Keonjhar
 
 
+## X Games update (Zen Roads X, NEW highlight, HIT badge, Coming Soon)
+- **Zen Roads X** added in the same format as Dino x Samurai: `games/zen-roads-x/play.html` + `media/` (banner, poster, 11 screenshots, thumbnails, gameplay mp4/webm) and an entry in `games-data.js`.
+- **NEW highlight:** give a game `"new": true` in `games-data.js`. Each visitor sees it glow with a NEW ribbon for their first 5 visits (`XEN_CONFIG.newTimes`), and it stops as soon as they play it. Remove the flag when the game is no longer new. Tracking lives in the visitor's own browser (`games-track.js`).
+- **Golden HIT badge:** every play page loads `games-track.js` (`data-game="<id>"`), which sends an anonymous visitor id to the Apps Script. The most-played game (ties all win) with at least `XEN_CONFIG.hitMin` different players (default 25) gets the badge on the list and detail pages. `"hit": true` on a game forces it by hand. **Paste the new `backend/Code.gs` into Apps Script and redeploy as a New version**; it creates a `GamePlays` tab by itself. Until then no badge appears (nothing breaks).
+- **Coming Soon page:** `coming-soon.html`, fed by `XEN_SOON` in `games-data.js`. New games' play pages must include the two script tags shown in `games/zen-roads-x/play.html` right after `<body>`.
+
 ## Updates
 - **Fix: "Could not reach the server" although the data was saved.** If the browser blocks Apps Script's reply, `register.html` now looks the registration up (by event, entry type, email and mobile, last 20 min) via a new `lookup` GET endpoint in `backend/Code.gs` and shows the normal success screen. **Redeploy the Apps Script as a New version.**
 - **IPL Auction pricing:** now two team-size options on the registration page: **1 to 3 players = ₹99**, **full team of 4 = ₹149** (entry types `small` / `full`). Updated `events-data.js`, `events-details.js` and `backend/Code.gs`. **Redeploy the Apps Script as a New version.**

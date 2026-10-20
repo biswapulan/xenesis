@@ -52,11 +52,18 @@ main.gpw{max-width:1180px;min-width:0}.gp>*,.about{min-width:0}
 .ctl b:nth-last-child(2),.ctl span:last-child{border-bottom:0}
 .nf{text-align:center;padding:60px 10px}
 @media (max-width:900px){.gp{grid-template-columns:minmax(0,1fr)}.th{width:104px}}
+.tt{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.tag2{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;font-size:10.5px;letter-spacing:.2em;font-weight:700;text-transform:uppercase}
+.tag2.nw{background:var(--crim);color:#fff;border:1px solid rgba(255,255,255,.35)}
+.tag2.ht{color:#2b1a00;background:linear-gradient(110deg,#a8741a 0%,#f7d774 28%,#fff3b8 45%,#e2a92f 62%,#a8741a 100%);background-size:220% 100%;border:1px solid #fff1b0;box-shadow:0 3px 14px rgba(226,169,47,.5);animation:shine 3.2s linear infinite}
+@keyframes shine{to{background-position:-220% 0}}
+@media (prefers-reduced-motion:reduce){.tag2.ht{animation:none}}
 </style></head>
 <body data-page="games.html">
 <div class="app"><main class="gpw" id="root"></main></div>
 <script src="shared.js?v=3"></script>
 <script src="games-data.js"></script>
+<script src="games-track.js"></script>
 <script>
 (function(){
   var root=document.getElementById('root');
@@ -71,7 +78,10 @@ main.gpw{max-width:1180px;min-width:0}.gp>*,.about{min-width:0}
   var crumb=el('nav','crumb in'); var a1=el('a','','X Games'); a1.href='games.html'; crumb.appendChild(a1); crumb.appendChild(el('i','','›')); crumb.appendChild(el('span','',G.title));
   var back=el('a','back','← All X Games'); back.href='games.html';
   var play=el('a','btn playbtn','▶  Play Now'); play.href=G.play;
-  root.appendChild(crumb); root.appendChild(el('div','tb in',null,[el('h1','',G.title),el('div','acts',null,[back,play])]));
+  root.appendChild(crumb); var tt=el('div','tt',null,[el('h1','',G.title)]);
+  if(window.XenGames&&G.new&&!window.XenGames.hasPlayed(G.id)) tt.appendChild(el('span','tag2 nw','New'));
+  root.appendChild(el('div','tb in',null,[tt,el('div','acts',null,[back,play])]));
+  if(window.XenGames) window.XenGames.stats().then(function(st){ if(window.XenGames.hits(window.XEN_GAMES,st)[G.id]) tt.appendChild(el('span','tag2 ht','\u2605 Hit')); });
 
   /* left: viewer + thumbnail strip (video first, then screenshots) */
   var items=[{type:'video',thumb:G.poster,alt:'Gameplay video'}].concat(G.shots.map(function(s){return {type:'img',src:s.src,thumb:s.thumb,alt:s.alt}}));

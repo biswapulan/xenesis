@@ -5,7 +5,7 @@
  * The Sheet menu only marks a row Verified / Rejected.
  */
 // Bump this every time you paste new code. Open the /exec URL in a browser: it must show this same version.
-const VERSION     = "2026-10-15-reply-recovery";
+const VERSION     = "2026-10-19-game-plays";
 const SHEET_NAME  = "Registrations";
 const FOLDER_NAME = "Xenesis 4.0 Payment Screenshots";
 const FROM_NAME   = "XENESIS 4.0 · CSE, GCE Keonjhar";   // display name students see
@@ -69,7 +69,51 @@ function testRegistration(){
 
 function doGet(e){
   if(e && e.parameter && e.parameter.action==="lookup") return lookup_(e.parameter);
+  if(e && e.parameter && e.parameter.action==="play")   return play_(e.parameter);
+  if(e && e.parameter && e.parameter.action==="stats")  return stats_(e.parameter);
   return out_({status:"ok",version:VERSION,message:"XENESIS registration endpoint is running.",ipl:EVENTS["ipl-auction"]});
+}
+
+/* ---------- X Games play counter (powers the golden HIT badge) ----------
+   Sheet tab "GamePlays": one row per (game, anonymous visitor id) with a play count, so we can count DIFFERENT players per game.
+   play  -> GET ?action=play&game=<id>&uid=<anonymous id>      (sent by games-track.js when a game page opens)
+   stats -> GET ?action=stats[&callback=fn]                    (JSONP) -> {status:"ok",games:{<id>:{players,plays}}} */
+const PLAYS_SHEET = "GamePlays";
+function plays_(){
+  const ss=SpreadsheetApp.getActiveSpreadsheet(); let s=ss.getSheetByName(PLAYS_SHEET);
+  if(!s){ s=ss.insertSheet(PLAYS_SHEET); s.appendRow(["Game","Visitor","Plays","First played","Last played"]); s.setFrozenRows(1); }
+  return s;
+}
+function play_(p){
+  const game=String(p.game||"").replace(/[^a-z0-9-]/gi,"").slice(0,60), uid=String(p.uid||"").replace(/[^a-z0-9]/gi,"").slice(0,40);
+  if(!game||!uid) return out_({status:"error"});
+  const lock=LockService.getScriptLock();
+  try{
+    lock.waitLock(10000);
+    const s=plays_(), last=s.getLastRow(), now=new Date();
+    let row=0;
+    if(last>1){ const v=s.getRange(2,1,last-1,2).getValues(); for(let i=0;i<v.length;i++){ if(v[i][0]===game && v[i][1]===uid){ row=i+2; break; } } }
+    if(row){ const c=s.getRange(row,3,1,3).getValues()[0]; s.getRange(row,3,1,3).setValues([[(+c[0]||0)+1,c[1],now]]); }
+    else s.appendRow([game,uid,1,now,now]);
+    CacheService.getScriptCache().remove("gstats");
+  }catch(err){ console.error(err); return out_({status:"error"}); }
+  finally{ try{lock.releaseLock();}catch(_){} }
+  return out_({status:"ok"});
+}
+function stats_(p){
+  const cb=/^[A-Za-z_]\w{0,60}$/.test(String(p.callback||"")) ? String(p.callback) : "";
+  const cache=CacheService.getScriptCache(); let res; const hit=cache.get("gstats");
+  if(hit){ res=JSON.parse(hit); }
+  else{
+    const games={};
+    try{
+      const s=plays_(), last=s.getLastRow();
+      if(last>1){ s.getRange(2,1,last-1,3).getValues().forEach(function(r){ const g=r[0]; if(!g) return; (games[g]=games[g]||{players:0,plays:0}); games[g].players++; games[g].plays+=(+r[2]||0); }); }
+    }catch(err){ console.error(err); }
+    res={status:"ok",games:games}; cache.put("gstats",JSON.stringify(res),120);
+  }
+  if(cb) return ContentService.createTextOutput(cb+"("+JSON.stringify(res)+");").setMimeType(ContentService.MimeType.JAVASCRIPT);
+  return out_(res);
 }
 
 /* Used by the website when the browser blocks the reply to a POST (the row may already be saved).

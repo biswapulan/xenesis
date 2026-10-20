@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Coming Soon · X Games · XENESIS 4.0</title><meta name="theme-color" content="#0b0f12">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Shippori+Mincho:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="theme.css?v=3">
+<style>
+.hd{text-align:center;padding:10px 0 6px}.hd h1{font-size:clamp(26px,6vw,46px)}.hd p{max-width:50ch;margin:12px auto 0;opacity:.85;font-size:14px}
+.crumb{font-size:12px;opacity:.75;margin:4px 0 8px}.crumb a{color:inherit;text-decoration:none}.crumb a:hover{color:var(--amber)}.crumb i{font-style:normal;margin:0 6px;opacity:.6}
+.list{display:grid;gap:22px;max-width:980px;margin:30px auto 0}
+.cs{position:relative;display:grid;grid-template-columns:minmax(220px,340px) 1fr;background:linear-gradient(180deg,rgba(11,15,18,.55),rgba(11,15,18,.82));border:1px dashed rgba(217,161,91,.4);backdrop-filter:blur(3px);overflow:hidden;scroll-margin-top:90px}
+.cs:target,.cs.pick{border-style:solid;border-color:var(--amber);box-shadow:0 0 36px rgba(217,161,91,.22)}
+.sk{position:relative;display:grid;place-items:center;min-height:190px;border-right:1px dashed rgba(217,161,91,.3);overflow:hidden;background:radial-gradient(circle at 50% 40%,rgba(176,32,42,.45),rgba(11,15,18,.92) 72%)}
+.sk b{font:700 clamp(64px,10vw,92px)/1 var(--min);color:rgba(217,161,91,.85);text-shadow:0 0 30px rgba(176,32,42,.7)}
+.rib{position:absolute;top:16px;left:-36px;transform:rotate(-35deg);width:160px;text-align:center;padding:5px 0;background:var(--amber);color:#1c1008;font-size:9.5px;letter-spacing:.2em;font-weight:700;text-transform:uppercase}
+.bd{padding:24px 26px 26px;display:flex;flex-direction:column}
+.grp{font-size:10.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--amber);font-weight:600}
+.cs h2{font-size:20px;margin:8px 0 10px;letter-spacing:.1em;text-transform:none}
+.cs p.s{font-size:14px;opacity:.85;line-height:1.7;margin:0 0 16px}
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin:0 0 16px}
+.chip{border:1px solid rgba(232,228,218,.3);padding:4px 10px;font-size:10px;letter-spacing:.14em;text-transform:uppercase;font-weight:600}
+.eta{margin-top:auto;align-self:flex-start;border:1px dashed rgba(217,161,91,.55);color:var(--amber);padding:9px 16px;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;font-weight:600}
+.cta{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin:34px 0 6px}
+.cta a{border:1px solid rgba(232,228,218,.3);padding:12px 22px;font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;font-weight:600;color:inherit;text-decoration:none;background:rgba(11,15,18,.6)}
+.cta a:hover{border-color:var(--amber);color:var(--amber)}
+.empty{text-align:center;opacity:.8;padding:40px 10px}
+@media (max-width:700px){.cs{grid-template-columns:1fr}.sk{min-height:150px;border-right:0;border-bottom:1px dashed rgba(217,161,91,.3)}}
+</style></head>
+<body data-page="games.html">
+<div class="app"><main>
+ <nav class="crumb in"><a href="games.html">X Games</a><i>›</i><span>Coming Soon</span></nav>
+ <section class="hd in"><h1>Coming Soon<span class="kj" lang="ja">近日</span></h1><hr class="blade" style="width:min(260px,60%);margin:18px auto">
+ <p>New games are on their way to the Xenesis arcade. When one is published it is highlighted on the X Games page for you.</p></section>
+ <div class="list" id="list"></div>
+ <div class="cta"><a href="games.html">&larr; Back to X Games</a><a href="events.html">See events</a></div>
+</main></div>
+<script src="shared.js?v=3"></script>
+<script src="games-data.js"></script>
+<script>
+(function(){
+  var L=document.getElementById('list'), S=window.XEN_SOON||[];
+  function el(tag,cls,txt){var e=document.createElement(tag); if(cls)e.className=cls; if(txt!=null)e.textContent=txt; return e;}
+  if(!S.length){L.appendChild(el('p','empty','Nothing is announced right now. Play the games that are live and check back soon!')); return;}
+  S.forEach(function(x){
+    var c=el('article','cs in'); if(x.id) c.id=x.id;
+    var sk=el('div','sk'); sk.setAttribute('aria-hidden','true'); sk.appendChild(el('span','rib','Coming Soon')); sk.appendChild(el('b','',x.icon||'?')); c.appendChild(sk);
+    var bd=el('div','bd'); bd.appendChild(el('p','grp',x.genre||'Stay tuned')); bd.appendChild(el('h2','',x.title)); bd.appendChild(el('p','s',x.text));
+    if(x.tags&&x.tags.length){var t=el('div','chips'); x.tags.forEach(function(g){t.appendChild(el('span','chip',g))}); bd.appendChild(t);}
+    bd.appendChild(el('div','eta',x.eta||'Coming Soon')); c.appendChild(bd); L.appendChild(c);
+  });
+  /* the shoji transition can delay layout, so scroll to a linked card after load */
+  if(location.hash){var t=document.getElementById(decodeURIComponent(location.hash.slice(1))); if(t){t.classList.add('pick'); setTimeout(function(){t.scrollIntoView({block:'center'})},500);}}
+})();
+</script>
+</body></html>

@@ -26,6 +26,23 @@
 .gm.soon p.s{opacity:.7;margin-bottom:16px}
 .soonbtn{display:flex;align-items:center;justify-content:center;padding:12px 10px;border:1px dashed rgba(217,161,91,.5);color:var(--amber);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;font-weight:600}
 .gm .btn{padding:12px 10px;font-size:10.5px;letter-spacing:.18em;text-align:center}
+
+/* NEW highlight (shown for a few visits until the game is played) */
+.gm.fresh{border-color:var(--amber);animation:glow 2.4s ease-in-out infinite}
+@keyframes glow{0%,100%{box-shadow:0 0 0 1px rgba(217,161,91,.55),0 0 22px rgba(217,161,91,.22)}50%{box-shadow:0 0 0 1px rgba(242,193,78,.95),0 0 44px rgba(242,193,78,.5)}}
+.bdg{position:absolute;top:12px;z-index:2;display:inline-flex;align-items:center;gap:6px;padding:6px 12px;font-size:10.5px;letter-spacing:.2em;font-weight:700;text-transform:uppercase;pointer-events:none}
+.bdg.nw{right:12px;background:var(--crim);color:#fff;border:1px solid rgba(255,255,255,.35);box-shadow:0 4px 16px rgba(176,32,42,.55)}
+.bdg.nw::before{content:"";width:6px;height:6px;border-radius:50%;background:#fff;animation:blink 1.2s infinite}
+@keyframes blink{50%{opacity:.25}}
+.bdg.ht{left:12px;color:#2b1a00;background:linear-gradient(110deg,#a8741a 0%,#f7d774 28%,#fff3b8 45%,#e2a92f 62%,#a8741a 100%);background-size:220% 100%;border:1px solid #fff1b0;box-shadow:0 4px 18px rgba(226,169,47,.6),inset 0 0 0 1px rgba(120,76,0,.35);animation:shine 3.2s linear infinite}
+@keyframes shine{to{background-position:-220% 0}}
+.gm.top{border-color:#e2a92f}
+.nt{display:block;margin:-6px 0 14px;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);font-weight:600}
+.cs{display:flex;justify-content:center;margin:34px 0 4px}
+.cs a{border:1px solid rgba(217,161,91,.5);padding:12px 22px;font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;font-weight:600;color:var(--amber);text-decoration:none;background:rgba(11,15,18,.6)}
+.cs a:hover{background:var(--amber);color:#1c1008}
+.gm.soon{color:inherit;text-decoration:none}.gm.soon:hover{border-color:var(--amber)}
+@media (prefers-reduced-motion:reduce){.gm.fresh,.bdg.ht,.bdg.nw::before{animation:none}}
 </style></head>
 <body data-page="games.html">
 <div class="app"><main>
@@ -35,24 +52,47 @@
 </main></div>
 <script src="shared.js?v=3"></script>
 <script src="games-data.js"></script>
+<script src="games-track.js"></script>
 <script>
 (function(){
-  var g=document.getElementById('grid');
-  (window.XEN_GAMES||[]).forEach(function(x){
-    var a=document.createElement('a'); a.className='gm in'; a.href='game.html?id='+encodeURIComponent(x.id);
-    var img=document.createElement('img'); img.className='th'; img.src=x.banner; img.alt=x.title+' banner'; img.loading='lazy'; a.appendChild(img);
-    var bd=document.createElement('div'); bd.className='bd';
-    function add(tag,cls,txt){var e=document.createElement(tag); if(cls)e.className=cls; e.textContent=txt; bd.appendChild(e); return e;}
-    add('p','grp',x.genre); add('h2','',x.title); add('p','s',x.short);
-    var c=document.createElement('div'); c.className='chips'; x.tags.slice(0,4).forEach(function(t){var s=document.createElement('span'); s.className='chip'; s.textContent=t; c.appendChild(s);}); bd.appendChild(c);
-    var b=document.createElement('span'); b.className='btn'; b.textContent='View Game'; bd.appendChild(b);
-    a.appendChild(bd); g.appendChild(a);
+  var g=document.getElementById('grid'), T=window.XenGames;
+  function el(tag,cls,txt){var e=document.createElement(tag); if(cls)e.className=cls; if(txt!=null)e.textContent=txt; return e;}
+  /* shown in the same order as the list in games-data.js */
+  var games=(window.XEN_GAMES||[]).slice();
+  var cards={};
+
+  /* every visit counts once toward a NEW game's highlight limit; decide what to highlight from the count BEFORE this visit */
+  var glow={}; games.forEach(function(x){glow[x.id]=T.isHighlighted(x)}); T.countVisit(games);
+
+  games.forEach(function(x){
+    var a=el('a','gm in'+(glow[x.id]?' fresh':'')); a.href='game.html?id='+encodeURIComponent(x.id); a.dataset.id=x.id;
+    var img=el('img','th'); img.src=x.banner; img.alt=x.title+' banner'; img.loading='lazy'; a.appendChild(img);
+    if(glow[x.id]) a.appendChild(el('span','bdg nw','New'));
+    var bd=el('div','bd');
+    bd.appendChild(el('p','grp',x.genre)); bd.appendChild(el('h2','',x.title));
+    if(glow[x.id]) bd.appendChild(el('span','nt','Just published. Give it a try!'));
+    bd.appendChild(el('p','s',x.short));
+    var c=el('div','chips'); x.tags.slice(0,4).forEach(function(t){c.appendChild(el('span','chip',t))}); bd.appendChild(c);
+    bd.appendChild(el('span','btn',glow[x.id]?'Check it out':'View Game'));
+    a.appendChild(bd); g.appendChild(a); cards[x.id]=a;
   });
+
   (window.XEN_SOON||[]).forEach(function(x){
-    function el(tag,cls,txt){var e=document.createElement(tag); if(cls)e.className=cls; if(txt!=null)e.textContent=txt; return e;}
-    var c=el('article','gm soon in'), sk=el('div','sk'); sk.setAttribute('aria-hidden','true'); sk.appendChild(el('span','rib','Coming Soon')); sk.appendChild(el('b','','?')); c.appendChild(sk);
-    var bd=el('div','bd'); bd.appendChild(el('p','grp','Stay tuned')); bd.appendChild(el('h2','',x.title)); bd.appendChild(el('p','s',x.text)); bd.appendChild(el('div','soonbtn','Coming Soon')); c.appendChild(bd); g.appendChild(c);
+    var c=el('a','gm soon in'), sk=el('div','sk'); c.href='coming-soon.html#'+encodeURIComponent(x.id||''); sk.setAttribute('aria-hidden','true');
+    sk.appendChild(el('span','rib','Coming Soon')); sk.appendChild(el('b','',x.icon||'?')); c.appendChild(sk);
+    var bd=el('div','bd'); bd.appendChild(el('p','grp',x.genre||'Stay tuned')); bd.appendChild(el('h2','',x.title)); bd.appendChild(el('p','s',x.text)); bd.appendChild(el('div','soonbtn',x.eta||'Coming Soon')); c.appendChild(bd); g.appendChild(c);
   });
+  if((window.XEN_SOON||[]).length){var w=el('div','cs'),l=el('a','','See everything coming soon \u2192'); l.href='coming-soon.html'; w.appendChild(l); g.parentNode.appendChild(w);}
+
+  /* golden HIT: most-played game(s) with enough different players (live count from the sheet) */
+  function applyHits(stats){
+    var hit=T.hits(games,stats);
+    Object.keys(cards).forEach(function(id){
+      var a=cards[id], has=a.querySelector('.bdg.ht');
+      if(hit[id]&&!has){a.insertBefore(el('span','bdg ht','\u2605 Hit'),a.firstChild.nextSibling);a.classList.add('top');}
+    });
+  }
+  applyHits({}); T.stats().then(applyHits);
 })();
 </script>
 </body></html>
