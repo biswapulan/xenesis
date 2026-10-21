@@ -45,7 +45,7 @@ Department of CSE, Government College of Engineering, Keonjhar
 - Shrine gates and pagodas only appear in Japanese-style worlds.
 - New engine features in `games/zen-roads-x/play.html`: water beside the road (sea, lake, stream), guard rails, house and building sprites, mesa mountains. World data is `LOCS`.
 - Fixed: share codes for worlds 10-14 failed to load (parser only accepted one digit).
-- The old screenshots/video in `games/zen-roads-x/media/` still show the previous worlds.
+
 
 - **Zen Roads X vehicles:** the Cat Bus was replaced by a **Tractor** (`carTractor`). At dusk and night its tail lamps, roof work lights and amber beacon switch on and headlight beams light the road ahead.
 
@@ -57,3 +57,11 @@ Department of CSE, Government College of Engineering, Keonjhar
 - Worlds reduced from 16 to 13: Kyoto Blossom Road (too close to Sakura Forest), Festival Village (same as Matsuri Festival) and Wisteria Garden Road were removed. Old share codes that pointed past those slots now open a different world.
 - Each world now has one ecosystem, so scenes no longer mix tree types: Samurai Hills (broadleaf), Coastal Cliffs (windswept Japanese pines), Bamboo Grove, Alpine Pass (spruce), Desert Canyon (saguaro, Joshua trees, boulders, tumbleweed; the pyramid-like buttes were removed), Scottish Highlands (treeless moor), Lavender Fields (cypress), Xenesis Moon (Japanese pines), Nikko Autumn (maples only), Lake Country (birch only), Sakura Forest (cherry only).
 - Vehicles are drawn about 1.6x larger so they read at the right size against trees, houses and gates.
+- **Zen Roads X media refreshed:** 13 new screenshots and thumbnails (one per world), a new banner (Matsuri Festival fireworks), poster (Sakura Forest) and a 30-second gameplay video (MP4 and WebM) cycling through all 13 worlds. Recorded from the current build with a fixed clock for smooth frames.
+
+## Zen Roads X: latest gameplay changes
+- Changing the location now switches instantly (no slow blend); the default world is **Xenesis Moon** at night (new storage key `zenroadsx4`, so everyone gets the new default once).
+- Xenesis Moon has a new shaded, sphere-lit blood moon with the ringed tomoe pattern from the reference image (`mkMoon`).
+- Vehicle lights (tail lamps and soft road-lighting headlights) switch on automatically in night, dusk, fog and rain. Tractor lamps, work lights and beacon are much dimmer.
+- Intro only: *There Is a Light That Never Goes Out* (The Smiths, trimmed to 14 s, `media/intro-song.mp3`) plays through the radio during the intro and stops when the player clicks or the intro ends. It is not part of the in-game radio. Make sure you have the rights to use it publicly.
+- Fog haze was reduced in several worlds and glowing particles were softened for clearer views. Screenshots, banner and video were re-recorded.

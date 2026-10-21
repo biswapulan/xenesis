@@ -126,7 +126,7 @@ window.XEN_GAMES = [
   "genre": "Relaxing Driver",
   "new": true,
   "added": "2026-10-19",
-  "short": "A quiet road, always ahead. Cruise endless anime-style roads through eight calm worlds, change the season, the hour and the weather, and play your own radio while you drive. No score, no crashes, no rush.",
+  "short": "A quiet road, always ahead. Cruise endless anime-style roads through thirteen calm worlds, change the season, the hour and the weather, and play your own radio while you drive. No score, no crashes, no rush.",
   "banner": "games/zen-roads-x/media/banner.jpg",
   "poster": "games/zen-roads-x/media/poster.jpg",
   "video": "games/zen-roads-x/media/gameplay.mp4",
@@ -146,7 +146,7 @@ window.XEN_GAMES = [
   ],
   "about": [
    "Zen Roads X is the calm side of the Xenesis arcade: an endless, hand-painted road with nothing to beat and nowhere to be. Steer gently, let the hills roll past and watch the light change.",
-   "It opens with the Xenesis intro (the sunset, the torii gate and the spinning X), then drops you onto the road in Samurai Hills. Eight worlds are one key press away, and you can switch on autodrive and simply watch."
+   "It opens with the Xenesis intro (the sunset, the torii gate and the spinning X), then drops you onto the road in Xenesis Moon, under a huge blood-red moon. Thirteen worlds, from bamboo groves and alpine passes to a Tokyo night drive and a festival with fireworks, are one tap away, and you can switch on autodrive and simply watch."
   ],
   "features": [
    "13 worlds, each with its own climate and plants: Samurai Hills, Coastal Cliffs, Bamboo Grove, Alpine Pass, Desert Canyon, Scottish Highlands, Lavender Fields, Xenesis Moon, Tokyo City Drive, Nikko Autumn, Lake Country, Sakura Forest and Matsuri Festival with night fireworks.",
@@ -206,12 +206,12 @@ window.XEN_GAMES = [
    {
     "src": "games/zen-roads-x/media/ss01.jpg",
     "thumb": "games/zen-roads-x/media/t01.jpg",
-    "alt": "Samurai Hills at dawn in spring"
+    "alt": "Samurai Hills at dawn in summer"
    },
    {
     "src": "games/zen-roads-x/media/ss02.jpg",
     "thumb": "games/zen-roads-x/media/t02.jpg",
-    "alt": "Shrine Valley at dusk in autumn"
+    "alt": "Coastal Cliffs at summer dusk"
    },
    {
     "src": "games/zen-roads-x/media/ss03.jpg",
@@ -226,22 +226,47 @@ window.XEN_GAMES = [
    {
     "src": "games/zen-roads-x/media/ss05.jpg",
     "thumb": "games/zen-roads-x/media/t05.jpg",
-    "alt": "Golden Dunes at summer dusk"
+    "alt": "Desert Canyon at summer dusk"
    },
    {
     "src": "games/zen-roads-x/media/ss06.jpg",
     "thumb": "games/zen-roads-x/media/t06.jpg",
-    "alt": "Misty Highlands in autumn fog"
+    "alt": "Scottish Highlands in autumn fog"
    },
    {
     "src": "games/zen-roads-x/media/ss07.jpg",
     "thumb": "games/zen-roads-x/media/t07.jpg",
-    "alt": "Lavender Meadows on a cloudy spring day"
+    "alt": "Lavender Fields on a cloudy spring day"
    },
    {
     "src": "games/zen-roads-x/media/ss08.jpg",
     "thumb": "games/zen-roads-x/media/t08.jpg",
     "alt": "Xenesis Moon on a winter night"
+   },
+   {
+    "src": "games/zen-roads-x/media/ss09.jpg",
+    "thumb": "games/zen-roads-x/media/t09.jpg",
+    "alt": "Tokyo City Drive on a summer night"
+   },
+   {
+    "src": "games/zen-roads-x/media/ss10.jpg",
+    "thumb": "games/zen-roads-x/media/t10.jpg",
+    "alt": "Nikko Autumn at dusk"
+   },
+   {
+    "src": "games/zen-roads-x/media/ss11.jpg",
+    "thumb": "games/zen-roads-x/media/t11.jpg",
+    "alt": "Lake Country on a summer night, with the tractor headlights on"
+   },
+   {
+    "src": "games/zen-roads-x/media/ss12.jpg",
+    "thumb": "games/zen-roads-x/media/t12.jpg",
+    "alt": "Sakura Forest in spring"
+   },
+   {
+    "src": "games/zen-roads-x/media/ss13.jpg",
+    "thumb": "games/zen-roads-x/media/t13.jpg",
+    "alt": "Matsuri Festival with night fireworks"
    }
   ]
  },

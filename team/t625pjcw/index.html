@@ -72,6 +72,19 @@ body{background:#050607}
 @keyframes eq{to{height:12px}}
 @media (prefers-reduced-motion:reduce){.sound.on i b{animation:none;height:8px}}
 .foot{padding-bottom:70px}
+
+/* rotating lines */
+.bio{position:relative;width:100%;margin:20px 0 0;padding:16px 18px 14px;border-left:3px solid var(--crim);
+  background:linear-gradient(90deg,rgba(176,32,42,.14),rgba(5,6,7,.0) 85%);-webkit-tap-highlight-color:transparent;cursor:pointer}
+.bio .stack{display:grid}
+.bio p{grid-area:1/1;margin:0;font:700 clamp(16px,4.8vw,19px)/1.5 var(--min);color:var(--bone);text-wrap:balance;
+  opacity:0;transform:translateY(6px);transition:opacity .7s ease,transform .7s ease}
+.bio p.on{opacity:1;transform:none}
+.bio p::before{content:"“";color:var(--crim);font-size:1.5em;line-height:0;vertical-align:-.28em;margin-right:4px}
+.dots{display:flex;gap:7px;margin-top:12px}
+.dots b{width:18px;height:3px;background:rgba(232,228,218,.22);transition:background .4s}
+.dots b.on{background:var(--crim)}
+@media (prefers-reduced-motion:reduce){.bio .stack{display:block}.bio p{opacity:1;transform:none;margin:0 0 10px;transition:none}.dots{display:none}}
 </style>
 </head>
 <body data-page="team">
@@ -93,6 +106,7 @@ body{background:#050607}
   <figure class="frame"><img src="photo.jpg" alt="Photo of Gourav Samal" width="1097" height="1296" style="width:141.676%;left:-1.337%;top:0.000%"></figure></div>
   <h1>Gourav Samal</h1>
   <p class="role">Executive Member</p>
+  <div class="bio" role="group" aria-label="About"><div class="stack"><p>Says what’s on his mind, and means every word.</p><p>Remembers the little things about everyone.</p><p>Lives a thriller with a golden retriever’s heart.</p></div><div class="dots" aria-hidden="true"><b></b><b></b><b></b></div></div>
   <hr class="blade">
   <nav class="links" aria-label="Profiles">
     <a class="link" href="https://www.instagram.com/samal.gaurav/" data-android="intent://instagram.com/_u/samal.gaurav/#Intent;package=com.instagram.android;scheme=https;S.browser_fallback_url=https%3A%2F%2Fwww.instagram.com%2Fsamal.gaurav%2F;end" data-ios="instagram://user?username=samal.gaurav" rel="noopener">
@@ -122,6 +136,17 @@ body{background:#050607}
   function first(e){ if(btn.contains(e.target)) return; if(wantOn&&a.paused) play(); if(!a.paused) evs.forEach(function(t){removeEventListener(t,first,true);}); }
   evs.forEach(function(t){ addEventListener(t,first,true); });
   document.addEventListener('visibilitychange',function(){ if(document.hidden) a.pause(); else if(wantOn) a.play().catch(function(){}); });
+})();
+</script>
+<script>
+(function(){
+  var b=document.querySelector('.bio'); if(!b) return;
+  var ps=[].slice.call(b.querySelectorAll('p')), ds=[].slice.call(b.querySelectorAll('.dots b')), i=0, timer;
+  if(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  function show(n){ i=(n+ps.length)%ps.length; ps.forEach(function(p,k){p.classList.toggle('on',k===i);}); ds.forEach(function(d,k){d.classList.toggle('on',k===i);}); }
+  function start(){ clearInterval(timer); timer=setInterval(function(){show(i+1);},4200); }
+  show(0); start();
+  b.addEventListener('click',function(){ show(i+1); start(); });
 })();
 </script>
 <script>
