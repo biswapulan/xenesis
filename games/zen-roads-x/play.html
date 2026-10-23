@@ -160,8 +160,11 @@ body.pOpen #tabs{background:rgba(16,20,26,.92);border-top:1px solid rgba(232,228
 @media (prefers-reduced-motion:reduce){#cd,#cd.on,.eq.on i{animation:none}}
 @media (pointer:coarse){#panel.open{overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;touch-action:pan-y}
 #panel::before{content:'';display:block;width:42px;height:4px;margin:8px auto 0;border-radius:4px;background:rgba(232,228,218,.35)}
-#tabs::before{content:'';position:absolute;left:50%;bottom:calc(2px + env(safe-area-inset-bottom));width:36px;height:3px;margin-left:-18px;border-radius:3px;background:rgba(232,228,218,.28);pointer-events:none}
-#tabs{position:relative}
+#tabs{overflow-x:auto;overflow-y:hidden;flex-wrap:nowrap;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;touch-action:pan-x;scrollbar-width:none;scroll-snap-type:x proximity;-webkit-mask-image:linear-gradient(90deg,#000 0,#000 86%,transparent 100%);mask-image:linear-gradient(90deg,#000 0,#000 86%,transparent 100%)}
+#tabs::-webkit-scrollbar{display:none}
+#tabs>*{flex:0 0 auto;white-space:nowrap;scroll-snap-align:start}
+#tabs .sp{flex:0 0 14px}
+#tabs.atEnd{-webkit-mask-image:none;mask-image:none}
 #cd,#cd.on{animation:none}.eq.on i{animation:none;transform:scaleY(.6)}}
 </style>
 </head>
@@ -1467,7 +1470,7 @@ function syncUI(){
 }
 var openTab=null,TABS=['World','Style','Vehicle'];
 function setTab(n){
- openTab=openTab===n?null:n;if(openTab)lastTab=openTab;$('settings').hidden=true;if(openTab)radToggleOpen(false);
+ openTab=openTab===n?null:n;$('settings').hidden=true;if(openTab)radToggleOpen(false);
  TABS.forEach(function(t){$('tab'+t).setAttribute('aria-pressed',openTab===t?'true':'false');$('p'+t).hidden=openTab!==t});
  $('panel').classList.toggle('open',openTab!==null);document.body.classList.toggle('pOpen',openTab!==null);
 }
@@ -1806,7 +1809,7 @@ function startGame(){
  if(introOn||S.started)return;
  if(!reduce){introSongPlay();introSongArm();setTimeout(function(){if(RA.paused&&radDev.indexOf(INTRO_SONG)>=0&&introOn)try{RA.play()}catch(e){}},700)}else radStart();
  $('start').classList.add('gone');setTimeout(function(){$('start').hidden=true},750);auInit();auVolumes();keys={};
- var go=function(){introOn=false;S.started=true;keys={};toast(coarse?'Touch and drag to steer':'A D steer · W S speed · C autodrive',5000);if(coarse)setTimeout(function(){if(!openTab)toast('Swipe up from the bottom for World · Style · Vehicle',4500)},5600)};
+ var go=function(){introOn=false;S.started=true;keys={};toast(coarse?'Touch and drag to steer':'A D steer · W S speed · C autodrive',5000);};
  if(reduce){go();return}
  introOn=true;zrIntro(go);
 }
@@ -1895,26 +1898,8 @@ function frame(ts){
 }
 cv.addEventListener('contextlost',function(e){e.preventDefault()});cv.addEventListener('contextrestored',function(){resize()});
 if(/[?&]debug/.test(location.search)){var dbg=document.createElement('div');dbg.style.cssText='position:fixed;left:6px;bottom:6px;z-index:99;font:11px monospace;color:#0f0;background:rgba(0,0,0,.6);padding:3px 6px;pointer-events:none';document.body.appendChild(dbg);var dn=0,dl=performance.now(),dr=0;window.addEventListener('resize',function(){dr++});setInterval(function(){var n=performance.now();dbg.textContent=Math.round(dn*1000/(n-dl))+' fps  resizes:'+dr+'  '+cv.width+'x'+cv.height+(lowQ?' low':'');dn=0;dl=n},1000);(function t(){dn++;requestAnimationFrame(t)})()}
-/* ---------- phones: swipe up from the bottom edge to open World / Style / Vehicle, swipe down to close ---------- */
 var lastTab='World';
-(function(){
- if(!coarse)return;
- var sy=0,sx=0,mode=0,pn=$('panel'),zone=96;
- function ok(){return S.started&&!introOn}
- document.addEventListener('touchstart',function(e){
-  if(!ok()||e.touches.length!==1){mode=0;return}
-  var t=e.touches[0];sy=t.clientY;sx=t.clientX;mode=0;
-  if(openTab&&pn.contains(e.target)&&pn.scrollTop<=0)mode=2;            /* panel at top: a downward drag closes it */
-  else if(!openTab&&sy>window.innerHeight-zone)mode=1;                  /* started on the bottom edge: an upward drag opens it */
- },{passive:true});
- document.addEventListener('touchmove',function(e){
-  if(!mode)return;var t=e.touches[0],dy=t.clientY-sy,dx=t.clientX-sx;
-  if(Math.abs(dx)>Math.abs(dy)*1.4){mode=0;return}
-  if(mode===1&&dy<-42){mode=0;setTab(lastTab)}
-  else if(mode===2&&dy>70){mode=0;setTab(openTab)}
- },{passive:true});
- document.addEventListener('touchend',function(){mode=0},{passive:true});
-})();
+(function(){var tb=$('tabs');if(!tb)return;function ck(){tb.classList.toggle('atEnd',tb.scrollLeft+tb.clientWidth>=tb.scrollWidth-6)}tb.addEventListener('scroll',ck,{passive:true});window.addEventListener('resize',function(){setTimeout(ck,200)});ck()})();
 window.__zr={S:S,ST:ST,LOCS:LOCS,setLoc:setLoc,setSeedStr:setSeedStr,afterChange:afterChange,loadCode:loadCode,code:code,frame:frame,start:function(){S.started=true}};
 resize();setQuality(ST.quality);if(coarse&&ST.quality===0){lowQ=true;DRAWN=LITE?150:160;resize()}
 (function init(){
