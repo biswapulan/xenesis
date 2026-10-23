@@ -497,7 +497,7 @@ var skyX=0,vig=null;
 var SEGL=200,ROADW=1100,CAMH=1500,DEPTH=1/Math.tan(35*Math.PI/180),PLAYERZ=CAMH*DEPTH,MAXSPEED=7000,KMU=210000;
 
 function resize(){
- DPR=Math.min(window.devicePixelRatio||1,lowQ?1:(ST.quality===1?2:1.25));W=window.innerWidth;H=window.innerHeight;
+ DPR=Math.min(window.devicePixelRatio||1,lowQ?(coarse?1.15:1):(ST.quality===1?2:1.25));W=window.innerWidth;H=window.innerHeight;
  cv.width=Math.round(W*DPR);cv.height=Math.round(H*DPR);
  Wf=Math.min(.5*H,.72*W);horizon=Math.round(.9*H-Wf);
  vig=document.createElement('canvas');vig.width=256;vig.height=256;var vc=vig.getContext('2d');
@@ -1864,9 +1864,10 @@ function hud(dt){
 var last=0;
 function frame(ts){
  requestAnimationFrame(frame);
+ if(coarse&&!reduce&&last&&ts-last<29)return; /* phones: one steady 30 fps beats an uneven 20-60 */
  if(!last){last=ts}var dt=Math.min(.05,(ts-last)/1000);last=ts;if(dt<=0)return;
  tmpAvg+=(dt-tmpAvg)*.05;
- if(autoQ&&!lowQ&&tmpAvg>.021){slowT+=dt;if(slowT>1){lowQ=true;DRAWN=160;resize()}}else slowT=Math.max(0,slowT-dt*.5);
+ if(autoQ&&!lowQ&&tmpAvg>(coarse?.04:.021)){slowT+=dt;if(slowT>1){lowQ=true;DRAWN=160;resize()}}else slowT=Math.max(0,slowT-dt*.5);
  update(dt);camStep(dt);
  ctx.setTransform(DPR,0,0,DPR,0,0);
  var fp=cabK>.01&&!reduce,sp0=S.speed/MAXSPEED;
@@ -1882,7 +1883,7 @@ function frame(ts){
  hud(dt);auUpdate();
 }
 window.__zr={S:S,ST:ST,LOCS:LOCS,setLoc:setLoc,setSeedStr:setSeedStr,afterChange:afterChange,loadCode:loadCode,code:code,frame:frame,start:function(){S.started=true}};
-resize();setQuality(ST.quality);
+resize();setQuality(ST.quality);if(coarse&&ST.quality===0){lowQ=true;DRAWN=160;resize()}
 (function init(){
  var h=(window.location.hash||'').replace('#','');
  if(h&&loadCode(h)){}else{setSeedStr(ST.seed);}
