@@ -12,8 +12,9 @@
 :root{--char:#0b0f12;--crim:#b0202a;--amber:#d9a15b;--bone:#e8e4da;
 --sans:'Montserrat','Helvetica Neue',Arial,sans-serif;--min:'Shippori Mincho','Yu Mincho','Hiragino Mincho ProN',serif}
 *{box-sizing:border-box}
-html,body{margin:0;height:100%;overflow:hidden;background:var(--char);color:var(--bone);font:500 13px/1.45 var(--sans);-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent}
-canvas{position:fixed;inset:0;width:100%;height:100%;display:block;touch-action:none}
+html,body{margin:0;height:100%;overflow:hidden;overscroll-behavior:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;background:var(--char);color:var(--bone);font:500 13px/1.45 var(--sans);-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent}
+canvas{position:fixed;inset:0;width:100%;height:100%;display:block;touch-action:none;transform:translateZ(0)}
+body{position:fixed;inset:0;width:100%}
 button,input{font:inherit;color:inherit}
 button{cursor:pointer}
 :focus-visible{outline:2px solid var(--amber);outline-offset:2px}
@@ -499,13 +500,17 @@ var skyX=0,vig=null;
 var SEGL=200,ROADW=1100,CAMH=1500,DEPTH=1/Math.tan(35*Math.PI/180),PLAYERZ=CAMH*DEPTH,MAXSPEED=7000,KMU=210000;
 
 function resize(){
- DPR=Math.min(window.devicePixelRatio||1,lowQ?(coarse?1.15:1):(ST.quality===1?2:1.25));W=window.innerWidth;H=window.innerHeight;
- cv.width=Math.round(W*DPR);cv.height=Math.round(H*DPR);
+ DPR=Math.min(window.devicePixelRatio||1,lowQ?(coarse?1.15:1):(ST.quality===1?2:1.25));
+ var nw=window.innerWidth,nh=window.innerHeight,cw=Math.round(nw*DPR),ch=Math.round(nh*DPR);
+ W=nw;H=nh;
+ /* only touch the canvas when its size really changed: re-setting width/height wipes it and makes phones flash */
+ if(cv.width!==cw||cv.height!==ch){cv.width=cw;cv.height=ch}
  Wf=Math.min(.5*H,.72*W);horizon=Math.round(.9*H-Wf);
- vig=document.createElement('canvas');vig.width=256;vig.height=256;var vc=vig.getContext('2d');
- if(vc&&vc.createRadialGradient){var g=vc.createRadialGradient(128,128,70,128,128,190);g.addColorStop(0,'rgba(0,0,0,0)');g.addColorStop(1,'rgba(0,0,0,.34)');vc.fillStyle=g;vc.fillRect(0,0,256,256)}
+ if(!vig){vig=document.createElement('canvas');vig.width=256;vig.height=256;var vc=vig.getContext('2d');
+ if(vc&&vc.createRadialGradient){var g=vc.createRadialGradient(128,128,70,128,128,190);g.addColorStop(0,'rgba(0,0,0,0)');g.addColorStop(1,'rgba(0,0,0,.34)');vc.fillStyle=g;vc.fillRect(0,0,256,256)}}
 }
-window.addEventListener('resize',resize);
+/* phone browsers fire many resize events while the address bar slides: settle first, then resize once */
+var rsT=0;window.addEventListener('resize',function(){clearTimeout(rsT);rsT=setTimeout(resize,160)});
 
 /* ---------- fog and light aware drawing ---------- */
 var FOGC=[255,255,255],fa=0,LT=[1,1,1];
