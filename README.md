@@ -65,3 +65,14 @@ Department of CSE, Government College of Engineering, Keonjhar
 - Vehicle lights (tail lamps and soft road-lighting headlights) switch on automatically in night, dusk, fog and rain. Tractor lamps, work lights and beacon are much dimmer.
 - Intro only: *There Is a Light That Never Goes Out* (The Smiths, trimmed to 14 s, `media/intro-song.mp3`) plays through the radio during the intro and stops when the player clicks or the intro ends. It is not part of the in-game radio. Make sure you have the rights to use it publicly.
 - Fog haze was reduced in several worlds and glowing particles were softened for clearer views. Screenshots, banner and video were re-recorded.
+
+## Zen Roads X: opening song and Xenesis moon (update)
+- The opening song now starts as soon as the opening screen loads (if the browser allows autoplay) and stops at the first click on **Start driving**. Browsers that block autoplay start it on that first click instead and play it through the sunset intro until the player skips it or it ends. It is never part of the in-game radio.
+- The blood moon in Xenesis Moon appears **only at night**, with dark clouds drifting across it. By day, dawn and dusk the world shows a red sun.
+
+## Zen Roads X: clearer distance (update)
+- Distance fog was reduced: scenery now stays clear almost to the horizon, with haze only in the last stretch of road that hides the draw-distance edge (`buildFog` / `fdE` in `drawRoad`). Fog and rain weather still use heavy/medium haze. Screenshots, banner and video were re-recorded.
+
+## Zen Roads X: moon at every time of day (update)
+- In Xenesis Moon the blood moon now follows the time of day (`MP` table in `comp`): low, large and hazy at dawn; a pale translucent moon high in the sky by day; a big warm moon rising behind the hills at dusk; full and cloud-crossed at night. Haze tinting uses a small cached canvas (`MOONT`).
+- Screenshots (13), thumbnails, poster and banner re-recorded from the latest build.

@@ -241,7 +241,7 @@ window.XEN_GAMES = [
    {
     "src": "games/zen-roads-x/media/ss08.jpg",
     "thumb": "games/zen-roads-x/media/t08.jpg",
-    "alt": "Xenesis Moon on a winter night"
+    "alt": "Xenesis Moon at night under the blood moon"
    },
    {
     "src": "games/zen-roads-x/media/ss09.jpg",
