@@ -457,17 +457,26 @@ function softPuff(x,y,rx,ry,col,al){
  ctx.fillStyle=g;ctx.fillRect(-1,-1,2,2);ctx.restore();
 }
 function cloudBody(x,y,sz,seed,col,lit,al,spread){
- /* a billowy cloud: many overlapping soft puffs, arched top, flat shadowed belly, lit rim */
- var n=11,k,u,px,py,pr,h;
- for(k=0;k<n;k++){
-  h=Math.abs(Math.sin(seed*91.7+k*12.9898)*43758.5453)%1;u=(k/(n-1))*2-1;
-  px=x+u*sz*spread*(1+.18*(h-.5));pr=sz*(.55+.5*(1-Math.abs(u))*(.6+h*.6));py=y-(1-u*u)*sz*.3*(.5+h*.6)+h*sz*.06;
-  softPuff(px,py+pr*.12,pr,pr*.52,[col[0]*.55,col[1]*.55,col[2]*.6],al*.55);
-  softPuff(px,py,pr*.9,pr*.46,col,al*.8);
-  if(lit)softPuff(px-pr*.12,py-pr*.2,pr*.55,pr*.22,lit,al*.5);
+ /* billowy cloud drawn from a cached sprite (rebuilt only when the colour drifts) */
+ var q=function(c){return [(c[0]/10|0)*10,(c[1]/10|0)*10,(c[2]/10|0)*10]},qc=q(col),ql=lit?q(lit):null,
+  key=((seed*7)|0)%9+'|'+qc+'|'+(ql||''),sp=CSPR[key];
+ if(!sp){
+  var cw=320,ch=150,cnv=document.createElement('canvas');cnv.width=cw;cnv.height=ch;
+  var sv=ctx;ctx=cnv.getContext('2d');var U=40,n=11,k,u,px,py,pr,h;
+  for(k=0;k<n;k++){
+   h=Math.abs(Math.sin(seed*91.7+k*12.9898)*43758.5453)%1;u=(k/(n-1))*2-1;
+   px=cw/2+u*U*spread*(1+.18*(h-.5));pr=U*(.55+.5*(1-Math.abs(u))*(.6+h*.6));py=ch*.62-(1-u*u)*U*.3*(.5+h*.6)+h*U*.06;
+   softPuff(px,py+pr*.12,pr,pr*.52,[qc[0]*.55,qc[1]*.55,qc[2]*.6],.3);
+   softPuff(px,py,pr*.9,pr*.46,qc,.42);
+   if(ql)softPuff(px-pr*.12,py-pr*.2,pr*.55,pr*.22,ql,.26);
+  }
+  softPuff(cw/2,ch*.62+U*.12,U*spread*1.25,U*.16,qc,.18);
+  ctx=sv;sp=CSPR[key]=cnv;
  }
- softPuff(x,y+sz*.12,sz*spread*1.25,sz*.16,col,al*.35);
+ var k2=sz/40;ctx.globalAlpha=Math.min(1,al/.5);ctx.drawImage(sp,x-160*k2,y-ch0(k2),320*k2,150*k2);ctx.globalAlpha=1;
 }
+function ch0(k2){return 150*.62*k2}
+var CSPR={};
 function drawMoonClouds(t,cx,cy,mr){
  var a=pal.xmoon*pal.xmC;if(a<.03)return;
  var SP=[[-.7,.5,.5,.9,.9],[.35,.66,.55,.8,-.7],[1.0,.1,.4,.6,.6],[-1.1,-.35,.42,.5,-.5],[.8,.88,.5,.7,-.8],[-.3,-.85,.34,.45,.3]],i;
@@ -1089,12 +1098,12 @@ function drawSky(t){
    var mr=Math.min(hz*pal.xmS,W*.27*pal.xmS/.43),bg2=ctx.createRadialGradient(cx,cy,mr*.9,cx,cy,mr*2.2);bg2.addColorStop(0,rgba(pal.sunGlow,.4*pal.xmoon));bg2.addColorStop(1,rgba(pal.sunGlow,0));
    ctx.fillStyle=bg2;ctx.fillRect(cx-mr*2.2,cy-mr*2.2,mr*4.4,mr*4.4);
    if(!MOONC)MOONC=mkMoon();ctx.globalAlpha=Math.min(1,pal.xmoon*1.1);
-   if(pal.xmT>.02){if(!MOONT){MOONT=document.createElement('canvas');MOONT.width=MOONT.height=420}var mg=MOONT.getContext('2d');mg.globalCompositeOperation='source-over';mg.clearRect(0,0,420,420);mg.drawImage(MOONC,0,0,420,420);mg.globalCompositeOperation='source-atop';mg.fillStyle=rgba(pal.xmTC,pal.xmT);mg.fillRect(0,0,420,420);mg.globalCompositeOperation='source-over';ctx.drawImage(MOONT,cx-mr,cy-mr,mr*2,mr*2)}
+   if(pal.xmT>.02){if(!MOONT){MOONT=document.createElement('canvas');MOONT.width=MOONT.height=420}var tk=rgba(pal.xmTC,(Math.round(pal.xmT*20)/20));if(MOONT._k!==tk){MOONT._k=tk;var mg=MOONT.getContext('2d');mg.globalCompositeOperation='source-over';mg.clearRect(0,0,420,420);mg.drawImage(MOONC,0,0,420,420);mg.globalCompositeOperation='source-atop';mg.fillStyle=tk;mg.fillRect(0,0,420,420);mg.globalCompositeOperation='source-over'}ctx.drawImage(MOONT,cx-mr,cy-mr,mr*2,mr*2)}
    else ctx.drawImage(MOONC,cx-mr,cy-mr,mr*2,mr*2);
    ctx.globalAlpha=1;drawMoonClouds(t,cx,cy,mr);
   }else{ctx.fillStyle=rgba(pal.sunC,pal.sunA);ctx.beginPath();ctx.arc(cx,cy,r,0,6.2832);ctx.fill()}
  }
- var cc=pal.cloud,wcl=W*1.5,nc=Math.max(2,Math.round(clouds.length*pal.cloudAmt)),lit=pal.night>.3?null:mixc(cc,[255,235,205],.6);
+ var cc=pal.cloud,wcl=W*1.5,nc=Math.max(2,Math.round(clouds.length*pal.cloudAmt*((lowQ||coarse)?.6:1))),lit=pal.night>.3?null:mixc(cc,[255,235,205],.6);
  for(j=0;j<nc;j++){var c=clouds[j],cx2=(((c.x*wcl+t*c.v*(reduce?0:1)+skyX*.04)%wcl)+wcl)%wcl-W*.25,cy2=c.y*hz+(reduce?0:Math.sin(t*.05+c.x*20)*hz*.008),s0=c.s*Math.min(W,H*1.6)*.075*(.8+.5*pal.cloudAmt),fy=1-c.y*.9;
   cloudBody(cx2,cy2,s0*(.7+.4*c.y*2),c.x*50+j,cc,lit,(.17+.14*pal.cloudAmt)*(.6+.5*fy),2.4)}
  var amp=hz*.42;
@@ -1861,7 +1870,7 @@ function frame(ts){
  update(dt);camStep(dt);
  ctx.setTransform(DPR,0,0,DPR,0,0);
  var fp=cabK>.01&&!reduce,sp0=S.speed/MAXSPEED;
- if(fp){ctx.save();var z=1+cabK*(.05+sp0*.03),rl=cabK*(-(S.steerV||0)*.016+cuP*sp0*.004),by=cabK*(Math.sin(S.t*(9+10*sp0))*.8*sp0+(S.brake||0)*3);ctx.translate(W/2,H*.55+by);ctx.rotate(rl);ctx.scale(z,z);ctx.translate(-W/2,-H*.55)}
+ if(fp){ctx.save();var sh=coarse?.35:1,z=1+cabK*(.05+sp0*.03*sh),rl=cabK*sh*(-(S.steerV||0)*.016+cuP*sp0*.004),by=cabK*sh*(Math.sin(S.t*(9+10*sp0))*.8*sp0+(S.brake||0)*3);ctx.translate(W/2,H*.55+by);ctx.rotate(rl);ctx.scale(z,z);ctx.translate(-W/2,-H*.55)}
  drawSky(S.t);
  ctx.fillStyle=rgb(pal.fog);ctx.fillRect(0,horizon,W,H-horizon+2);
  drawRoad();
