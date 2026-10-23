@@ -1739,7 +1739,7 @@ var zrIntro=(function(){
     cvI.onpointerdown=skip;raf=requestAnimationFrame(tick);
   };
 })();
-var INTRO_SONG={t:'There Is a Light That Never Goes Out',a:'The Smiths',k:'file',src:'media/intro-song.mp3'},introAuto=false;
+var INTRO_SONG={t:'There Is a Light That Never Goes Out',a:'The Smiths',k:'file',src:'media/intro-song.mp3'};
 function introSongPlay(){
  if(radDev.indexOf(INTRO_SONG)<0)radDev.push(INTRO_SONG);
  radBegun=true;radPlay(radList().indexOf(INTRO_SONG)>=0?radList().length-1:0);
@@ -1748,15 +1748,11 @@ function introSongStop(){
  if(radDev.indexOf(INTRO_SONG)<0)return;
  var v0=RA.volume,n=0,iv=setInterval(function(){n++;RA.volume=Math.max(0,v0*(1-n/8));if(n>=8){clearInterval(iv);RA.pause();radDev=radDev.filter(function(x){return x!==INTRO_SONG});RA.removeAttribute('src');radOn=false;radStarted=false;radI=0;radErr=0;radVol();radProg(0,0);radUI()}},45);
 }
-/* try to start the song as soon as the opening screen is up; browsers that block autoplay start it on the first click instead */
-(function(){
- if(radUrl.length)return;
- var onPlay=function(){if(!S.started&&!introOn)introAuto=true;RA.removeEventListener('playing',onPlay)};
- RA.addEventListener('playing',onPlay);introSongPlay();
-})();
+/* warm the cache so the song starts the instant the player clicks Start driving */
+var introPre=new Audio();introPre.preload='auto';introPre.src=INTRO_SONG.src;
 function startGame(){
  if(introOn||S.started)return;
- if(introAuto){introSongStop()}else if(!reduce){introSongPlay()}else radStart();
+ if(!reduce){introSongPlay();setTimeout(function(){if(RA.paused&&radDev.indexOf(INTRO_SONG)>=0&&introOn)try{RA.play()}catch(e){}},700)}else radStart();
  $('start').classList.add('gone');setTimeout(function(){$('start').hidden=true},750);auInit();auVolumes();keys={};
  var go=function(){introSongStop();introOn=false;S.started=true;keys={};toast(coarse?'Touch and drag to steer':'A D steer · W S speed · C autodrive',5000)};
  if(reduce){go();return}
