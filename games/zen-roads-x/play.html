@@ -99,9 +99,16 @@ body.pOpen #tabs{background:rgba(16,20,26,.92);border-top:1px solid rgba(232,228
 #begin:hover{filter:brightness(1.15);transform:translateY(-1px)}
 #start .ks{margin-top:34px;font-size:11.5px;letter-spacing:.08em;opacity:.7;max-width:560px}
 #start .lk{position:fixed;left:0;right:0;bottom:calc(16px + env(safe-area-inset-bottom));display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+@media (max-width:480px){#reg .rq{display:none}}
 @media (max-width:820px){
  .cols{grid-template-columns:1fr}.col{margin-bottom:6px}
- #reg{top:auto;bottom:calc(132px + env(safe-area-inset-bottom));max-width:calc(100vw - 24px)}
+ :root{--rh:34px}
+ #reg{position:fixed;top:0;left:0;right:0;max-width:none;transform:none;border-radius:0;border:0;border-bottom:1px solid var(--amber);padding:calc(7px + env(safe-area-inset-top)) 12px 7px;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;background:rgba(16,12,14,.88);box-shadow:none;z-index:6}
+ #tl{top:calc(var(--rh) + 12px + env(safe-area-inset-top))}
+ #where{top:calc(var(--rh) + 14px + env(safe-area-inset-top))}
+ #cd{top:calc(var(--rh) + 10px + env(safe-area-inset-top))!important;width:56px!important;height:56px!important}
+ #radio{top:calc(var(--rh) + 74px + env(safe-area-inset-top))!important}
+ #fs{display:none}
  #panel.open{max-height:58vh}
  #toast{bottom:calc(176px + env(safe-area-inset-bottom))}
  .opt{width:calc(25% - 8px);min-width:68px}
@@ -163,7 +170,7 @@ body.pOpen #tabs{background:rgba(16,20,26,.92);border-top:1px solid rgba(232,228
   <button id="fs" class="pill" type="button" tabindex="-1">Fullscreen (F)</button>
   <a id="back" class="pill" href="../../games.html">&larr; X Games</a>
  </div>
- <a id="reg" href="../../register.html" target="_blank" rel="noopener">Enjoying the drive? <b>Register for XENESIS 4.0</b> &rarr;</a>
+ <a id="reg" href="../../register.html" target="_blank" rel="noopener"><span class="rq">Enjoying the drive?</span> <b>Register for XENESIS 4.0</b> &rarr;</a>
  <div id="where"><b id="wn">Samurai Hills</b><span id="wd">Dawn · Clear</span></div>
 
  <button id="cd" type="button" aria-label="Radio" title="Radio (P)"><i></i></button>
@@ -444,13 +451,31 @@ function mkMoon(){
  g.fillStyle='rgba(10,1,4,.98)';g.beginPath();g.moveTo(-.28,-.7);g.quadraticCurveTo(-.2,-.84,-.05,-.81);g.quadraticCurveTo(-.17,-.79,-.23,-.65);g.closePath();g.fill();
  g.restore();return c;
 }
+function softPuff(x,y,rx,ry,col,al){
+ if(al<.004)return;ctx.save();ctx.translate(x,y);ctx.scale(rx,ry);
+ var g=ctx.createRadialGradient(0,0,0,0,0,1);g.addColorStop(0,rgba(col,al));g.addColorStop(.5,rgba(col,al*.5));g.addColorStop(1,rgba(col,0));
+ ctx.fillStyle=g;ctx.fillRect(-1,-1,2,2);ctx.restore();
+}
+function cloudBody(x,y,sz,seed,col,lit,al,spread){
+ /* a billowy cloud: many overlapping soft puffs, arched top, flat shadowed belly, lit rim */
+ var n=11,k,u,px,py,pr,h;
+ for(k=0;k<n;k++){
+  h=Math.abs(Math.sin(seed*91.7+k*12.9898)*43758.5453)%1;u=(k/(n-1))*2-1;
+  px=x+u*sz*spread*(1+.18*(h-.5));pr=sz*(.55+.5*(1-Math.abs(u))*(.6+h*.6));py=y-(1-u*u)*sz*.3*(.5+h*.6)+h*sz*.06;
+  softPuff(px,py+pr*.12,pr,pr*.52,[col[0]*.55,col[1]*.55,col[2]*.6],al*.55);
+  softPuff(px,py,pr*.9,pr*.46,col,al*.8);
+  if(lit)softPuff(px-pr*.12,py-pr*.2,pr*.55,pr*.22,lit,al*.5);
+ }
+ softPuff(x,y+sz*.12,sz*spread*1.25,sz*.16,col,al*.35);
+}
 function drawMoonClouds(t,cx,cy,mr){
  var a=pal.xmoon*pal.xmC;if(a<.03)return;
- var SP=[[-.62,.55,1.9,.8,.9],[.3,.62,2.1,.75,-.7],[.9,.1,1.5,.6,.6],[-1,-.4,1.6,.55,-.5],[.05,.08,1.2,.4,.4],[.75,.85,1.8,.7,-.8],[-.3,-.8,1.4,.5,.3],[-.2,.28,1,.35,.7]],i,q;
- for(i=0;i<SP.length;i++){var sp=SP[i],dx=reduce?0:Math.sin(t*.04*sp[4]+i*1.9)*mr*.35,x=cx+sp[0]*mr+dx,y=cy+sp[1]*mr,sz=mr*sp[2]*.5;
-  for(q=0;q<9;q++){var ex=x+(q-4)*sz*.42,ey=y+Math.sin(q*1.9+i*2.3)*sz*.1,er=sz*(.62-Math.abs(q-4)*.07);
-   ctx.fillStyle='rgba(18,13,30,'+(.62*a*sp[3]).toFixed(3)+')';ctx.beginPath();ctx.ellipse(ex,ey,er,er*.34,0,0,6.2832);ctx.fill();
-   ctx.fillStyle='rgba(120,34,46,'+(.12*a*sp[3]).toFixed(3)+')';ctx.beginPath();ctx.ellipse(ex,ey-er*.2,er*.9,er*.14,0,0,6.2832);ctx.fill()}}
+ var SP=[[-.7,.5,.5,.9,.9],[.35,.66,.55,.8,-.7],[1.0,.1,.4,.6,.6],[-1.1,-.35,.42,.5,-.5],[.8,.88,.5,.7,-.8],[-.3,-.85,.34,.45,.3]],i;
+ for(i=0;i<SP.length;i++){var sp=SP[i],dx=reduce?0:Math.sin(t*.03*sp[4]+i*1.9)*mr*.3,x=cx+sp[0]*mr+dx,y=cy+sp[1]*mr,sz=mr*sp[2];
+  cloudBody(x,y,sz,i+3.3,[26,18,40],[170,70,70],.5*a*sp[3],1.6);
+ }
+ /* thin wisps stretched across the face */
+ for(i=0;i<3;i++){var wx=cx+Math.sin(t*.02+i*2.1)*mr*.25*(reduce?0:1)+(i-1)*mr*.35,wy=cy+(i-1)*mr*.42;softPuff(wx,wy,mr*.95,mr*.06,[40,22,44],.2*a)}
 }
 
 /* ---------- sky furniture ---------- */
@@ -1069,10 +1094,9 @@ function drawSky(t){
    ctx.globalAlpha=1;drawMoonClouds(t,cx,cy,mr);
   }else{ctx.fillStyle=rgba(pal.sunC,pal.sunA);ctx.beginPath();ctx.arc(cx,cy,r,0,6.2832);ctx.fill()}
  }
- var cc=pal.cloud,wcl=W*1.5,nc=Math.max(2,Math.round(clouds.length*pal.cloudAmt));
- for(j=0;j<nc;j++){var c=clouds[j],cx2=(((c.x*wcl+t*c.v*(reduce?0:1)+skyX*.04)%wcl)+wcl)%wcl-W*.25,cy2=c.y*hz,s0=c.s*Math.min(W,H*1.6)*.07*(.8+.5*pal.cloudAmt);
-  ctx.fillStyle=rgba(cc,.15+.1*pal.cloudAmt);
-  for(var q=0;q<7;q++){var ex=cx2+(q-3)*s0*.55,ey=cy2+Math.sin(q*1.7+c.x*9)*s0*.12,er=s0*(1.1-Math.abs(q-3)*.14);ctx.beginPath();ctx.moveTo(ex+er,ey);ctx.ellipse(ex,ey,er,er*.3,0,0,6.2832);ctx.fill()}}
+ var cc=pal.cloud,wcl=W*1.5,nc=Math.max(2,Math.round(clouds.length*pal.cloudAmt)),lit=pal.night>.3?null:mixc(cc,[255,235,205],.6);
+ for(j=0;j<nc;j++){var c=clouds[j],cx2=(((c.x*wcl+t*c.v*(reduce?0:1)+skyX*.04)%wcl)+wcl)%wcl-W*.25,cy2=c.y*hz+(reduce?0:Math.sin(t*.05+c.x*20)*hz*.008),s0=c.s*Math.min(W,H*1.6)*.075*(.8+.5*pal.cloudAmt),fy=1-c.y*.9;
+  cloudBody(cx2,cy2,s0*(.7+.4*c.y*2),c.x*50+j,cc,lit,(.17+.14*pal.cloudAmt)*(.6+.5*fy),2.4)}
  var amp=hz*.42;
  drawMount(mixc(pal.mtnFar,pal.fog,.5),.06,.6,amp*1.08,pal.peaks,pal.snowcap*.5);
  drawMount(pal.mtnFar,.12,1.7,amp,pal.peaks,pal.snowcap);
@@ -1721,7 +1745,7 @@ var zrIntro=(function(){
     if (t > 7.5) { const wq = sstep((t - 7.5) / .4), kq = sstep((t - 7.9) / .6), c = Math.round(255 * (1 - kq)); ctx.fillStyle = `rgba(${c},${c},${c},${wq})`; ctx.fillRect(-20, -20, W + 40, H + 40); }
     ctx.restore();
   }
-  function skip(){if(introT<7.5){introT=7.5;introSongStop()}}
+  function skip(){if(introT<7.5)introT=7.5}
   function finish(){
     cancelAnimationFrame(raf);window.removeEventListener('keydown',onKey,true);window.removeEventListener('resize',size);
     cvI.style.opacity='0';setTimeout(function(){cvI.hidden=true},750);
@@ -1744,17 +1768,25 @@ function introSongPlay(){
  if(radDev.indexOf(INTRO_SONG)<0)radDev.push(INTRO_SONG);
  radBegun=true;radPlay(radList().indexOf(INTRO_SONG)>=0?radList().length-1:0);
 }
-function introSongStop(){
- if(radDev.indexOf(INTRO_SONG)<0)return;
- var v0=RA.volume,n=0,iv=setInterval(function(){n++;RA.volume=Math.max(0,v0*(1-n/8));if(n>=8){clearInterval(iv);RA.pause();radDev=radDev.filter(function(x){return x!==INTRO_SONG});RA.removeAttribute('src');radOn=false;radStarted=false;radI=0;radErr=0;radVol();radProg(0,0);radUI()}},45);
+var introSongFading=false;
+function introSongStop(ms){
+ if(radDev.indexOf(INTRO_SONG)<0||introSongFading)return;
+ introSongFading=true;ms=ms||2600;
+ var v0=RA.volume,n=0,N=Math.max(2,Math.round(ms/60)),iv=setInterval(function(){n++;var k=Math.max(0,1-n/N);RA.volume=v0*k*k;
+  if(n>=N){clearInterval(iv);RA.pause();radDev=radDev.filter(function(x){return x!==INTRO_SONG});RA.removeAttribute('src');radOn=false;radStarted=false;radI=0;radErr=0;introSongFading=false;radVol();radProg(0,0);radUI()}},60);
+}
+function introSongArm(){
+ var f=function(){document.removeEventListener('pointerdown',f,true);introSongStop(2600)};
+ setTimeout(function(){document.addEventListener('pointerdown',f,true)},80);
+ RA.addEventListener('ended',function e(){RA.removeEventListener('ended',e);introSongStop(50)});
 }
 /* warm the cache so the song starts the instant the player clicks Start driving */
 var introPre=new Audio();introPre.preload='auto';introPre.src=INTRO_SONG.src;
 function startGame(){
  if(introOn||S.started)return;
- if(!reduce){introSongPlay();setTimeout(function(){if(RA.paused&&radDev.indexOf(INTRO_SONG)>=0&&introOn)try{RA.play()}catch(e){}},700)}else radStart();
+ if(!reduce){introSongPlay();introSongArm();setTimeout(function(){if(RA.paused&&radDev.indexOf(INTRO_SONG)>=0&&introOn)try{RA.play()}catch(e){}},700)}else radStart();
  $('start').classList.add('gone');setTimeout(function(){$('start').hidden=true},750);auInit();auVolumes();keys={};
- var go=function(){introSongStop();introOn=false;S.started=true;keys={};toast(coarse?'Touch and drag to steer':'A D steer · W S speed · C autodrive',5000)};
+ var go=function(){introOn=false;S.started=true;keys={};toast(coarse?'Touch and drag to steer':'A D steer · W S speed · C autodrive',5000)};
  if(reduce){go();return}
  introOn=true;zrIntro(go);
 }

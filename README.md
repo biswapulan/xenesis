@@ -79,3 +79,6 @@ Department of CSE, Government College of Engineering, Keonjhar
 
 ## Zen Roads X: intro song (final behaviour)
 - `games/zen-roads-x/media/intro-song.mp3` is now the **full song** (4:04). It starts on the first click on **Start driving**, plays through the sunset intro, and stops when the player clicks/taps/presses a key to skip, or when the intro ends and the game starts. It is never played in the game and is not part of the in-game radio. The earlier autoplay attempt on the opening screen was removed. Make sure you have the rights to use the track publicly.
+
+## Zen Roads X: intro song (updated behaviour)
+- The song starts on the first click on **Start driving** and keeps playing through the intro and into the drive. It stops with a smooth ~2.6 s fade-out on the player's next click or tap (including a click to skip the intro). Keyboard presses (driving keys) do not stop it. It is not part of the in-game radio list.
