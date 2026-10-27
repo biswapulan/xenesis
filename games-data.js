@@ -382,6 +382,145 @@ window.XEN_GAMES = [
     "alt": "Live leaderboard"
    }
   ]
+ },
+ {
+  "id": "bounce-adventure",
+  "title": "Bounce Adventure",
+  "genre": "Platformer",
+  "new": true,
+  "added": "2026-10-25",
+  "short": "Bounce a red ball through eight very different worlds: a sunny sakura meadow, windy maple woods, icy peaks, a lava forge, a neon Cyber Grid and more. Collect the rings, stomp the bugs and reach the portal in every world.",
+  "banner": "games/bounce-adventure/media/banner.jpg",
+  "poster": "games/bounce-adventure/media/poster.jpg",
+  "video": "games/bounce-adventure/media/gameplay.mp4",
+  "videoWebm": "games/bounce-adventure/media/gameplay.webm",
+  "play": "games/bounce-adventure/play.html",
+  "developer": "CSE, GCE Keonjhar",
+  "publisher": "XENESIS 4.0",
+  "platform": "Browser (desktop and mobile, portrait and landscape)",
+  "players": "Single-player",
+  "tags": [
+   "Platformer",
+   "Arcade",
+   "Bounce",
+   "Worlds",
+   "Colourful",
+   "Singleplayer"
+  ],
+  "about": [
+   "Bounce Adventure is the Xenesis platformer: a red ball with a big personality, eight worlds, and one goal in each, the glowing portal at the end. Run, jump, double jump and stomp your way there.",
+   "It opens with the Xenesis intro (the sunset, the torii gate and the spinning X), then drops you into Sakura Meadow. Every world changes the rules: gusty winds, icy ground, low gravity, fireballs from the lava and, at the end, the Cyber Grid, where the enemies are real bugs."
+  ],
+  "features": [
+   "8 worlds, each with its own look and its own twist: Sakura Meadow, Maple Forest (gusty winds), Frozen Peaks (icy ground), Sunset Dunes (hot wind), Lantern Night (low gravity), Volcano Forge (fireballs), Cloud Kingdom and Cyber Grid (data packets).",
+   "Double jump from World 2, plus springs, moving platforms, spikes and checkpoint flags.",
+   "Stomp the bugs for points and chain stomps in mid-air for combos.",
+   "Collect rings, beat the clock for a time bonus and win an extra life for every world you clear.",
+   "Built for phones: play in portrait or landscape with big touch buttons, or use the keyboard on a computer.",
+   "Your best score and the worlds you have unlocked are saved on your device."
+  ],
+  "controls": [
+   [
+    "A D or ← →",
+    "Move"
+   ],
+   [
+    "Space, W or ↑",
+    "Jump (press again in mid-air for a double jump from World 2)"
+   ],
+   [
+    "Esc or P",
+    "Pause"
+   ],
+   [
+    "R",
+    "Restart the level"
+   ],
+   [
+    "F",
+    "Toggle fullscreen"
+   ],
+   [
+    "M",
+    "Mute the sound"
+   ],
+   [
+    "Touch buttons",
+    "◀ ▶ to move, JUMP to jump. Tap the top bar to pause"
+   ]
+  ],
+  "shots": [
+   {
+    "src": "games/bounce-adventure/media/ss01.jpg",
+    "thumb": "games/bounce-adventure/media/t01.jpg",
+    "alt": "Title screen"
+   },
+   {
+    "src": "games/bounce-adventure/media/ss02.jpg",
+    "thumb": "games/bounce-adventure/media/t02.jpg",
+    "alt": "Intro: sunset over the torii gate"
+   },
+   {
+    "src": "games/bounce-adventure/media/ss03.jpg",
+    "thumb": "games/bounce-adventure/media/t03.jpg",
+    "alt": "Intro: the Xenesis X rises"
+   },
+   {
+    "src": "games/bounce-adventure/media/ss04.jpg",
+    "thumb": "games/bounce-adventure/media/t04.jpg",
+    "alt": "Intro: the X flies at the camera"
+   },
+   {
+    "src": "games/bounce-adventure/media/ss05.jpg",
+    "thumb": "games/bounce-adventure/media/t05.jpg",
+    "alt": "Game menu"
+   },
+   {
+    "src": "games/bounce-adventure/media/ss06.jpg",
+    "thumb": "games/bounce-adventure/media/t06.jpg",
+    "alt": "Sakura Meadow world"
+   },
+   {
+    "src": "games/bounce-adventure/media/ss07.jpg",
+    "thumb": "games/bounce-adventure/media/t07.jpg",
+    "alt": "Maple Forest world: gusty winds"
+   },
+   {
+    "src": "games/bounce-adventure/media/ss08.jpg",
+    "thumb": "games/bounce-adventure/media/t08.jpg",
+    "alt": "Frozen Peaks world: icy ground"
+   },
+   {
+    "src": "games/bounce-adventure/media/ss09.jpg",
+    "thumb": "games/bounce-adventure/media/t09.jpg",
+    "alt": "Sunset Dunes world"
+   },
+   {
+    "src": "games/bounce-adventure/media/ss10.jpg",
+    "thumb": "games/bounce-adventure/media/t10.jpg",
+    "alt": "Lantern Night world: low gravity"
+   },
+   {
+    "src": "games/bounce-adventure/media/ss11.jpg",
+    "thumb": "games/bounce-adventure/media/t11.jpg",
+    "alt": "Volcano Forge world: fireballs"
+   },
+   {
+    "src": "games/bounce-adventure/media/ss12.jpg",
+    "thumb": "games/bounce-adventure/media/t12.jpg",
+    "alt": "Cloud Kingdom world"
+   },
+   {
+    "src": "games/bounce-adventure/media/ss13.jpg",
+    "thumb": "games/bounce-adventure/media/t13.jpg",
+    "alt": "Cyber Grid world: data packets"
+   },
+   {
+    "src": "games/bounce-adventure/media/ss14.jpg",
+    "thumb": "games/bounce-adventure/media/t14.jpg",
+    "alt": "Plays in portrait and landscape on phones"
+   }
+  ]
  }
 ];
 

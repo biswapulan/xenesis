@@ -1,6 +1,15 @@
 # XENESIS: hold-to-ignite teaser
 Department of CSE, Government College of Engineering, Keonjhar
 
+## X Games update (Bounce Adventure, NEW)
+- **Bounce Adventure** added in the same format as the other games: `games/bounce-adventure/play.html` + `media/` (banner, poster, 14 screenshots + thumbnails, 37-second gameplay video as mp4/webm) and an entry in `games-data.js` (`"new": true`, so it glows with a NEW ribbon for each visitor's first 5 visits until they play it). The play page loads `games-data.js` and `games-track.js` (`data-game="bounce-adventure"`) right after `<body>`, so plays count towards the HIT badge. No backend change is needed.
+- **Opens with the Xenesis intro**, exactly like Dino x Samurai, Zen Roads X and Branch Battle: a title screen (*Start adventure*), then the sunset over the torii gate, the 3D Xenesis X rising and flying at the camera, a white flash, and the game. A click, tap or key skips it. The intro code is the same self-contained module used in Branch Battle (`xenIntro` in `play.html`). The Zen Roads X intro *song* is not used. Add `?nointro` to the URL to skip the intro while testing (`?autostart` also skips the title screen).
+- **The game:** 8 worlds (Sakura Meadow, Maple Forest with gusty winds, Frozen Peaks with icy ground, Sunset Dunes, Lantern Night with low gravity, Volcano Forge with fireballs, Cloud Kingdom, Cyber Grid with data packets), double jump from World 2, springs, moving platforms, checkpoints, stomp combos, rings and a time bonus. Everything is drawn on one canvas in `play.html`, with no external assets except the Google font (Onest) and the Xenesis logo.
+- **Mobile:** works in portrait (game view on top, control panel below) and landscape (faint corner buttons). Tap the top bar to pause. The sound, fullscreen, pause and home buttons are hidden while playing on touch devices and reappear on the pause screen.
+- Keys: A D / arrows move, Space / W / Up jump, Esc or P pause, R restart level, F fullscreen, M mute, Enter on a menu continues.
+- Saved on the player's device only (localStorage key `xen.bounce.v1`): best score and the furthest world unlocked.
+
+
 
 ## X Games update (Zen Roads X, NEW highlight, HIT badge, Coming Soon)
 - **Zen Roads X** added in the same format as Dino x Samurai: `games/zen-roads-x/play.html` + `media/` (banner, poster, 11 screenshots, thumbnails, gameplay mp4/webm) and an entry in `games-data.js`.
@@ -11,6 +20,7 @@ Department of CSE, Government College of Engineering, Keonjhar
 - **Zen Roads X vehicles:** the small cars (Coupe, Hatch) were replaced by a new **Sports Car** and a **Bike** (drawn in `games/zen-roads-x/play.html`: `carSport`, `carBike`). The bike has handlebars in Hood and Cockpit view. The other six vehicles are unchanged.
 
 ## Updates
+- **Payment QR replaced** with the ACTS GCE Kendujhar Union Bank QR (UPI ID 89841001@ubin): `assets/payment-qr.jpeg`. **IPL Auction** now needs exactly **3 players (₹99)** or exactly **4 players (₹149)**; the 1–2 player option is removed. Updated `events-data.js`, `events-details.js`, `backend/Code.gs` (**paste and redeploy as a New version**).
 - **Fix: "Could not reach the server" although the data was saved.** If the browser blocks Apps Script's reply, `register.html` now looks the registration up (by event, entry type, email and mobile, last 20 min) via a new `lookup` GET endpoint in `backend/Code.gs` and shows the normal success screen. **Redeploy the Apps Script as a New version.**
 - **IPL Auction pricing:** now two team-size options on the registration page: **1 to 3 players = ₹99**, **full team of 4 = ₹149** (entry types `small` / `full`). Updated `events-data.js`, `events-details.js` and `backend/Code.gs`. **Redeploy the Apps Script as a New version.**
 - **Latest:** KBC is now a quiz (the word "Hackathon" is removed): name is "KBC — Kon Banega Coder". Prompt Wars is replaced by **Tech Escape Room** (id `tech-escape-room`, solo only, 7 mini-tasks). Updated `events-data.js`, `events-details.js` and `backend/Code.gs`. **Redeploy the Apps Script as a New version.** Fee for Tech Escape Room is currently ₹49 per person (change in both `events-data.js` and `Code.gs` if needed).

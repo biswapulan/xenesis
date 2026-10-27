@@ -5,7 +5,7 @@
  * The Sheet menu only marks a row Verified / Rejected.
  */
 // Bump this every time you paste new code. Open the /exec URL in a browser: it must show this same version.
-const VERSION     = "2026-10-19-game-plays";
+const VERSION     = "2026-10-27-ipl-3-or-4";
 const SHEET_NAME  = "Registrations";
 const FOLDER_NAME = "Xenesis 4.0 Payment Screenshots";
 const FROM_NAME   = "XENESIS 4.0 · CSE, GCE Keonjhar";   // display name students see
@@ -34,8 +34,8 @@ const EVENTS = {
  "memography":{n:"Memography — The Memory Arc",min:1,max:1,fee:29},
  "ad-mad":{n:"Ad-Mad",min:1,max:4,fee:49},
  "ipl-auction":{n:"IPL Auction",modes:{
-    "small":{l:"1 to 3 players",min:1,max:3,fee:99},
-    "full":{l:"Full team of 4",min:4,max:4,fee:149}}},
+    "small":{l:"Team of 3 players",min:3,max:3,fee:99},
+    "full":{l:"Team of 4 players",min:4,max:4,fee:149}}},
  "chess":{n:"MindX4.0 — Chess Championship",min:1,max:1,fee:49},
  "reels":{n:"Reels x Render",min:1,max:1,fee:29},
  "xen-z-show":{n:"The Xen-Z Show",modes:{

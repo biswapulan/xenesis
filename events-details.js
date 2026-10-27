@@ -69,8 +69,8 @@ const XEN_DETAILS={
  {h:"Rules",items:["Keep content respectful and suitable for a college audience.","Product and time limit are announced on the spot.","Organizers' decisions are final."]}]},
 "ipl-auction":{tag:"Bid. Build. Win.",sections:[
  {h:"About",p:"Simulated cricket auction. Manage a fixed virtual budget, strategize bidder paddle wars, and assemble a balanced squad under tactical constraints."},
- {h:"Format",items:["Team of 1 to 4 members.","Every team gets the same virtual budget.","Teams bid for players in live auction rounds.","Squads must be balanced and meet the announced constraints."]},
- {h:"Registration",items:["1 to 3 players: ₹99 per team.","Full team of 4 players: ₹149 per team.","Pick your team size on the registration page."]},
+ {h:"Format",items:["Team of 3 or 4 members (a team must have exactly 3 or exactly 4 players).","Every team gets the same virtual budget.","Teams bid for players in live auction rounds.","Squads must be balanced and meet the announced constraints."]},
+ {h:"Registration",items:["Team of 3 players: ₹99 per team.","Team of 4 players: ₹149 per team.","Pick your team size on the registration page."]},
  {h:"Ranking",p:"Teams are ranked on the strength and balance of the final playing XI. Exact scoring rules are announced before the event."}]},
 "chess":{tag:"Chess Championship",sections:[
  {h:"About",p:"A fast-paced rapid/blitz tournament that tests board awareness, tactical openings, endgame strategy and time management."},
