@@ -5,7 +5,7 @@
 <link rel="icon" type="image/png" href="assets/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Shippori+Mincho:wght@500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="theme.css?v=3">
+<link rel="stylesheet" href="theme.css?v=4">
 <style>
 main{display:flex;flex-direction:column;justify-content:center;align-items:center}
 #stage{width:100%;display:flex;justify-content:center}
@@ -52,7 +52,7 @@ input:focus{outline:0;border-color:var(--crim);box-shadow:0 2px 0 var(--crim)}::
 </style></head>
 <body data-page="register.html">
 <div class="app"><main><div id="stage" aria-live="polite"></div></main></div>
-<script src="events-data.js?v=10"></script><script src="shared.js?v=5"></script>
+<script src="events-data.js?v=10"></script><script src="shared.js?v=6"></script>
 <script>
 const ENDPOINT="https://script.google.com/macros/s/AKfycbzrKlSOWAJwTOZSTfyArfAqgz-eN317NJSNJ1g6Pm0f0c_uK94o13gX6jf4GPq9LYnC/exec";  /* Google Apps Script web-app URL */
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
@@ -189,7 +189,7 @@ function done(id,mail){
  ?`<div class="mailbox no" role="status"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg><div><b>Save this screen</b><p>We couldn't email your receipt right now. <u>Take a screenshot of this page</u> and keep your Registration ID: it is your proof of registration.</p></div></div>`
  :`<div class="mailbox" role="status"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg><div><b>Check your mailbox</b><p>Your registration receipt has been sent to <u>${esc(A.email)}</u>. If you don't see it, <u>check your Spam / Junk folder too</u>.</p></div></div>`}
  <p class="warn" style="text-align:left;margin:14px 0 0"><b>Remember your Registration ID.</b> Take a screenshot of this screen. The receipt email is your proof of registration.</p>
- <p class="note" style="margin:12px auto 0">Our team will verify your payment and send your confirmation on <b>WhatsApp</b>. Date, time and venue will be notified via WhatsApp and email.</p>
+ <p class="note" style="margin:12px auto 0">Our team will verify your payment and send your confirmation on <b>WhatsApp</b>. The venue will be notified via WhatsApp and email. Check the event page for your day and time.</p>
  <div class="row"><a class="btn" href="events.html">More Events</a><a class="btn ghost" href="index.html">Home</a></div><p class="note" style="margin:6px auto 0">Need help? <a href="help.html" style="color:var(--crim);border-bottom:1px solid var(--crim)">Chat with us</a></p></section>`;
 }
 

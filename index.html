@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>XENESIS 4.0 — Dept. of CSE, GCE Keonjhar</title>
-<meta name="description" content="XENESIS 4.0 — the three-day departmental tech fest of Computer Science and Engineering, Government College of Engineering, Keonjhar. Flash mob, inauguration, tech and non-tech events, grand prizes and a DJ night.">
+<meta name="description" content="XENESIS 4.0 — the two-day departmental tech fest of Computer Science and Engineering, Government College of Engineering, Keonjhar. Opening ceremony, tech and non-tech events and grand prizes on Saturday, 31 October and Sunday, 1 November 2026.">
 <link rel="icon" type="image/png" href="assets/favicon.png">
 <link rel="stylesheet" href="secret-pathways-assets/fonts.css">
 <style>
@@ -487,6 +487,22 @@ h1,h2,h3{ font-weight:400; margin:0; letter-spacing:-.005em; }
 .cur-dot.act{ width:52px; height:52px; margin:-26px 0 0 -26px; background:rgba(223,231,224,.07); border-color:rgba(223,231,224,.6); }
 @media (hover:hover) and (pointer:fine){ .cur-dot{ opacity:1 } }
 
+
+/* — chapter III: timetable (two days) */
+.sched{ display:grid; grid-template-columns:1fr 1fr; gap:clamp(24px,4vw,64px); }
+.sday h3{ font-size:clamp(20px,2vw,30px); font-weight:400; letter-spacing:-.005em; padding-bottom:14px; border-bottom:1px solid var(--vermilion); }
+.sday h3 em{ font-style:normal; font-family:'NotoJP',sans-serif; font-size:.6em; color:var(--muted); margin-left:12px; letter-spacing:.24em; }
+.srow{ display:grid; grid-template-columns:minmax(128px,.5fr) minmax(0,1fr); gap:14px; align-items:baseline; padding:15px 0; border-bottom:1px solid var(--line-soft); }
+.srow .t{ font-size:11px; letter-spacing:.1em; color:#8b958f; font-variant-numeric:tabular-nums; text-shadow:0 1px 16px rgba(3,6,8,.92); }
+.srow b{ font-weight:400; font-size:clamp(15px,1.3vw,19px); }
+.srow b a{ color:inherit; text-decoration:none; transition:color .3s; }
+.srow b a:hover{ color:var(--vermilion); }
+.srow small{ display:block; margin-top:3px; font-size:11px; letter-spacing:.06em; color:#909b95; text-shadow:0 1px 16px rgba(3,6,8,.92); }
+.srow.brk{ background:linear-gradient(90deg,rgba(224,35,28,.10),transparent 70%); padding-left:12px; padding-right:12px; margin:0 -12px; }
+.srow.brk b{ font-style:italic; }
+.snote{ margin:16px 0 0; font-size:12.5px; line-height:1.65; color:#909b95; text-shadow:0 1px 16px rgba(3,6,8,.92); }
+@media (max-width:860px){ .sched{ grid-template-columns:1fr; } .srow{ grid-template-columns:116px minmax(0,1fr); } }
+
 /* ============================================================= responsive */
 @media (max-width:1080px){
   .hero-top{ max-width:none; }
@@ -935,6 +951,17 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
 }
 </style>
 <style>
+.igfab{position:fixed;right:max(16px,env(safe-area-inset-right));bottom:calc(82px + env(safe-area-inset-bottom));z-index:20;width:52px;height:52px;border-radius:50%;background:#0b0f12;border:2px solid #d9a15b;color:#e8e4da;display:grid;place-items:center;box-shadow:0 6px 22px rgba(0,0,0,.5),0 0 22px rgba(217,161,91,.28);transition:transform .25s,box-shadow .25s,background .25s}
+.igfab.low{bottom:calc(18px + env(safe-area-inset-bottom))}
+.igfab:hover{transform:scale(1.08);background:#b0202a;box-shadow:0 6px 26px rgba(0,0,0,.55),0 0 34px rgba(176,32,42,.7)}
+.igfab svg,.soc svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.igfab::before{content:attr(data-tip);position:absolute;right:62px;top:50%;translate:0 -50%;background:rgba(11,15,18,.92);border:1px solid rgba(232,228,218,.2);color:#e8e4da;font-size:12px;letter-spacing:.08em;padding:6px 10px;border-radius:6px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .2s}
+.igfab:hover::before,.igfab:focus-visible::before{opacity:1}
+@media (max-width:700px){.igfab{width:46px;height:46px;right:14px;bottom:calc(74px + env(safe-area-inset-bottom))}.igfab.low{bottom:calc(18px + env(safe-area-inset-bottom))}}
+.soc{display:flex;gap:10px;justify-content:center;margin-top:12px}
+.soc a{display:inline-grid;place-items:center;width:40px;height:40px;border-radius:50%;border:1px solid rgba(232,228,218,.28);color:#e8e4da;transition:background .25s,border-color .25s,transform .25s}
+.soc a:hover{background:#b0202a;border-color:#d9a15b;transform:translateY(-2px)}
+.soc svg{width:20px;height:20px}
 .helpfab{position:fixed;right:max(16px,env(safe-area-inset-right));bottom:calc(18px + env(safe-area-inset-bottom));z-index:20;width:52px;height:52px;border-radius:50%;background:#b0202a;border:2px solid #d9a15b;color:#e8e4da;display:grid;place-items:center;box-shadow:0 6px 22px rgba(0,0,0,.5),0 0 22px rgba(176,32,42,.45);transition:transform .25s,box-shadow .25s,background .25s}
 .helpfab:hover{transform:scale(1.08);background:#7a1f24;box-shadow:0 6px 26px rgba(0,0,0,.55),0 0 34px rgba(176,32,42,.7)}
 .helpfab svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
@@ -1002,7 +1029,7 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
       <span class="mask-line"><span>becomes</span></span>
       <span class="mask-line"><span>creation.</span></span>
     </h1>
-    <p class="hero-sub body" data-rv="up">The three-day tech fest of Computer Science and Engineering, Government College of Engineering, Keonjhar.</p>
+    <p class="hero-sub body" data-rv="up">The two-day tech fest of Computer Science and Engineering, Government College of Engineering, Keonjhar.</p>
   </div>
 
   <div class="hero-spacer"></div>
@@ -1011,13 +1038,13 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
     <div class="hero-cue" data-rv="fade"><span>Scroll to enter</span><span class="track"><i></i></span></div>
     <div class="chapters" id="chips">
       <div class="chip" data-chip="0" data-rv="up" data-cursor><span class="num">01</span>
-        <span class="tx"><b>Day 1</b><p>Flash mob at 4 PM in the evening kicks off the fest.</p></span></div>
+        <span class="tx"><b>Day 1 · Morning</b><p>Opening ceremony at 9 AM, with Chess, Codemon and the One Piece treasure hunt.</p></span></div>
       <div class="chip" data-chip="1" data-rv="up" data-cursor><span class="num">02</span>
-        <span class="tx"><b>Day 2</b><p>Inauguration, then a full day of tech and non-tech events.</p></span></div>
+        <span class="tx"><b>Day 1 · Afternoon</b><p>Battle Verse, the Xen-Z Show, WordLord and Silent Signal until 6 PM.</p></span></div>
       <div class="chip" data-chip="2" data-rv="up" data-cursor><span class="num">03</span>
-        <span class="tx"><b>Day 3</b><p>More events, lunch, the ending ceremony and prizes.</p></span></div>
+        <span class="tx"><b>Day 2 · Sunday</b><p>KBC, Robo Drift, IPL Auction, Escape Room, Ad-Mad and more.</p></span></div>
       <div class="chip" data-chip="3" data-rv="up" data-cursor><span class="num">04</span>
-        <span class="tx"><b>DJ Night</b><p>The fest closes with a DJ night on the final day.</p></span></div>
+        <span class="tx"><b>Closing</b><p>The fest wraps up at 4:30 PM on Sunday.</p></span></div>
     </div>
   </div>
 
@@ -1054,10 +1081,10 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
     <span class="k"><b>01</b> — About</span><span class="rule"></span><span class="k jp">XENESIS</span>
   </div>
   <div class="gate-grid">
-    <h2 class="display h-sec" data-rv="up">Three days of code, contests and celebration.</h2>
+    <h2 class="display h-sec" data-rv="up">Two days of code, contests and celebration.</h2>
     <div class="gate-copy">
-      <p class="lead" data-rv="up">XENESIS 4.0 is the departmental tech fest organised by the Department of Computer Science and Engineering, Government College of Engineering, Keonjhar. Technical and non-technical events, grand prizes, and three days built for curious minds.</p>
-      <p class="body" data-rv="up">It opens with a flash mob, moves through the inauguration and a full day of events, and closes with the prize distribution and a DJ night. Full event details are coming soon.</p>
+      <p class="lead" data-rv="up">XENESIS 4.0 is the departmental tech fest organised by the Department of Computer Science and Engineering, Government College of Engineering, Keonjhar. Technical and non-technical events, grand prizes, and two days built for curious minds.</p>
+      <p class="body" data-rv="up">It opens on Saturday, 31 October with the opening ceremony, runs 15 tech and non-tech events across two days, and closes on Sunday, 1 November at 4:30 PM. See the full timetable below.</p>
       <a class="arrowlink" href="#lessons" data-rv="fade" data-cursor>
         <span>See the itinerary</span>
         <span class="ar"><svg viewBox="0 0 14 14" fill="none"><path d="M3 11 11 3M5 3h6v6" stroke="#dfe7e0" stroke-width="1.3"/></svg></span>
@@ -1065,9 +1092,9 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
     </div>
   </div>
   <div class="gate-stats" data-rv="up">
-    <div><b>03</b><span>Days</span></div>
+    <div><b>02</b><span>Days</span></div>
     <div><b>4.0</b><span>Edition</span></div>
-    <div><b>01</b><span>DJ night</span></div>
+    <div><b>15</b><span>Events</span></div>
     <div><b>∞</b><span>Energy</span></div>
   </div>
 </section>
@@ -1090,32 +1117,32 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
     </span>
   </div>
   <div class="sec-head" data-rv="fade">
-    <span class="k"><b>02</b> — Three Days</span><span class="rule"></span><span class="k jp">DAY 1–3</span>
+    <span class="k"><b>02</b> — Two Days</span><span class="rule"></span><span class="k jp">DAY 1–2</span>
   </div>
   <div class="cards" id="cards">
     <article class="card" data-rv="up" data-view="0" data-cursor>
       <div class="card-fr" data-frame>
                 <span class="card-ar"><svg viewBox="0 0 14 14" fill="none"><path d="M3 11 11 3M5 3h6v6" stroke="#dfe7e0" stroke-width="1.3"/></svg></span>
         <i class="glow" style="--gx:80.2%; --gy:23.9%; --gr:22%; --gt:6.1s; --gt2:9.7s; --gc1:rgba(255,142,108,.50); --gc2:rgba(212,56,38,.24)"></i>
-        <div class="card-lab"><b>Day 1</b><span class="jp">Evening</span></div>
+        <div class="card-lab"><b>Day 1</b><span class="jp">Morning</span></div>
       </div>
-      <div class="card-meta"><span>Flash mob · 4 PM</span><span>01 / 03</span></div>
+      <div class="card-meta"><span>Opening ceremony · 9 AM</span><span>01 / 03</span></div>
     </article>
     <article class="card" data-rv="up" data-view="1" data-cursor>
       <div class="card-fr" data-frame>
                 <span class="card-ar"><svg viewBox="0 0 14 14" fill="none"><path d="M3 11 11 3M5 3h6v6" stroke="#dfe7e0" stroke-width="1.3"/></svg></span>
         <i class="glow glow--flame" style="--gx:70.5%; --gy:47.2%; --gr:14%; --gt:3.7s; --gt2:5.3s; --gc1:rgba(255,198,124,.62); --gc2:rgba(226,118,40,.30)"></i>
-        <div class="card-lab"><b>Day 2</b><span class="jp">Full day</span></div>
+        <div class="card-lab"><b>Day 1</b><span class="jp">Afternoon</span></div>
       </div>
-      <div class="card-meta"><span>Inauguration & events</span><span>02 / 03</span></div>
+      <div class="card-meta"><span>Battle Verse, Xen-Z & more</span><span>02 / 03</span></div>
     </article>
     <article class="card" data-rv="up" data-view="2" data-cursor>
       <div class="card-fr" data-frame>
                 <span class="card-ar"><svg viewBox="0 0 14 14" fill="none"><path d="M3 11 11 3M5 3h6v6" stroke="#dfe7e0" stroke-width="1.3"/></svg></span>
         <i class="glow" style="--gx:48.0%; --gy:16.8%; --gr:20%; --gt:7.3s; --gt2:11.2s; --gc1:rgba(255,138,104,.52); --gc2:rgba(208,54,36,.24)"></i>
-        <div class="card-lab"><b>Day 3</b><span class="jp">Finale</span></div>
+        <div class="card-lab"><b>Day 2</b><span class="jp">Full day</span></div>
       </div>
-      <div class="card-meta"><span>Prizes & DJ night</span><span>03 / 03</span></div>
+      <div class="card-meta"><span>8 events · closing 4:30 PM</span><span>03 / 03</span></div>
     </article>
   </div>
 </section>
@@ -1138,39 +1165,36 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
     <span class="k"><b>03</b> — Itinerary</span><span class="rule"></span><span class="k jp">SCHEDULE</span>
   </div>
   <div class="cur-head">
-    <h2 class="display h-sec" data-rv="up">Three days. One fest. Endless events.</h2>
-    <p class="body-lg" data-rv="up">Here is the plan so far. Exact dates, timings and venue will be notified via WhatsApp and email to registered participants.</p>
+    <h2 class="display h-sec" data-rv="up">Two days. One fest. Endless events.</h2>
+    <p class="body-lg" data-rv="up">Here is the full timetable for Saturday, 31 October and Sunday, 1 November 2026. The venue will be notified via WhatsApp and email to registered participants.</p>
   </div>
-  <div class="cur" id="cur">
-    <div class="les" data-les="0" data-cursor>
-      <span class="k">01</span>
-      <h3>Flash Mob<em class="jp">Day 1</em></h3>
-      <p>The fest opens in the evening with a flash mob.</p>
-      <span class="t">4 PM</span><i class="bar"></i>
+  <div class="sched" id="cur">
+    <div class="sday">
+      <h3>Day 1<em class="jp">Saturday · 31 Oct</em></h3>
+      <div class="srow"><span class="t">9:00 AM – 11:30 AM</span><div><b>Opening Ceremony</b><small>Inauguration</small></div></div>
+      <div class="srow"><span class="t">9:30 AM – 10:30 AM</span><div><b><a href="event.html?id=chess" data-cursor>Chess</a></b><small>Non-tech</small></div></div>
+      <div class="srow"><span class="t">10:30 AM – 1:30 PM</span><div><b><a href="event.html?id=codemon" data-cursor>Codemon</a></b><small>Tech</small></div></div>
+      <div class="srow"><span class="t">11:00 AM – 1:00 PM</span><div><b><a href="event.html?id=one-piece" data-cursor>Treasure Hunt (One Piece)</a></b><small>Non-tech</small></div></div>
+      <div class="srow brk"><span class="t">1:00 PM – 2:00 PM</span><div><b>Lunch Break</b></div></div>
+      <div class="srow"><span class="t">1:30 PM – 4:00 PM</span><div><b><a href="event.html?id=battle-verse" data-cursor>Battle Verse</a></b><small>Non-tech</small></div></div>
+      <div class="srow"><span class="t">2:00 PM – 5:00 PM</span><div><b><a href="event.html?id=xen-z-show" data-cursor>Xen-Z Show</a></b><small>Non-tech</small></div></div>
+      <div class="srow"><span class="t">4:00 PM – 5:00 PM</span><div><b><a href="event.html?id=wordlord" data-cursor>WordLord</a></b><small>Tech</small></div></div>
+      <div class="srow"><span class="t">5:00 PM – 6:00 PM</span><div><b><a href="event.html?id=dumb-charades" data-cursor>Silent Signal</a></b><small>Non-tech</small></div></div>
+      <p class="snote">Participants of Codemon can't participate in Treasure Hunt (One Piece), and vice versa.</p>
     </div>
-    <div class="les" data-les="1" data-cursor>
-      <span class="k">02</span>
-      <h3>Inauguration<em class="jp">Day 2</em></h3>
-      <p>The formal opening ceremony of XENESIS 4.0.</p>
-      <span class="t">Time via WhatsApp &amp; Email</span><i class="bar"></i>
-    </div>
-    <div class="les" data-les="2" data-cursor>
-      <span class="k">03</span>
-      <h3>Tech &amp; Non-Tech Events<em class="jp">Day 2</em></h3>
-      <p>A whole day of competitions and activities with grand prizes.</p>
-      <span class="t">All day</span><i class="bar"></i>
-    </div>
-    <div class="les" data-les="3" data-cursor>
-      <span class="k">04</span>
-      <h3>Final Events &amp; Lunch<em class="jp">Day 3</em></h3>
-      <p>A few more events, then lunch together.</p>
-      <span class="t">Time via WhatsApp &amp; Email</span><i class="bar"></i>
-    </div>
-    <div class="les" data-les="4" data-cursor>
-      <span class="k">05</span>
-      <h3>Closing, Prizes &amp; DJ Night<em class="jp">Day 3</em></h3>
-      <p>Ending ceremony, prize distribution, then a DJ night to close the fest.</p>
-      <span class="t">Evening</span><i class="bar"></i>
+    <div class="sday">
+      <h3>Day 2<em class="jp">Sunday · 1 Nov</em></h3>
+      <div class="srow"><span class="t">9:00 AM – 10:30 AM</span><div><b><a href="event.html?id=kbc" data-cursor>KBC</a></b><small>Tech</small></div></div>
+      <div class="srow"><span class="t">9:00 AM – 10:30 AM</span><div><b><a href="event.html?id=robo-drift" data-cursor>Robo Drift</a></b><small>Tech</small></div></div>
+      <div class="srow"><span class="t">10:00 AM – 10:45 AM</span><div><b><a href="event.html?id=memography" data-cursor>Memography</a></b><small>Non-tech</small></div></div>
+      <div class="srow"><span class="t">10:30 AM – 1:30 PM</span><div><b><a href="event.html?id=ipl-auction" data-cursor>IPL Auction</a></b><small>Non-tech</small></div></div>
+      <div class="srow brk"><span class="t">12:30 PM – 3:00 PM</span><div><b>Mass Lunch Window</b><small>Events overlapping this window continue as scheduled</small></div></div>
+      <div class="srow"><span class="t">2:00 PM – 3:00 PM</span><div><b><a href="event.html?id=tech-escape-room" data-cursor>Tech Escape Room</a></b><small>Tech</small></div></div>
+      <div class="srow"><span class="t">2:45 PM – 4:00 PM</span><div><b><a href="event.html?id=ad-mad" data-cursor>Ad-Mad</a></b><small>Non-tech</small></div></div>
+      <div class="srow"><span class="t">3:00 PM – 4:00 PM</span><div><b><a href="event.html?id=reels" data-cursor>Reel × Render</a></b><small>Non-tech</small></div></div>
+      <div class="srow"><span class="t">3:30 PM – 4:30 PM</span><div><b><a href="event.html?id=perfect-partner" data-cursor>Perfect Partner</a></b><small>Non-tech</small></div></div>
+      <div class="srow"><span class="t">4:30 PM</span><div><b>Closing / End of Fest</b><small>Closing</small></div></div>
+      <p class="snote">The official mass-lunch window is 12:30 PM – 3:00 PM. Events overlapping this window continue as scheduled, so plan your lunch around your event timings.</p>
     </div>
   </div>
 </section>
@@ -1194,7 +1218,7 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
   </div>
   <div class="eyebrow" data-rv="fade">04 — Join us</div>
   <h2 class="display" data-rv="up">See you there.</h2>
-  <p class="body-lg" data-rv="up">Three days, one department, a lot of energy. Registrations are open. Browse every event and sign up for the ones you want to play.</p>
+  <p class="body-lg" data-rv="up">Two days, one department, a lot of energy. Registrations are open. Browse every event and sign up for the ones you want to play.</p>
   <a class="cta" href="events.html" data-rv="fade" data-cursor>
     <i></i><span>Explore events &amp; register</span>
     <svg viewBox="0 0 14 14" fill="none" width="13" height="13"><path d="M3 11 11 3M5 3h6v6" stroke="#dfe7e0" stroke-width="1.3"/></svg>
@@ -1220,10 +1244,11 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
       <img src="assets/xenesis-logo.png" alt="" width="750" height="603" decoding="async">
       <p>XENESIS 4.0 — the departmental tech fest of Computer Science and Engineering, Government College of Engineering, Keonjhar.</p>
       <p class="foot-mail">Support &amp; queries: <a href="mailto:info@xenesis.tech" data-cursor>info@xenesis.tech</a><br>Sponsorships: <a href="mailto:sponsorships@xenesis.tech" data-cursor>sponsorships@xenesis.tech</a></p>
+      <span class="soc" style="justify-content:flex-start"><a href="https://www.instagram.com/xenesis_4.0?mdxt=cGU5cTRpMmg0N3Nv" target="_blank" rel="noopener noreferrer" aria-label="XENESIS 4.0 on Instagram" data-cursor><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r=".9" fill="currentColor" stroke="none"/></svg></a></span>
     </div>
     <div><h4>Explore</h4><ul>
       <li><a href="#gate" data-cursor>About</a></li>
-      <li><a href="#pathways" data-cursor>Three Days</a></li>
+      <li><a href="#pathways" data-cursor>Two Days</a></li>
       <li><a href="#lessons" data-cursor>Itinerary</a></li>
       <li><a href="#eternity" data-cursor>Join us</a></li>
       <li><a href="events.html" data-cursor>Events</a></li>
@@ -1232,10 +1257,10 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
       <li><a href="games.html" data-cursor>X Games</a></li>
     </ul></div>
     <div><h4>Days</h4><ul>
-      <li><a href="#lessons" data-cursor>Day 1 — Flash mob</a></li>
-      <li><a href="#lessons" data-cursor>Day 2 — Inauguration</a></li>
+      <li><a href="#lessons" data-cursor>Day 1 — Opening ceremony</a></li>
+      <li><a href="#lessons" data-cursor>Day 1 — Events</a></li>
       <li><a href="#lessons" data-cursor>Day 2 — Events</a></li>
-      <li><a href="#lessons" data-cursor>Day 3 — Finale &amp; DJ night</a></li>
+      <li><a href="#lessons" data-cursor>Day 2 — Closing</a></li>
     </ul></div>
     <div><h4>Events</h4><ul>
       <li><a href="events.html#tech" data-cursor>Tech Events</a></li>
@@ -4929,6 +4954,7 @@ else addEventListener('DOMContentLoaded', boot);
   });
 })();
 </script>
+<a class="igfab" href="https://www.instagram.com/xenesis_4.0?mdxt=cGU5cTRpMmg0N3Nv" target="_blank" rel="noopener noreferrer" data-tip="Instagram" aria-label="Follow XENESIS 4.0 on Instagram" data-cursor><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r=".9" fill="currentColor" stroke="none"/></svg></a>
 <a class="helpfab" href="help.html" data-tip="Help" aria-label="Help desk and live chat" data-cursor><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.5-4.6A8 8 0 1 1 21 12z"/><path d="M9.5 10.5h5M9.5 13.5h3"/></svg></a>
 </body>
 </html>
