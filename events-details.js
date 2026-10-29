@@ -22,6 +22,24 @@ const XEN_SCHEDULE={
  "reels":{day:"Day 2 · Sunday, 1 November 2026",time:"3:00 PM – 4:00 PM"},
  "perfect-partner":{day:"Day 2 · Sunday, 1 November 2026",time:"3:30 PM – 4:30 PM"},
 };
+/* Event coordinators (4th year) per event, from the coordinators list. */
+const XEN_COORDS={
+ "robo-drift":[{name:"Rajesh Kerketa",phone:"+91 78942 79152"},{name:"Arpit Biswal",phone:"+91 94398 78530"},{name:"Saikat Ranjan Behera",phone:"+91 83288 04639"}],
+ "wordlord":[{name:"Abhijit Tripathy",phone:"+91 93483 21279"},{name:"Om Suryanshu",phone:"+91 72056 62960"}],
+ "codemon":[{name:"Subhrajeet Panda",phone:"+91 73777 96993"}],
+ "kbc":[{name:"Sanjit Swain",phone:"+91 70778 70908"},{name:"Amrit Nayak",phone:"+91 81448 43129"}],
+ "tech-escape-room":[{name:"Gourav Samal",phone:"+91 90407 24200"}],
+ "battle-verse":[{name:"Biswat Basant Khillar",phone:"+91 78558 81212"},{name:"Jagrut Pradhan",phone:"+91 99371 81726"},{name:"Omprakash Patra",phone:"+91 82600 08234"}],
+ "one-piece":[{name:"Soumyajit Pradhan",phone:"+91 63718 86007"},{name:"Srabani Parida",phone:"+91 77500 61117"}],
+ "perfect-partner":[{name:"Jagrut Pradhan",phone:"+91 99371 81726"},{name:"Ritik Samal",phone:"+91 91788 20235"}],
+ "dumb-charades":[{name:"Divya Jyoti Sahoo",phone:"+91 63720 23144"},{name:"Gyana Ranjan Nayak",phone:"+91 63728 32355"}],
+ "memography":[{name:"Biswat Basant Khillar",phone:"+91 78558 81212"},{name:"Abhijit Tripathy",phone:"+91 93483 21279"}],
+ "ad-mad":[{name:"Guptesh Ku. Giri",phone:"+91 82608 40885"},{name:"Om Suryanshu",phone:"+91 72056 62960"},{name:"Gourav Acharya",phone:"+91 78470 48775"}],
+ "ipl-auction":[{name:"Gourav Acharya",phone:"+91 78470 48775"},{name:"Divya Jyoti Sahoo",phone:"+91 63720 23144"}],
+ "chess":[{name:"Prabhanshu Dash",phone:"+91 99370 04403"}],
+ "reels":[{name:"Sthitiprajna Dash",phone:"+91 63700 03669"},{name:"Guptesh Ku. Giri",phone:"+91 82608 40885"}],
+ "xen-z-show":[{name:"Banamali Naik",phone:"+91 63710 95338"},{name:"Abhisek Mohanty",phone:"+91 94378 49756"},{name:"Soumyajit Pradhan",phone:"+91 63718 86007"}],
+};
 const XEN_DETAILS={
 /* ================= TECH ================= */
 "robo-drift":{tag:"Build. Control. Drift.",sections:[

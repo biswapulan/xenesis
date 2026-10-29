@@ -31,7 +31,7 @@
 </style></head>
 <body data-page="events.html">
 <div class="app"><main id="m"></main></div>
-<script src="events-data.js?v=10"></script><script src="events-details.js?v=10"></script><script src="shared.js?v=5"></script>
+<script src="events-data.js?v=10"></script><script src="events-details.js?v=11"></script><script src="shared.js?v=5"></script>
 <script>
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const id=new URLSearchParams(location.search).get("id"),i=XEN_EVENTS.findIndex(e=>e.id===id),m=document.getElementById("m");
@@ -41,7 +41,8 @@ else{
  document.title=e.name+" · XENESIS 4.0";
  const row=(k,v,c)=>v?`<div class="r"><dt>${k}</dt><dd class="${c||""}">${esc(v)}</dd></div>`:"";
  const sec=s=>`<div class="sec"><h2>${esc(s.h)}</h2>${s.p?`<p>${esc(s.p)}</p>`:""}${s.items?`<ul>${s.items.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>`:""}</div>`;
- const co=I.coordinators.length?`<div class="sec"><h2>Coordinators</h2><ul>${I.coordinators.map(c=>`<li>${esc(c.name)} · <a href="tel:${esc(c.phone)}">${esc(c.phone)}</a></li>`).join("")}</ul></div>`:"";
+ const CO=(typeof XEN_COORDS!=="undefined"&&XEN_COORDS[id])||I.coordinators;
+ const co=CO.length?`<div class="sec"><h2>Event Coordinators</h2><ul>${CO.map(c=>`<li>${esc(c.name)} · <a href="tel:${esc(c.phone.replace(/\s/g,""))}">${esc(c.phone)}</a></li>`).join("")}</ul></div>`:"";
  const reg=e.fee==null?`<a class="btn" aria-disabled="true" href="#">Fee TBA</a>`:`<a class="btn" href="register.html?event=${e.id}">Register Now</a>`;
  const same=XEN_EVENTS.filter(x=>x.type===e.type),k=same.findIndex(x=>x.id===e.id),p=same[k-1],n=same[k+1];
  m.innerHTML=`<a class="back" href="events.html${tab}">← All events</a>
