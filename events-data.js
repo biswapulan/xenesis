@@ -44,7 +44,7 @@ const XEN_EVENTS=[
 {id:"memography",type:"non-tech",jp:"記憶",name:"Memography — The Memory Arc",min:1,max:1,fee:29,unit:"person",
  prize:"1st ₹400 · 2nd ₹200 · 3rd Memento + Certificate",
  summary:"20 rapid image slides, 2 seconds each. Recall minute visual details, chronological order and anomalies."},
-{id:"ad-mad",type:"non-tech",jp:"広告",name:"Ad-Mad",min:1,max:4,fee:49,unit:"entry",
+{id:"ad-mad",type:"non-tech",cancelled:true,jp:"広告",name:"Ad-Mad",min:1,max:4,fee:49,unit:"entry",
  prize:"1st ₹600 · 2nd ₹300 · 3rd Memento + Certificate",
  format:"Solo or Team of 2–4",
  summary:"A live marketing pitch and humorous skit. Market quirky, unexpected products on the spot with taglines, jingles and brand pitches."},
@@ -60,6 +60,12 @@ const XEN_EVENTS=[
  prize:"1st ₹600 · 2nd ₹300 · 3rd Memento + Certificate",
  summary:"A vertical 9:16 content creation sprint. Film, edit, beat-match and deliver high-energy social reels documenting the festival."}
 ];
-const XEN_UPI={qr:"assets/payment-qr.jpeg"};
+/* Online registrations are CLOSED. The payment QR was removed from the site (set open:true and restore assets/payment-qr.jpeg to reopen). */
+const XEN_UPI={qr:""};
+const XEN_REG={open:false};
+/* Ad-Mad is cancelled: refunds are handled by this person. */
+const XEN_REFUND={name:"Om Suryanshu",phone:"+91 72056 62960",photo:"assets/om-suryanshu.png"};
+const xenRefund=()=>`<div class="refund"><img class="rf-ph" src="${XEN_REFUND.photo}" alt="${XEN_REFUND.name}" width="96" height="96" decoding="async"><div class="rf-tx"><b class="rf-t">Ad-Mad has been cancelled</b><p>If you registered for Ad-Mad, please contact <strong>${XEN_REFUND.name}</strong> to get your refund.</p><a class="callpill" href="tel:${XEN_REFUND.phone.replace(/\s/g,"")}">${XEN_REFUND.phone}</a></div></div>`;
+const xenRegBtn=e=>e.cancelled?`<a class="btn" aria-disabled="true" href="#">Event Cancelled</a>`:!XEN_REG.open?`<a class="btn" aria-disabled="true" href="#">Registrations Closed</a>`:e.fee==null?`<a class="btn" aria-disabled="true" href="#">Fee TBA</a>`:`<a class="btn" href="register.html?event=${e.id}">Register Now</a>`;
 const xenTeam=e=>e.format||(e.min===1&&e.max===1?"Solo":e.min===e.max?`${e.min} players`:`${e.min}–${e.max} players`);
 const xenFee=e=>e.fee==null?"Fee TBA":e.feeText||`₹${e.fee}${e.unit==="person"?"":" / "+e.unit}`;

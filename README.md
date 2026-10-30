@@ -92,3 +92,8 @@ Department of CSE, Government College of Engineering, Keonjhar
 
 ## Zen Roads X: intro song (updated behaviour)
 - The song starts on the first click on **Start driving** and keeps playing through the intro and into the drive. It stops with a smooth ~2.6 s fade-out on the player's next click or tap (including a click to skip the intro). Keyboard presses (driving keys) do not stop it. It is not part of the in-game radio list.
+
+## Update (registrations closed, Ad-Mad cancelled, rooms)
+- Online registrations are **closed**: `XEN_REG.open=false` in `events-data.js` (register page shows a closed notice, "Register Now" buttons show "Registrations Closed"). The UPI payment QR was removed from `assets/`. `backend/Code.gs` also has `REGISTRATIONS_OPEN=false` (redeploy the Apps Script for it to take effect).
+- **Ad-Mad is cancelled** (`cancelled:true`): removed from the timetable and counts; refunds via Om Suryanshu (`XEN_REFUND`). A red notice ticker repeats this on every page.
+- Codemon is now 10:00 AM – 1:00 PM. Every event has a `room` in `XEN_SCHEDULE` (`events-details.js`), shown on event pages and the home timetable.

@@ -1,26 +1,25 @@
 /* Full event details. Edit freely: each section = {h:heading, p:paragraph, items:[bullets]} */
 const XEN_INFO={
- date:"Saturday, 31 Oct & Sunday, 1 Nov 2026",time:"See schedule",venue:"Via WhatsApp & Email",   /* day/time per event: see XEN_SCHEDULE below; venue shared with registered participants */
- notice:"The venue will be notified via WhatsApp and email to the registered mobile number and email ID.",
+ date:"Saturday, 31 Oct & Sunday, 1 Nov 2026",time:"See schedule",venue:"Room shown on each event page",   /* day, time and room per event: see XEN_SCHEDULE below */
+ notice:"",
  coordinators:[/* {name:"Name",phone:"98XXXXXXXX"} */]
 };
 /* Day and time of every event (XENESIS 4.0 schedule). Keep in sync with the timetable in index.html. */
 const XEN_SCHEDULE={
- "chess":{day:"Day 1 · Saturday, 31 October 2026",time:"9:30 AM – 10:30 AM"},
- "codemon":{day:"Day 1 · Saturday, 31 October 2026",time:"10:30 AM – 1:30 PM",note:"Participants of Codemon can't participate in Treasure Hunt (One Piece), and vice versa."},
- "one-piece":{day:"Day 1 · Saturday, 31 October 2026",time:"11:00 AM – 1:00 PM",note:"Participants of Codemon can't participate in Treasure Hunt (One Piece), and vice versa."},
- "battle-verse":{day:"Day 1 · Saturday, 31 October 2026",time:"1:30 PM – 4:00 PM"},
- "xen-z-show":{day:"Day 1 · Saturday, 31 October 2026",time:"2:00 PM – 5:00 PM"},
- "wordlord":{day:"Day 1 · Saturday, 31 October 2026",time:"4:00 PM – 5:00 PM"},
- "dumb-charades":{day:"Day 1 · Saturday, 31 October 2026",time:"5:00 PM – 6:00 PM"},
- "kbc":{day:"Day 2 · Sunday, 1 November 2026",time:"9:00 AM – 10:30 AM"},
- "robo-drift":{day:"Day 2 · Sunday, 1 November 2026",time:"9:00 AM – 10:30 AM"},
- "memography":{day:"Day 2 · Sunday, 1 November 2026",time:"10:00 AM – 10:45 AM"},
- "ipl-auction":{day:"Day 2 · Sunday, 1 November 2026",time:"10:30 AM – 1:30 PM"},
- "tech-escape-room":{day:"Day 2 · Sunday, 1 November 2026",time:"2:00 PM – 3:00 PM"},
- "ad-mad":{day:"Day 2 · Sunday, 1 November 2026",time:"2:45 PM – 4:00 PM"},
- "reels":{day:"Day 2 · Sunday, 1 November 2026",time:"3:00 PM – 4:00 PM"},
- "perfect-partner":{day:"Day 2 · Sunday, 1 November 2026",time:"3:30 PM – 4:30 PM"},
+ "chess":{day:"Day 1 · Saturday, 31 October 2026",time:"9:30 AM – 10:30 AM",room:"2nd Year Classroom"},
+ "codemon":{day:"Day 1 · Saturday, 31 October 2026",time:"10:00 AM – 1:00 PM",room:"2nd Block OOPS Lab or Classroom",note:"Participants of Codemon can't participate in Treasure Hunt (One Piece), and vice versa."},
+ "one-piece":{day:"Day 1 · Saturday, 31 October 2026",time:"11:00 AM – 1:00 PM",room:"Seminar Hall",note:"Participants of Codemon can't participate in Treasure Hunt (One Piece), and vice versa."},
+ "battle-verse":{day:"Day 1 · Saturday, 31 October 2026",time:"1:30 PM – 4:00 PM",room:"3rd Year Classroom"},
+ "xen-z-show":{day:"Day 1 · Saturday, 31 October 2026",time:"2:00 PM – 5:00 PM",room:"Auditorium"},
+ "wordlord":{day:"Day 1 · Saturday, 31 October 2026",time:"4:00 PM – 5:00 PM",room:"3rd Block 1st Lab"},
+ "dumb-charades":{day:"Day 1 · Saturday, 31 October 2026",time:"5:00 PM – 6:00 PM",room:"4th Block Lab or Seminar Hall"},
+ "kbc":{day:"Day 2 · Sunday, 1 November 2026",time:"9:00 AM – 10:30 AM",room:"4th Year Classroom"},
+ "robo-drift":{day:"Day 2 · Sunday, 1 November 2026",time:"9:00 AM – 10:30 AM",room:"HPL Ground"},
+ "memography":{day:"Day 2 · Sunday, 1 November 2026",time:"10:00 AM – 10:45 AM",room:"2nd Year Classroom"},
+ "ipl-auction":{day:"Day 2 · Sunday, 1 November 2026",time:"10:30 AM – 1:30 PM",room:"4th Block Lab"},
+ "tech-escape-room":{day:"Day 2 · Sunday, 1 November 2026",time:"2:00 PM – 3:00 PM",room:"4th Block Lab"},
+ "reels":{day:"Day 2 · Sunday, 1 November 2026",time:"3:00 PM – 4:00 PM",room:"Seminar Hall"},
+ "perfect-partner":{day:"Day 2 · Sunday, 1 November 2026",time:"3:30 PM – 4:30 PM",room:"4th Year Classroom"},
 };
 /* Event coordinators (4th year) per event, from the coordinators list. */
 const XEN_COORDS={

@@ -5,7 +5,7 @@
 <link rel="icon" type="image/png" href="assets/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Shippori+Mincho:wght@500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="theme.css?v=6">
+<link rel="stylesheet" href="theme.css?v=7">
 <style>
 main{display:flex;flex-direction:column;justify-content:center;align-items:center}
 #stage{width:100%;display:flex;justify-content:center}
@@ -52,7 +52,7 @@ input:focus{outline:0;border-color:var(--crim);box-shadow:0 2px 0 var(--crim)}::
 </style></head>
 <body data-page="register.html">
 <div class="app"><main><div id="stage" aria-live="polite"></div></main></div>
-<script src="events-data.js?v=10"></script><script src="shared.js?v=7"></script>
+<script src="events-data.js?v=11"></script><script src="shared.js?v=8"></script>
 <script>
 const ENDPOINT="https://script.google.com/macros/s/AKfycbzrKlSOWAJwTOZSTfyArfAqgz-eN317NJSNJ1g6Pm0f0c_uK94o13gX6jf4GPq9LYnC/exec";  /* Google Apps Script web-app URL */
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
@@ -193,7 +193,15 @@ function done(id,mail){
  <div class="row"><a class="btn" href="events.html">More Events</a><a class="btn ghost" href="index.html">Home</a></div><p class="note" style="margin:6px auto 0">Need help? <a href="help.html" style="color:var(--crim);border-bottom:1px solid var(--crim)">Chat with us</a></p></section>`;
 }
 
-const pre=new URLSearchParams(location.search).get("event"),pe=XEN_EVENTS.find(e=>e.id===pre&&e.fee!=null);
+if(!XEN_REG.open){
+ document.title="Registrations closed · XENESIS 4.0";
+ stage.innerHTML=`<section class="card in"><p class="qn">Registrations closed</p><h2 id="qt">Online registrations are now closed<span class="kj" lang="ja">受付終了</span></h2><hr class="blade">
+ <p style="line-height:1.7;margin:0 0 16px">We are no longer accepting registrations for XENESIS 4.0 events on the website. Browse the events to see the day, time and room of each one.</p>
+ ${xenRefund()}
+ <div class="row"><a class="btn" href="events.html">View Events</a><a class="btn ghost" href="index.html">Home</a></div></section>`;
+}else{
+const pre=new URLSearchParams(location.search).get("event"),pe=XEN_EVENTS.find(e=>e.id===pre&&e.fee!=null&&!e.cancelled);
 if(pe){A.type=pe.type;A.event=pe.id;step=2}
 view();
+}
 </script></body></html>

@@ -144,7 +144,10 @@ function lookup_(p){
   return out_(res);
 }
 
+/* Online registrations are CLOSED. Set to true (and redeploy) to accept registrations again. */
+const REGISTRATIONS_OPEN = false;
 function doPost(e){
+  if(!REGISTRATIONS_OPEN) return fail_("Online registrations are closed.");
   if(!e || !e.postData) return fail_("No data received. This endpoint only accepts form submissions from the website.");
   const lock = LockService.getScriptLock();
   try{

@@ -102,3 +102,24 @@ h1,h2,.btn,.opts label,.rv span{overflow-wrap:anywhere}
 
 .callpill{display:inline-block;margin:3px 0 3px 6px;padding:4px 14px;border-radius:999px;background:#b0202a;color:#fff!important;font-weight:600;letter-spacing:.04em;text-decoration:none!important;border:0!important;box-shadow:0 0 16px rgba(224,35,28,.45);font-variant-numeric:tabular-nums;transition:transform .2s,box-shadow .2s}
 .callpill:hover{transform:translateY(-1px);box-shadow:0 0 24px rgba(224,35,28,.8)}
+
+/* — notice ticker + refund card + highlighted call pills */
+.ticker{position:sticky;top:0;z-index:32;overflow:hidden;height:34px;display:flex;align-items:center;background:linear-gradient(90deg,#7a1f24,#b0202a 50%,#7a1f24);color:#fff;border-bottom:1px solid rgba(217,161,91,.65);font-size:12px;letter-spacing:.08em;font-family:inherit}
+.ticker.fx{position:fixed;left:0;right:0;top:0;z-index:51}
+.tk-track{display:flex;width:max-content;animation:tk 45s linear infinite}
+.ticker:hover .tk-track{animation-play-state:paused}
+.tk-set{display:flex;flex-shrink:0}
+.tk-i{white-space:nowrap;padding-right:6px}
+.tk-i b{font-weight:700;letter-spacing:.12em}
+.tk-i a{color:#ffe9b8;font-weight:700;text-decoration:underline}
+.tk-i i{font-style:normal;color:#e9b872;margin:0 18px}
+@keyframes tk{to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.tk-track{animation:none}}
+.refund{display:flex;align-items:center;gap:18px;padding:16px 20px;border:1px solid rgba(217,161,91,.6);border-left:4px solid #e0231c;border-radius:6px;background:linear-gradient(90deg,rgba(224,35,28,.18),rgba(11,15,18,.55) 75%);box-shadow:0 0 30px rgba(224,35,28,.15);text-align:left;color:#e8e4da}
+.rf-ph{width:84px;height:84px;border-radius:50%;object-fit:cover;flex:none;border:2px solid #d9a15b;box-shadow:0 0 18px rgba(217,161,91,.4)}
+.rf-t{display:block;font-size:clamp(17px,2vw,22px);letter-spacing:.02em;color:#ffd9a0}
+.rf-tx p{margin:6px 0 10px!important;font-size:14px;line-height:1.6;color:#d9dfdb}
+.rf-tx .callpill{margin-left:0}
+.card .refund{background:#12171b;margin:0 0 6px}
+@media (max-width:560px){.refund{flex-direction:column;text-align:center}}
+.cxl h2{color:#ff6a62!important}

@@ -5,7 +5,7 @@
 <link rel="icon" type="image/png" href="assets/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Shippori+Mincho:wght@500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="theme.css?v=6">
+<link rel="stylesheet" href="theme.css?v=7">
 <style>
 .hd{text-align:center;padding:10px 0 6px}.hd h1{font-size:clamp(26px,6vw,46px)}.hd p{max-width:46ch;margin:12px auto 0;opacity:.85;font-size:14px}
 .tabs{display:flex;justify-content:center;gap:10px;margin:22px 0 26px;flex-wrap:wrap}
@@ -29,24 +29,26 @@
 <body data-page="events.html">
 <div class="app"><main>
  <section class="hd in"><h1>Events<span class="kj" lang="ja">競技</span></h1><hr class="blade" style="width:min(260px,60%);margin:18px auto">
- <p>Pick your battle. Every event is open to registration, so choose one or try them all.</p></section>
+ <p>Online registrations are now closed. Browse every event to see its day, time and room.</p></section>
+ <div id="rf" style="max-width:920px;margin:0 auto 18px;padding:0 16px"></div>
  <div class="tabs" role="tablist" aria-label="Event type">
   <button class="tab" role="tab" id="t-tech" aria-controls="grid" data-t="tech">Tech<span id="n-tech"></span></button>
   <button class="tab" role="tab" id="t-non-tech" aria-controls="grid" data-t="non-tech">Non-Tech<span id="n-non-tech"></span></button>
  </div>
  <div class="grid" id="grid" role="tabpanel" aria-live="polite"></div>
 </main></div>
-<script src="events-data.js?v=10"></script><script src="shared.js?v=5"></script>
+<script src="events-data.js?v=11"></script><script src="shared.js?v=8"></script>
 <script>
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const grid=document.getElementById("grid");
-["tech","non-tech"].forEach(t=>document.getElementById("n-"+t).textContent=XEN_EVENTS.filter(e=>e.type===t).length);
+["tech","non-tech"].forEach(t=>document.getElementById("n-"+t).textContent=XEN_EVENTS.filter(e=>e.type===t&&!e.cancelled).length);
+document.getElementById("rf").innerHTML=xenRefund();
 function card(e){
- const reg=e.fee==null?`<a class="btn" aria-disabled="true" href="#">Fee TBA</a>`:`<a class="btn" href="register.html?event=${e.id}">Register Now</a>`;
+ const reg=xenRegBtn(e);
  return `<article class="ev in" data-jp="${e.jp}"><p class="grp">${esc(e.group||(e.type==="tech"?"Tech Event":"Non-Tech Event"))}</p>
  <h2>${esc(e.name)}</h2><p class="s">${esc(e.summary)}</p>
- <div class="chips"><span class="chip">${xenTeam(e)}</span><span class="chip fee">${xenFee(e)}</span>${e.duration?`<span class="chip">${e.duration}</span>`:""}</div>
- ${e.prize?`<p class="pz"><b>Prize</b>${esc(e.prize)}</p>`:`<p class="pz"><b>Prize</b>Announced soon</p>`}
+ <div class="chips"><span class="chip">${xenTeam(e)}</span><span class="chip fee">${e.cancelled?"CANCELLED":xenFee(e)}</span>${e.duration?`<span class="chip">${e.duration}</span>`:""}</div>
+ ${e.cancelled?`<p class="pz"><b>Refund</b>Contact ${esc(XEN_REFUND.name)}: <a class="callpill" href="tel:${XEN_REFUND.phone.replace(/\s/g,"")}">${XEN_REFUND.phone}</a></p>`:e.prize?`<p class="pz"><b>Prize</b>${esc(e.prize)}</p>`:`<p class="pz"><b>Prize</b>Announced soon</p>`}
  <div class="acts"><a class="btn ghost" href="event.html?id=${e.id}">View Details</a>${reg}</div></article>`;
 }
 function select(t,push){

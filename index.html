@@ -21,7 +21,7 @@
   --ember:#ff5a3c;
   --gold:#c9a24a;
   --pad:clamp(20px, 3.4vw, 56px);
-  --nav-h:84px;
+  --nav-h:84px; --tk-h:34px;
   --ease:cubic-bezier(.22,.61,.36,1);
   --ease-out:cubic-bezier(.16,1,.3,1);
   --ease-io:cubic-bezier(.65,0,.35,1);
@@ -129,7 +129,7 @@ h1,h2,h3{ font-weight:400; margin:0; letter-spacing:-.005em; }
      overflow makes that block wider than the screen — 437 against a 390 phone,
      860 against a 768 tablet — which carried the burger off the right edge.
      --vw is the layout viewport, written on every resize. */
-  position:fixed; top:0; left:0; width:var(--vw, 100%); height:var(--nav-h); z-index:50;
+  position:fixed; top:var(--tk-h); left:0; width:var(--vw, 100%); height:var(--nav-h); z-index:50;
   display:flex; align-items:center; gap:24px; padding:0 var(--pad);
   transition:transform .55s var(--ease);
 }
@@ -188,7 +188,7 @@ h1,h2,h3{ font-weight:400; margin:0; letter-spacing:-.005em; }
 .hero{ position:relative; min-height:100svh; padding:0 var(--pad); display:flex; flex-direction:column; }
 .hero::before{ content:''; position:absolute; left:0; right:0; top:0; height:46%; pointer-events:none;
   background:linear-gradient(rgba(3,6,9,.72), rgba(3,6,9,.34) 46%, transparent); }
-.hero-top{ padding-top:calc(var(--nav-h) + clamp(12px,2.6vh,34px)); max-width:min(560px,46vw); position:relative; z-index:2; }
+.hero-top{ padding-top:calc(var(--nav-h) + var(--tk-h) + clamp(12px,2.6vh,34px)); max-width:min(560px,46vw); position:relative; z-index:2; }
 .hero-top .eyebrow{ display:flex; align-items:center; gap:10px; margin-bottom:20px; }
 .hero-top .eyebrow .dot{ width:5px; height:5px; border-radius:50%; background:var(--vermilion); box-shadow:0 0 10px var(--vermilion); }
 .hero h1{ margin-bottom:18px; }
@@ -497,6 +497,7 @@ h1,h2,h3{ font-weight:400; margin:0; letter-spacing:-.005em; }
 .srow b{ font-weight:400; font-size:clamp(15px,1.3vw,19px); }
 .srow b a{ color:inherit; text-decoration:none; transition:color .3s; }
 .srow b a:hover{ color:var(--vermilion); }
+.srow small.rm{ color:#e9b872; margin-top:4px; letter-spacing:.04em; }
 .srow small{ display:block; margin-top:3px; font-size:11px; letter-spacing:.06em; color:#909b95; text-shadow:0 1px 16px rgba(3,6,8,.92); }
 .srow.brk{ background:linear-gradient(90deg,rgba(224,35,28,.10),transparent 70%); padding-left:12px; padding-right:12px; margin:0 -12px; }
 .srow.brk b{ font-style:italic; }
@@ -606,7 +607,7 @@ body[data-layout-hero="b"] .peek-cap b.jp{ font-size:clamp(20px,2.2vw,34px); let
 /* The Japanese title reads down the right edge, hung under the navigation —
    the one mark on that side of the frame now that the romanization has gone. */
 body[data-layout-hero="b"] .hero-side{
-  left:auto; right:var(--pad); top:calc(var(--nav-h) + clamp(14px,3vh,42px));
+  left:auto; right:var(--pad); top:calc(var(--nav-h) + var(--tk-h) + clamp(14px,3vh,42px));
   bottom:auto; transform:none; display:block;
 }
 body[data-layout-hero="b"] .hero-side .v{
@@ -959,7 +960,7 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
 @media (max-width:820px){
   /* phone: the button moves up beside the menu so it never covers the hero text */
   .sound{ left:auto; transform:none; right:calc(var(--pad) + 42px);
-    top:calc(env(safe-area-inset-top, 0px) + 26px); bottom:auto; padding:9px 11px; }
+    top:calc(env(safe-area-inset-top, 0px) + 26px + var(--tk-h)); bottom:auto; padding:9px 11px; }
   .sound span{ display:none; }
   body[data-layout-hero="b"] .hero-side{ display:none; }
 }
@@ -976,6 +977,28 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
 .soc a{display:inline-grid;place-items:center;width:40px;height:40px;border-radius:50%;border:1px solid rgba(232,228,218,.28);color:#e8e4da;transition:background .25s,border-color .25s,transform .25s}
 .soc a:hover{background:#b0202a;border-color:#d9a15b;transform:translateY(-2px)}
 .soc img{width:22px;height:22px;display:block}
+
+/* — notice ticker + refund card + highlighted call pills */
+.ticker{position:sticky;top:0;z-index:32;overflow:hidden;height:34px;display:flex;align-items:center;background:linear-gradient(90deg,#7a1f24,#b0202a 50%,#7a1f24);color:#fff;border-bottom:1px solid rgba(217,161,91,.65);font-size:12px;letter-spacing:.08em;font-family:inherit}
+.ticker.fx{position:fixed;left:0;right:0;top:0;z-index:51}
+.tk-track{display:flex;width:max-content;animation:tk 45s linear infinite}
+.ticker:hover .tk-track{animation-play-state:paused}
+.tk-set{display:flex;flex-shrink:0}
+.tk-i{white-space:nowrap;padding-right:6px}
+.tk-i b{font-weight:700;letter-spacing:.12em}
+.tk-i a{color:#ffe9b8;font-weight:700;text-decoration:underline}
+.tk-i i{font-style:normal;color:#e9b872;margin:0 18px}
+@keyframes tk{to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.tk-track{animation:none}}
+.callpill{display:inline-block;margin:3px 0;padding:5px 15px;border-radius:999px;background:#b0202a;color:#fff!important;font-weight:600;letter-spacing:.04em;text-decoration:none!important;box-shadow:0 0 16px rgba(224,35,28,.45);font-variant-numeric:tabular-nums}
+.refund{display:flex;align-items:center;gap:18px;padding:16px 20px;border:1px solid rgba(217,161,91,.6);border-left:4px solid #e0231c;border-radius:6px;background:linear-gradient(90deg,rgba(224,35,28,.18),rgba(11,15,18,.55) 75%);box-shadow:0 0 30px rgba(224,35,28,.15);text-align:left;color:#e8e4da}
+.rf-ph{width:84px;height:84px;border-radius:50%;object-fit:cover;flex:none;border:2px solid #d9a15b;box-shadow:0 0 18px rgba(217,161,91,.4)}
+.rf-t{display:block;font-size:clamp(17px,2vw,22px);letter-spacing:.02em;color:#ffd9a0}
+.rf-tx p{margin:6px 0 10px!important;font-size:14px;line-height:1.6;color:#d9dfdb}
+.rf-tx .callpill{margin-left:0}
+.card .refund{background:#12171b;margin:0 0 6px}
+@media (max-width:560px){.refund{flex-direction:column;text-align:center}}
+.cxl h2{color:#ff6a62!important}
 .helpfab{position:fixed;right:max(16px,env(safe-area-inset-right));bottom:calc(18px + env(safe-area-inset-bottom));z-index:20;width:52px;height:52px;border-radius:50%;background:#b0202a;border:2px solid #d9a15b;color:#e8e4da;display:grid;place-items:center;box-shadow:0 6px 22px rgba(0,0,0,.5),0 0 22px rgba(176,32,42,.45);transition:transform .25s,box-shadow .25s,background .25s}
 .helpfab:hover{transform:scale(1.08);background:#7a1f24;box-shadow:0 6px 26px rgba(0,0,0,.55),0 0 34px rgba(176,32,42,.7)}
 .helpfab svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
@@ -992,6 +1015,7 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
 </head>
 <body data-layout-hero="b" data-layout-story="b" data-layout-gallery="b"
       data-layout-curriculum="b" data-layout-closing="b" data-layout-footer="b">
+<div class="ticker fx" role="status" aria-label="Notice"><div class="tk-track"><span class="tk-set"><span class="tk-i"><b>AD-MAD IS CANCELLED</b> · Contact <a href="tel:+917205662960">Om Suryanshu +91 72056 62960</a> to get your refund<i>✦</i><b>ONLINE REGISTRATIONS ARE CLOSED</b><i>✦</i></span><span class="tk-i"><b>AD-MAD IS CANCELLED</b> · Contact <a href="tel:+917205662960">Om Suryanshu +91 72056 62960</a> to get your refund<i>✦</i><b>ONLINE REGISTRATIONS ARE CLOSED</b><i>✦</i></span><span class="tk-i"><b>AD-MAD IS CANCELLED</b> · Contact <a href="tel:+917205662960">Om Suryanshu +91 72056 62960</a> to get your refund<i>✦</i><b>ONLINE REGISTRATIONS ARE CLOSED</b><i>✦</i></span></span><span class="tk-set"><span class="tk-i"><b>AD-MAD IS CANCELLED</b> · Contact <a href="tel:+917205662960">Om Suryanshu +91 72056 62960</a> to get your refund<i>✦</i><b>ONLINE REGISTRATIONS ARE CLOSED</b><i>✦</i></span><span class="tk-i"><b>AD-MAD IS CANCELLED</b> · Contact <a href="tel:+917205662960">Om Suryanshu +91 72056 62960</a> to get your refund<i>✦</i><b>ONLINE REGISTRATIONS ARE CLOSED</b><i>✦</i></span><span class="tk-i"><b>AD-MAD IS CANCELLED</b> · Contact <a href="tel:+917205662960">Om Suryanshu +91 72056 62960</a> to get your refund<i>✦</i><b>ONLINE REGISTRATIONS ARE CLOSED</b><i>✦</i></span></span></div></div>
 
 <canvas id="gl" aria-hidden="true"></canvas>
 <div id="vignette"></div>
@@ -1056,7 +1080,7 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
       <div class="chip" data-chip="1" data-rv="up" data-cursor><span class="num">02</span>
         <span class="tx"><b>Day 1 · Afternoon</b><p>Battle Verse, the Xen-Z Show, WordLord and Silent Signal until 6 PM.</p></span></div>
       <div class="chip" data-chip="2" data-rv="up" data-cursor><span class="num">03</span>
-        <span class="tx"><b>Day 2 · Sunday</b><p>KBC, Robo Drift, IPL Auction, Escape Room, Ad-Mad and more.</p></span></div>
+        <span class="tx"><b>Day 2 · Sunday</b><p>KBC, Robo Drift, IPL Auction, Escape Room, Perfect Partner and more.</p></span></div>
       <div class="chip" data-chip="3" data-rv="up" data-cursor><span class="num">04</span>
         <span class="tx"><b>Closing</b><p>The fest wraps up at 4:30 PM on Sunday.</p></span></div>
     </div>
@@ -1098,7 +1122,7 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
     <h2 class="display h-sec" data-rv="up">Two days of code, contests and celebration.</h2>
     <div class="gate-copy">
       <p class="lead" data-rv="up">XENESIS 4.0 is the departmental tech fest organised by the Department of Computer Science and Engineering, Government College of Engineering, Keonjhar. Technical and non-technical events, grand prizes, and two days built for curious minds.</p>
-      <p class="body" data-rv="up">It opens on Saturday, 31 October with the opening ceremony, runs 15 tech and non-tech events across two days, and closes on Sunday, 1 November at 4:30 PM. See the full timetable below.</p>
+      <p class="body" data-rv="up">It opens on Saturday, 31 October with the opening ceremony, runs 14 tech and non-tech events across two days, and closes on Sunday, 1 November at 4:30 PM. See the full timetable below.</p>
       <a class="arrowlink" href="#lessons" data-rv="fade" data-cursor>
         <span>See the itinerary</span>
         <span class="ar"><svg viewBox="0 0 14 14" fill="none"><path d="M3 11 11 3M5 3h6v6" stroke="#dfe7e0" stroke-width="1.3"/></svg></span>
@@ -1108,7 +1132,7 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
   <div class="gate-stats" data-rv="up">
     <div><b>02</b><span>Days</span></div>
     <div><b>4.0</b><span>Edition</span></div>
-    <div><b>15</b><span>Events</span></div>
+    <div><b>14</b><span>Events</span></div>
     <div><b>∞</b><span>Energy</span></div>
   </div>
 </section>
@@ -1156,7 +1180,7 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
         <i class="glow" style="--gx:48.0%; --gy:16.8%; --gr:20%; --gt:7.3s; --gt2:11.2s; --gc1:rgba(255,138,104,.52); --gc2:rgba(208,54,36,.24)"></i>
         <div class="card-lab"><b>Day 2</b><span class="jp">Full day</span></div>
       </div>
-      <div class="card-meta"><span>8 events · closing 4:30 PM</span><span>03 / 03</span></div>
+      <div class="card-meta"><span>7 events · closing 4:30 PM</span><span>03 / 03</span></div>
     </article>
   </div>
 </section>
@@ -1180,38 +1204,38 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
   </div>
   <div class="cur-head">
     <h2 class="display h-sec" data-rv="up">Two days. One fest. Endless events.</h2>
-    <p class="body-lg" data-rv="up">Here is the full timetable for Saturday, 31 October and Sunday, 1 November 2026. The venue will be notified via WhatsApp and email to registered participants.</p>
+    <p class="body-lg" data-rv="up">Here is the full timetable for Saturday, 31 October and Sunday, 1 November 2026. The room for every event is shown with it.</p>
+  <div class="refund" id="refund" data-rv="up" style="margin:22px 0 clamp(26px,3vw,40px)"><img class="rf-ph" src="assets/om-suryanshu.png" alt="Om Suryanshu" width="96" height="96" decoding="async"><div class="rf-tx"><b class="rf-t">Ad-Mad has been cancelled</b><p>If you registered for Ad-Mad, please contact <strong>Om Suryanshu</strong> to get your refund.</p><a class="callpill" href="tel:+917205662960" data-cursor>+91 72056 62960</a></div></div>
   </div>
   <div class="sched" id="cur">
     <div class="sday">
       <h3>Day 1<em class="jp">Saturday · 31 Oct</em></h3>
       <div class="srow"><span class="t">9:00 AM – 11:30 AM</span><div><b>Opening Ceremony</b><small>Inauguration</small></div></div>
-      <div class="srow"><span class="t">9:30 AM – 10:30 AM</span><div><b><a href="event.html?id=chess" data-cursor>Chess</a></b><small>Non-tech</small></div></div>
-      <div class="srow"><span class="t">10:30 AM – 1:30 PM</span><div><b><a href="event.html?id=codemon" data-cursor>Codemon</a></b><small>Tech</small></div></div>
-      <div class="srow"><span class="t">11:00 AM – 1:00 PM</span><div><b><a href="event.html?id=one-piece" data-cursor>Treasure Hunt (One Piece)</a></b><small>Non-tech</small></div></div>
+      <div class="srow"><span class="t">9:30 AM – 10:30 AM</span><div><b><a href="event.html?id=chess" data-cursor>Chess</a></b><small>Non-tech</small><small class="rm">Room · 2nd Year Classroom</small></div></div>
+      <div class="srow"><span class="t">10:00 AM – 1:00 PM</span><div><b><a href="event.html?id=codemon" data-cursor>Codemon</a></b><small>Tech</small><small class="rm">Room · 2nd Block OOPS Lab or Classroom</small></div></div>
+      <div class="srow"><span class="t">11:00 AM – 1:00 PM</span><div><b><a href="event.html?id=one-piece" data-cursor>Treasure Hunt (One Piece)</a></b><small>Non-tech</small><small class="rm">Room · Seminar Hall</small></div></div>
       <div class="srow brk"><span class="t">1:00 PM – 2:00 PM</span><div><b>Lunch Break</b></div></div>
-      <div class="srow"><span class="t">1:30 PM – 4:00 PM</span><div><b><a href="event.html?id=battle-verse" data-cursor>Battle Verse</a></b><small>Non-tech</small></div></div>
-      <div class="srow"><span class="t">2:00 PM – 5:00 PM</span><div><b><a href="event.html?id=xen-z-show" data-cursor>Xen-Z Show</a></b><small>Non-tech</small></div></div>
-      <div class="srow"><span class="t">4:00 PM – 5:00 PM</span><div><b><a href="event.html?id=wordlord" data-cursor>WordLord</a></b><small>Tech</small></div></div>
-      <div class="srow"><span class="t">5:00 PM – 6:00 PM</span><div><b><a href="event.html?id=dumb-charades" data-cursor>Silent Signal</a></b><small>Non-tech</small></div></div>
+      <div class="srow"><span class="t">1:30 PM – 4:00 PM</span><div><b><a href="event.html?id=battle-verse" data-cursor>Battle Verse</a></b><small>Non-tech</small><small class="rm">Room · 3rd Year Classroom</small></div></div>
+      <div class="srow"><span class="t">2:00 PM – 5:00 PM</span><div><b><a href="event.html?id=xen-z-show" data-cursor>Xen-Z Show</a></b><small>Non-tech</small><small class="rm">Room · Auditorium</small></div></div>
+      <div class="srow"><span class="t">4:00 PM – 5:00 PM</span><div><b><a href="event.html?id=wordlord" data-cursor>WordLord</a></b><small>Tech</small><small class="rm">Room · 3rd Block 1st Lab</small></div></div>
+      <div class="srow"><span class="t">5:00 PM – 6:00 PM</span><div><b><a href="event.html?id=dumb-charades" data-cursor>Silent Signal</a></b><small>Non-tech</small><small class="rm">Room · 4th Block Lab or Seminar Hall</small></div></div>
       <p class="snote">Participants of Codemon can't participate in Treasure Hunt (One Piece), and vice versa.</p>
     </div>
     <div class="sday">
       <h3>Day 2<em class="jp">Sunday · 1 Nov</em></h3>
-      <div class="srow"><span class="t">9:00 AM – 10:30 AM</span><div><b><a href="event.html?id=kbc" data-cursor>KBC</a></b><small>Tech</small></div></div>
-      <div class="srow"><span class="t">9:00 AM – 10:30 AM</span><div><b><a href="event.html?id=robo-drift" data-cursor>Robo Drift</a></b><small>Tech</small></div></div>
-      <div class="srow"><span class="t">10:00 AM – 10:45 AM</span><div><b><a href="event.html?id=memography" data-cursor>Memography</a></b><small>Non-tech</small></div></div>
-      <div class="srow"><span class="t">10:30 AM – 1:30 PM</span><div><b><a href="event.html?id=ipl-auction" data-cursor>IPL Auction</a></b><small>Non-tech</small></div></div>
+      <div class="srow"><span class="t">9:00 AM – 10:30 AM</span><div><b><a href="event.html?id=kbc" data-cursor>KBC</a></b><small>Tech</small><small class="rm">Room · 4th Year Classroom</small></div></div>
+      <div class="srow"><span class="t">9:00 AM – 10:30 AM</span><div><b><a href="event.html?id=robo-drift" data-cursor>Robo Drift</a></b><small>Tech</small><small class="rm">Room · HPL Ground</small></div></div>
+      <div class="srow"><span class="t">10:00 AM – 10:45 AM</span><div><b><a href="event.html?id=memography" data-cursor>Memography</a></b><small>Non-tech</small><small class="rm">Room · 2nd Year Classroom</small></div></div>
+      <div class="srow"><span class="t">10:30 AM – 1:30 PM</span><div><b><a href="event.html?id=ipl-auction" data-cursor>IPL Auction</a></b><small>Non-tech</small><small class="rm">Room · 4th Block Lab</small></div></div>
       <div class="srow brk"><span class="t">12:30 PM – 3:00 PM</span><div><b>Mass Lunch Window</b><small>Events overlapping this window continue as scheduled</small></div></div>
-      <div class="srow"><span class="t">2:00 PM – 3:00 PM</span><div><b><a href="event.html?id=tech-escape-room" data-cursor>Tech Escape Room</a></b><small>Tech</small></div></div>
-      <div class="srow"><span class="t">2:45 PM – 4:00 PM</span><div><b><a href="event.html?id=ad-mad" data-cursor>Ad-Mad</a></b><small>Non-tech</small></div></div>
-      <div class="srow"><span class="t">3:00 PM – 4:00 PM</span><div><b><a href="event.html?id=reels" data-cursor>Reel × Render</a></b><small>Non-tech</small></div></div>
-      <div class="srow"><span class="t">3:30 PM – 4:30 PM</span><div><b><a href="event.html?id=perfect-partner" data-cursor>Perfect Partner</a></b><small>Non-tech</small></div></div>
+      <div class="srow"><span class="t">2:00 PM – 3:00 PM</span><div><b><a href="event.html?id=tech-escape-room" data-cursor>Tech Escape Room</a></b><small>Tech</small><small class="rm">Room · 4th Block Lab</small></div></div>
+      <div class="srow"><span class="t">3:00 PM – 4:00 PM</span><div><b><a href="event.html?id=reels" data-cursor>Reel × Render</a></b><small>Non-tech</small><small class="rm">Room · Seminar Hall</small></div></div>
+      <div class="srow"><span class="t">3:30 PM – 4:30 PM</span><div><b><a href="event.html?id=perfect-partner" data-cursor>Perfect Partner</a></b><small>Non-tech</small><small class="rm">Room · 4th Year Classroom</small></div></div>
       <div class="srow"><span class="t">4:30 PM</span><div><b>Closing / End of Fest</b><small>Closing</small></div></div>
       <p class="snote">The official mass-lunch window is 12:30 PM – 3:00 PM. Events overlapping this window continue as scheduled, so plan your lunch around your event timings.</p>
     </div>
   </div>
-  <div class="sc-help" data-rv="up"><b>Need help with an event?</b>
+<div class="sc-help" data-rv="up"><b>Need help with an event?</b>
     <p>If you face any problem or have a question about an event, please contact that event's coordinators. Their names and phone numbers are on each event's page.</p>
     <a href="events.html" data-cursor>View events &amp; coordinators →</a></div>
 
@@ -1247,9 +1271,9 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
   </div>
   <div class="eyebrow" data-rv="fade">04 — Join us</div>
   <h2 class="display" data-rv="up">See you there.</h2>
-  <p class="body-lg" data-rv="up">Two days, one department, a lot of energy. Registrations are open. Browse every event and sign up for the ones you want to play.</p>
+  <p class="body-lg" data-rv="up">Two days, one department, a lot of energy. Online registrations are now closed. Browse every event to see its day, time and room.</p>
   <a class="cta" href="events.html" data-rv="fade" data-cursor>
-    <i></i><span>Explore events &amp; register</span>
+    <i></i><span>Explore events</span>
     <svg viewBox="0 0 14 14" fill="none" width="13" height="13"><path d="M3 11 11 3M5 3h6v6" stroke="#dfe7e0" stroke-width="1.3"/></svg>
   </a>
 </section>
@@ -1294,7 +1318,7 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
     <div><h4>Events</h4><ul>
       <li><a href="events.html#tech" data-cursor>Tech Events</a></li>
       <li><a href="events.html#non-tech" data-cursor>Non-Tech Events</a></li>
-      <li><a href="register.html" data-cursor>Register Now</a></li>
+      <li><a href="register.html" data-cursor>Registrations Closed</a></li>
     </ul></div>
   </div>
   <div class="foot-base">
